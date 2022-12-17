@@ -1,29 +1,32 @@
-import Link from 'next/link';
-import { Button } from '../Button/Button';
 import LogoutIcon from '../../icons/Logout.svg';
+import HomeIcon from '../../icons/Home.svg';
+import DollarIcon from '../../icons/Dollar.svg';
+import CalendarIcon from '../../icons/Calendar.svg';
+import TableIcon from '../../icons/TableCells.svg';
+import { Button } from '../Button/Button';
+import { SidebarItem } from '../SidebarItem/SidebarItem';
 import { useRouter } from 'next/router';
-import clsx from 'clsx';
 
 const sidebarItems = [
 	{
-		text: 'Home',
+		text: 'Statystyki',
 		link: '/',
-		icon: 'LogoutIcon',
+		icon: HomeIcon,
 	},
 	{
-		text: 'Budzet',
+		text: 'Budżet',
 		link: '/budzet',
-		icon: 'ICON',
+		icon: DollarIcon,
 	},
 	{
 		text: 'Imprezy',
 		link: '/imprezy',
-		icon: 'ICON',
+		icon: CalendarIcon,
 	},
 	{
 		text: 'Logi',
 		link: '/logi',
-		icon: 'ICON',
+		icon: TableIcon,
 	},
 ];
 
@@ -37,36 +40,9 @@ export const Sidebar = () => {
 					{sidebarItems.map(({ text, link, icon: Icon }) => {
 						const isActive = link === router.pathname;
 						return (
-							<li key={text}>
-								<Link
-									href={link}
-									className={clsx(
-										'flex items-center p-2 text-base group font-normal rounded-lg',
-										{ 'bg-blue-600 hover:bg-blue-700 text-white': isActive },
-										{
-											' text-gray-900  hover:bg-gray-200': !isActive,
-										}
-									)}
-								>
-									<svg
-										aria-hidden="true"
-										className={clsx(
-											'w-6 h-6  transition duration-75',
-											{ ' text-white': isActive },
-											{
-												' text-gray-500  hover:bg-gray-200': !isActive,
-											}
-										)}
-										fill="currentColor"
-										viewBox="0 0 20 20"
-										xmlns="http://www.w3.org/2000/svg"
-									>
-										<path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-										<path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-									</svg>
-									<span className="ml-3">{text}</span>
-								</Link>
-							</li>
+							<SidebarItem key={text} isActive={isActive} icon={Icon} link={link}>
+								{text}
+							</SidebarItem>
 						);
 					})}
 				</ul>
