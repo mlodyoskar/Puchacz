@@ -1,13 +1,13 @@
 import { Typography } from 'components/atoms/Typography/Typography';
 import { MainLayout } from 'components/layouts/MainLayout';
 
-const HomePage = () => {
+const EventsPage = () => {
 	return (
 		<MainLayout>
-			<Typography component="h1">Strona główna</Typography>
-			<div className="bg-indigo-800 w-10 h-[2000px]"></div>
+			<Typography component="h1">Events dummy page</Typography>
+			<p>Does it work?</p>
 		</MainLayout>
 	);
 };
 
-export default HomePage;
+export default EventsPage;
