@@ -5,7 +5,6 @@ const HomePage = () => {
 	return (
 		<MainLayout>
 			<Typography component="h1">Strona główna</Typography>
-			<div className="bg-indigo-800 w-10 h-[2000px]"></div>
 		</MainLayout>
 	);
 };

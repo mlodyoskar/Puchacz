@@ -16,7 +16,7 @@ export const MainLayout = ({ children }: Props) => {
 		<div>
 			<div
 				className={cx(
-					'absolute right-0 left-0 transition-transform md:fixed md:translate-x-0',
+					'md:right- absolute right-0  left-0 transition-transform md:fixed md:right-full md:translate-x-0',
 					{
 						'translate-x-0': isOpen,
 						'-translate-x-full': !isOpen,
