@@ -1,6 +1,6 @@
 import cx from 'clsx';
 import { Hamburger } from 'components/atoms/Hamburger/Hamburger';
-import { Sidebar } from 'components/atoms/Sidebar/Sidebar';
+import { Sidebar } from 'components/molecules/Sidebar/Sidebar';
 import React, { useState } from 'react';
 
 interface Props {
