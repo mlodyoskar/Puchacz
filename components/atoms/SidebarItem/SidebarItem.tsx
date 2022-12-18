@@ -20,7 +20,7 @@ export const SidebarItem = ({
 			<Link
 				href={link}
 				className={clsx(
-					'flex items-center p-2 text-base group font-normal rounded-lg',
+					'flex items-center md:p-2 px-2 py-4 text-base group font-normal rounded-lg',
 					{ 'bg-blue-600 hover:bg-blue-700 text-white': isActive },
 					{
 						' text-gray-900  hover:bg-gray-200': !isActive,
