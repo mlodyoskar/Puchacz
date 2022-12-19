@@ -5,7 +5,7 @@ const EventsPage = () => {
 	return (
 		<MainLayout>
 			<Typography component="h1">Events dummy page</Typography>
-			<p>Does it work?</p>
+			<p>Does it work??</p>
 		</MainLayout>
 	);
 };
