@@ -38,16 +38,16 @@
 		"@storybook/react": "^6.5.14",
 		"@storybook/testing-library": "^0.0.13",
 		"@svgr/webpack": "^6.5.1",
-		"@typescript-eslint": "^1.22.19",
-		"@typescript-eslint/eslint-plugin": "^1.22.19",
+		"@typescript-eslint/eslint-plugin": "^5.47.0",
 		"autoprefixer": "^10.4.13",
 		"babel-loader": "^8.3.0",
 		"cypress": "^12.1.0",
+		"eslint": "8.30.0",
 		"postcss": "^8.4.20",
 		"prettier": "^2.8.1",
 		"prettier-plugin-tailwindcss": "^0.2.1",
 		"storybook": "^6.5.14",
 		"tailwindcss": "^3.2.4",
-		"eslint": "8.30.0"
+		"typescript-eslint": "^0.0.1-alpha.0"
 	}
 }
