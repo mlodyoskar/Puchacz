@@ -1,12 +1,12 @@
 import { Typography } from 'components/atoms/Typography/Typography';
 import { MainLayout } from 'components/layouts/MainLayout';
 
-const HomePage = () => {
+const StatisticsPage = () => {
 	return (
 		<MainLayout>
-			<Typography component="h1">Strona główna</Typography>
+			<Typography component="h1">Logs Statistics page</Typography>
 		</MainLayout>
 	);
 };
 
-export default HomePage;
+export default StatisticsPage;
