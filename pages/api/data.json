@@ -6,11 +6,17 @@
 			"date": "26.12.2022",
 			"start_time": "21:00",
 			"end_time": "4:00",
-			"Description": "sample text sample text sample text sample text sample text",
+			"description": "sample text sample text sample text sample text sample text",
 			"dj": ["og", "pete", "cnt"],
 			"staff": {
 				"photos": "arti",
 				"graphic": "isitgold"
+			},
+			"budget": {
+				"people_in_party": 500,
+				"party_income": 6250,
+				"party_spend": 3000,
+				"overall": 3250
 			}
 		},
 		{
@@ -19,11 +25,17 @@
 			"date": "26.01.2023",
 			"start_time": "21:00",
 			"end_time": "4:00",
-			"Description": "sample text sample text sample text sample text sample text",
+			"description": "sample text sample text sample text sample text sample text",
 			"dj": ["og", "kubulek", "cnt"],
 			"staff": {
 				"photos": "arti",
 				"graphic": "isitgold"
+			},
+			"budget": {
+				"people_in_party": 500,
+				"party_income": 6250,
+				"party_spend": 3000,
+				"overall": 3250
 			}
 		},
 		{
@@ -32,11 +44,17 @@
 			"date": "26.05.2023",
 			"start_time": "21:00",
 			"end_time": "4:00",
-			"Description": "sample text sample text sample text sample text sample text",
+			"description": "sample text sample text sample text sample text sample text",
 			"dj": ["og", "kubulek", "pete"],
 			"staff": {
 				"photos": "arti",
 				"graphic": "isitgold"
+			},
+			"budget": {
+				"people_in_party": 500,
+				"party_income": 6250,
+				"party_spend": 3000,
+				"overall": 3250
 			}
 		}
 	]
