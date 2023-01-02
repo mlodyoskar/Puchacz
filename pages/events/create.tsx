@@ -11,6 +11,7 @@ import { useState } from 'react';
 const CreateEventSchema = z.object({
 	name: z.string().min(1, 'To pole nie może być puste').max(40),
 	date: z.string(),
+	stuffDj: z.string().array(),
 });
 
 const peopleData = [
@@ -37,15 +38,6 @@ const CreateEventPage = () => {
 		console.log(data);
 	};
 
-	const [stuffPeople, setStuffPeople] = useState<typeof peopleData>([
-		peopleData[0],
-		peopleData[1],
-	]);
-
-	const setStuff = (people: typeof peopleData) => {
-		setStuffPeople(people);
-	};
-
 	return (
 		<MainLayout>
 			<Typography component="h1">Stwórz nową imprezę</Typography>
@@ -68,10 +60,10 @@ const CreateEventPage = () => {
 				<Typography component="h2">Ekipa</Typography>
 				<MultiSelect
 					control={control}
+					name="stuffDj"
 					label="Dj"
-					selectedOptions={stuffPeople}
 					options={peopleData}
-					setOptions={setStuff}
+					defaultValue={[]}
 				/>
 				<Button>Utwórz wydarzenie</Button>
 			</form>

@@ -1,26 +1,47 @@
 import { Listbox, Transition } from '@headlessui/react';
 import UpDownIcon from '../../icons/upDown.svg';
 import CheckIcon from '../../icons/Check.svg';
-import { Fragment } from 'react';
-import { UseControllerProps, useController } from 'react-hook-form';
+import { Fragment, useState } from 'react';
+import {
+	Control,
+	DefaultValues,
+	FieldValues,
+	UseControllerProps,
+	useController,
+} from 'react-hook-form';
+import { z } from 'zod';
+
+const OptionSchema = z.object({
+	id: z.number(),
+	name: z.string(),
+});
+
+type Option = z.infer<typeof OptionSchema>;
 
 interface Props {
 	readonly label: string;
-	readonly options: any[];
-	selectedOptions: any[];
-	setOptions: (options: any[]) => void;
+	readonly options: Option[];
+	readonly name: string;
+	readonly control: Control;
+	defaultValue: Option[];
 }
 
-export const MultiSelect = (props: Props & UseControllerProps) => {
+export const MultiSelect = <T extends FieldValues>(
+	props: Props & UseControllerProps<T>
+) => {
 	const {
-		field: { value, onChange },
-	} = useController(props);
+		field: { value, onChange, name },
+	} = useController<T>({ ...props });
 
-	const { label, name, options, selectedOptions, setOptions } = props;
+	const { label, options } = props;
+
+	console.log(value);
+
+	// const parsedValues = z.string().array().parse(value);
 
 	return (
 		<div>
-			<Listbox value={value} onChange={onChange} multiple>
+			<Listbox value={value} name={name} onChange={onChange} multiple>
 				<Listbox.Label>{label}</Listbox.Label>
 				<div className="relative mt-1">
 					<Listbox.Button className="relative w-full cursor-default rounded-md border bg-white py-2 pl-3 pr-10 text-left  focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-blue-300 sm:text-sm">
@@ -39,14 +60,15 @@ export const MultiSelect = (props: Props & UseControllerProps) => {
 						leaveTo="opacity-0"
 					>
 						<Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-							{options.map((option, optionIdx) => (
+							{options.map((option) => (
 								<Listbox.Option
-									key={optionIdx}
+									key={option.id}
 									className={({ active }) =>
-										`relative cursor-default select-none py-2 pl-10 pr-4 ${
+										`relative cursor-default select-none py-3 pl-10 pr-4 md:py-2 ${
 											active ? 'bg-blue-100 text-blue-900' : 'text-gray-900'
 										}`
 									}
+									//TODO: How can we pass whole objects here?
 									value={option}
 								>
 									{({ selected }) => (
