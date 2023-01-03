@@ -2,17 +2,11 @@ import { Button } from 'components/atoms/Button/Button';
 import { Input } from 'components/atoms/Input/Input';
 import { Typography } from 'components/atoms/Typography/Typography';
 import { MainLayout } from 'components/layouts/MainLayout';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import type { SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { MultiSelect } from 'components/atoms/MultiSelect/MultiSelect';
-import { useState } from 'react';
-
-const CreateEventSchema = z.object({
-	name: z.string().min(1, 'To pole nie może być puste').max(40),
-	date: z.string(),
-	stuffDj: z.string().array(),
-});
 
 const peopleData = [
 	{ id: 1, name: 'Oskar' },
@@ -22,6 +16,12 @@ const peopleData = [
 	{ id: 5, name: 'DJ OG' },
 ];
 
+const CreateEventSchema = z.object({
+	name: z.string().min(1, 'To pole nie może być puste').max(40),
+	date: z.string(),
+	stuffDj: z.object({ id: z.number(), name: z.string() }).array(),
+});
+
 type CreateEvent = z.infer<typeof CreateEventSchema>;
 
 const CreateEventPage = () => {
@@ -29,7 +29,6 @@ const CreateEventPage = () => {
 		register,
 		handleSubmit,
 		control,
-		watch,
 		formState: { errors },
 	} = useForm<CreateEvent>({ resolver: zodResolver(CreateEventSchema) });
 

@@ -1,14 +1,9 @@
 import { Listbox, Transition } from '@headlessui/react';
 import UpDownIcon from '../../icons/upDown.svg';
 import CheckIcon from '../../icons/Check.svg';
-import { Fragment, useState } from 'react';
-import {
-	Control,
-	DefaultValues,
-	FieldValues,
-	UseControllerProps,
-	useController,
-} from 'react-hook-form';
+import { Fragment } from 'react';
+import type { FieldValues, UseControllerProps } from 'react-hook-form';
+import { useController } from 'react-hook-form';
 import { z } from 'zod';
 
 const OptionSchema = z.object({
@@ -21,9 +16,6 @@ type Option = z.infer<typeof OptionSchema>;
 interface Props {
 	readonly label: string;
 	readonly options: Option[];
-	readonly name: string;
-	readonly control: Control;
-	defaultValue: Option[];
 }
 
 export const MultiSelect = <T extends FieldValues>(
