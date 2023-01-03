@@ -68,7 +68,6 @@ export const MultiSelect = <T extends FieldValues>(
 											active ? 'bg-blue-100 text-blue-900' : 'text-gray-900'
 										}`
 									}
-									//TODO: How can we pass whole objects here?
 									value={option}
 								>
 									{({ selected }) => (
