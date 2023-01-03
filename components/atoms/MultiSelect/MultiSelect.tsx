@@ -35,9 +35,7 @@ export const MultiSelect = <T extends FieldValues>(
 
 	const { label, options } = props;
 
-	console.log(value);
-
-	// const parsedValues = z.string().array().parse(value);
+	const parsedValues = OptionSchema.array().parse(value);
 
 	return (
 		<div>
@@ -45,7 +43,11 @@ export const MultiSelect = <T extends FieldValues>(
 				<Listbox.Label>{label}</Listbox.Label>
 				<div className="relative mt-1">
 					<Listbox.Button className="relative w-full cursor-default rounded-md border bg-white py-2 pl-3 pr-10 text-left  focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-blue-300 sm:text-sm">
-						{value.map((option) => option.name).join(', ')}
+						{parsedValues.length > 0 ? (
+							parsedValues.map((option) => option.name).join(', ')
+						) : (
+							<span className="text-gray-700">Wybierz grajków </span>
+						)}
 						<span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
 							<UpDownIcon
 								className="h-5 w-5 text-gray-400"
