@@ -5,7 +5,7 @@
 			"name": "Puchacz x-mass",
 			"date": "26.12.2022",
 			"start_time": "21:00",
-			"end_time": "4:00",
+			"end_time": "04:00",
 			"description": "sample text sample text sample text sample text sample text",
 			"dj": ["og", "pete", "cnt"],
 			"staff": {
@@ -24,7 +24,7 @@
 			"name": "Puchacz new year",
 			"date": "26.01.2023",
 			"start_time": "21:00",
-			"end_time": "4:00",
+			"end_time": "04:00",
 			"description": "sample text sample text sample text sample text sample text",
 			"dj": ["og", "kubulek", "cnt"],
 			"staff": {
@@ -43,7 +43,7 @@
 			"name": "Puchacz party",
 			"date": "26.05.2023",
 			"start_time": "21:00",
-			"end_time": "4:00",
+			"end_time": "04:00",
 			"description": "sample text sample text sample text sample text sample text",
 			"dj": ["og", "kubulek", "pete"],
 			"staff": {
