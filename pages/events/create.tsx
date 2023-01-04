@@ -6,7 +6,12 @@ import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { MultiSelect } from 'components/atoms/MultiSelect/MultiSelect';
+import {
+	MultiSelect,
+	MultiSelectOptionSchema,
+} from 'components/atoms/MultiSelect/MultiSelect';
+import { imageSchema } from 'utils/imageSchema';
+import { FileInput } from 'components/atoms/FileInput/FileInput';
 
 const peopleData = [
 	{ id: 1, name: 'Oskar' },
@@ -16,10 +21,18 @@ const peopleData = [
 	{ id: 5, name: 'DJ OG' },
 ];
 
+const photograpghs = [
+	{ id: 1, name: 'Arti Jakob' },
+	{ id: 2, name: 'Madzia' },
+	{ id: 5, name: 'Marta' },
+];
+
 const CreateEventSchema = z.object({
 	name: z.string().min(1, 'To pole nie może być puste').max(40),
 	date: z.string(),
-	stuffDj: z.object({ id: z.number(), name: z.string() }).array(),
+	photo: imageSchema.optional(),
+	stuffDj: MultiSelectOptionSchema.array(),
+	stuffPhoto: MultiSelectOptionSchema.array(),
 });
 
 type CreateEvent = z.infer<typeof CreateEventSchema>;
@@ -29,6 +42,7 @@ const CreateEventPage = () => {
 		register,
 		handleSubmit,
 		control,
+		watch,
 		formState: { errors },
 	} = useForm<CreateEvent>({ resolver: zodResolver(CreateEventSchema) });
 
@@ -56,14 +70,23 @@ const CreateEventPage = () => {
 				<Input {...register('date')} type="date">
 					Data imprezy
 				</Input>
-				<Typography component="h2">Ekipa</Typography>
+				<FileInput {...register('photo')} />
+				<Typography component="h2">Stuff na impreze</Typography>
 				<MultiSelect
 					control={control}
 					name="stuffDj"
-					label="Dj"
+					label="Dj'e"
 					options={peopleData}
 					defaultValue={[]}
 				/>
+				<MultiSelect
+					control={control}
+					name="stuffPhoto"
+					label="Fotografowie"
+					options={photograpghs}
+					defaultValue={[]}
+				/>
+
 				<Button>Utwórz wydarzenie</Button>
 			</form>
 		</MainLayout>

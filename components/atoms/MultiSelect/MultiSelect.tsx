@@ -6,12 +6,12 @@ import type { FieldValues, UseControllerProps } from 'react-hook-form';
 import { useController } from 'react-hook-form';
 import { z } from 'zod';
 
-const OptionSchema = z.object({
+export const MultiSelectOptionSchema = z.object({
 	id: z.number(),
 	name: z.string(),
 });
 
-type Option = z.infer<typeof OptionSchema>;
+type Option = z.infer<typeof MultiSelectOptionSchema>;
 
 interface Props {
 	readonly label: string;
@@ -27,18 +27,36 @@ export const MultiSelect = <T extends FieldValues>(
 
 	const { label, options } = props;
 
-	const parsedValues = OptionSchema.array().parse(value);
+	const parsedValues = MultiSelectOptionSchema.array().parse(value);
 
 	return (
 		<div>
-			<Listbox value={value} name={name} onChange={onChange} multiple>
-				<Listbox.Label>{label}</Listbox.Label>
+			<Listbox
+				value={value}
+				name={name}
+				onChange={(v) => {
+					if (parsedValues.find((option) => option.id === v.at(-1).id)) {
+						const newSelectedOptions = parsedValues.filter(
+							(option) => option.id !== v.at(-1).id
+						);
+						onChange(newSelectedOptions);
+					} else {
+						onChange(v);
+					}
+				}}
+				multiple
+			>
 				<div className="relative mt-1">
-					<Listbox.Button className="relative w-full cursor-default rounded-md border bg-white py-2 pl-3 pr-10 text-left  focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-blue-300 sm:text-sm">
+					<Listbox.Button className="relative flex w-full cursor-default flex-col rounded-md border bg-white py-2 pl-3 pr-10 text-left  focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-blue-300 sm:text-sm">
+						<Listbox.Label className="mb-3 text-xs font-medium text-gray-700">
+							{label}
+						</Listbox.Label>
 						{parsedValues.length > 0 ? (
-							parsedValues.map((option) => option.name).join(', ')
+							<span>
+								{parsedValues.map((option) => option.name).join(', ')}
+							</span>
 						) : (
-							<span className="text-gray-700">Wybierz grajków </span>
+							<span className="text-gray-700">Wybierz</span>
 						)}
 						<span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
 							<UpDownIcon
@@ -53,7 +71,7 @@ export const MultiSelect = <T extends FieldValues>(
 						leaveFrom="opacity-100"
 						leaveTo="opacity-0"
 					>
-						<Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+						<Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
 							{options.map((option) => (
 								<Listbox.Option
 									key={option.id}
