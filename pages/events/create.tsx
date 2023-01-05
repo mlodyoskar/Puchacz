@@ -1,17 +1,7 @@
-import dynamic from 'next/dynamic';
-
-const DynamicEventPage = dynamic(
-	() =>
-		import('../../components/templates/events/createEvent').then(
-			(mod) => mod.CreateEventPage
-		),
-	{
-		ssr: false,
-	}
-);
+import { CreateEventPage } from 'components/templates/events/createEvent';
 
 const CreateEvent = () => {
-	return <DynamicEventPage />;
+	return <CreateEventPage />;
 };
 
 export default CreateEvent;

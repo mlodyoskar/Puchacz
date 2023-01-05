@@ -16,7 +16,7 @@ export const FileInput = forwardRef<HTMLInputElement>((props, ref) => {
 					<p className="mb-2 text-sm text-gray-500 ">
 						<span className="font-semibold">Kliknij, aby dodać zdjęcie</span>
 					</p>
-					<p className="text-xs text-gray-500 ">PNG, JPG (MAX. 30MB)</p>
+					<p className="text-xs text-gray-500 ">PNG, JPG (MAX. 3MB)</p>
 				</div>
 				<input
 					{...props}

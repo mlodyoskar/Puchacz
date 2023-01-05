@@ -42,6 +42,7 @@ export const CreateEventPage = () => {
 		register,
 		handleSubmit,
 		control,
+		resetField,
 		watch,
 		formState: { errors },
 	} = useForm<CreateEvent>({ resolver: zodResolver(CreateEventSchema) });
@@ -51,6 +52,8 @@ export const CreateEventPage = () => {
 		console.log(data);
 	};
 
+	const photo = watch('photo');
+
 	return (
 		<MainLayout>
 			<Typography component="h1">Stwórz nową imprezę</Typography>
@@ -59,33 +62,44 @@ export const CreateEventPage = () => {
 				className="mt-4 flex flex-col gap-4"
 			>
 				<Typography component="h2">Podstawowe informacje</Typography>
-				<Input
-					{...register('name')}
-					error={errors.name?.message}
-					placeholder="American party"
-				>
-					Nazwa imprezy
-				</Input>
-				{/* //TODO: Add custom calendar component */}
-				<Input {...register('date')} type="date">
-					Data imprezy
-				</Input>
-				<FileInput {...register('photo')} />
+				<div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+					<Input
+						{...register('name')}
+						error={errors.name?.message}
+						placeholder="American party"
+					>
+						Nazwa imprezy
+					</Input>
+					{/* //TODO: Add custom calendar component */}
+					<Input {...register('date')} type="date">
+						Data imprezy
+					</Input>
+				</div>
+				{photo ? (
+					<div>
+						<button onClick={() => resetField('photo')}>Reset</button>
+						{/* {photo[0].size} */}
+					</div>
+				) : (
+					<FileInput {...register('photo')} />
+				)}
 				<Typography component="h2">Stuff na impreze</Typography>
-				<MultiSelect
-					control={control}
-					name="stuffDj"
-					label="Dj'e"
-					options={peopleData}
-					defaultValue={[]}
-				/>
-				<MultiSelect
-					control={control}
-					name="stuffPhoto"
-					label="Fotografowie"
-					options={photograpghs}
-					defaultValue={[]}
-				/>
+				<div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+					<MultiSelect
+						control={control}
+						name="stuffDj"
+						label="Dj'e"
+						options={peopleData}
+						defaultValue={[]}
+					/>
+					<MultiSelect
+						control={control}
+						name="stuffPhoto"
+						label="Fotografowie"
+						options={photograpghs}
+						defaultValue={[]}
+					/>
+				</div>
 
 				<Button>Utwórz wydarzenie</Button>
 			</form>
