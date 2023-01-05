@@ -44,7 +44,7 @@ const EventDetailsPage = () => {
 
 			{showBudget ? (
 				<div>
-					<div className="grid grid-cols-4 gap-4">
+					<div className="grid grid-cols-2 gap-4 md:grid md:grid-cols-4">
 						<div className=" rounded-lg bg-blue-700 p-5 text-white">
 							<Typography component="h3">Wydarzenie:</Typography>
 							<Typography component="h2">{parties[0].name}</Typography>
@@ -101,7 +101,7 @@ const EventDetailsPage = () => {
 				</div>
 			) : (
 				<div>
-					<div className="grid grid-cols-4 gap-4">
+					<div className="grid grid-cols-2 gap-4 md:grid md:grid-cols-4">
 						<div className=" rounded-lg bg-blue-700 p-5 text-white">
 							<Typography component="h3">Wydarzenie:</Typography>
 							<Typography component="h2">{parties[0].name}</Typography>
