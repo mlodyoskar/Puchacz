@@ -29,8 +29,8 @@ const EventsPage = () => {
 								/>
 							</div>
 							<div>
-								<Typography component="h2">{parties[0].name}</Typography>
-								<Typography component="h4">{parties[0].date}</Typography>
+								<Typography component="h1">{parties[0].name}</Typography>
+								<Typography component="h3">{parties[0].date}</Typography>
 							</div>
 						</div>
 						<div className="mb-12 flex justify-between md:mx-4">
