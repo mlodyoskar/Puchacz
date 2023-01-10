@@ -1,6 +1,6 @@
 export const parties = [
 	{
-		id: 1,
+		id: 0,
 		name: 'Puchacz x-mass',
 		date: '26.12.2022',
 		start_time: '21:00',
@@ -20,7 +20,7 @@ export const parties = [
 		},
 	},
 	{
-		id: 2,
+		id: 1,
 		name: 'Puchacz new year',
 		date: '26.01.2023',
 		start_time: '21:00',
@@ -40,7 +40,7 @@ export const parties = [
 		},
 	},
 	{
-		id: 3,
+		id: 2,
 		name: 'Puchacz party',
 		date: '26.05.2023',
 		start_time: '21:00',
