@@ -2,16 +2,16 @@ import { useRouter } from 'next/router';
 import { MainLayout } from 'components/layouts/MainLayout';
 import { Typography } from 'components/atoms/Typography/Typography';
 import { Button } from 'components/atoms/Button/Button';
-import Budget from '../../public/Budget.svg';
-import Calendar from '../../public/Calendar.svg';
-import Clock from '../../public/Clock.svg';
-import Music from '../../public/Music.svg';
-import Up from '../../public/Up.svg';
-import Down from '../../public/Down.svg';
-import Ticket from '../../public/Ticket.svg';
-import Wallet from '../../public/Wallet.svg';
-import Back from '../../public/Back.svg';
-import Star from '../../public/Star.svg';
+import Dollar from 'components/icons/Dollar.svg';
+import Calendar from 'components/icons/Calendar.svg';
+import Clock from 'components/icons/Clock.svg';
+import Tune from 'components/icons/Tune.svg';
+import TrendingUp from 'components/icons/TrendingUp.svg';
+import TrendingDown from 'components/icons/TrendingDown.svg';
+import Ticket from 'components/icons/Ticket.svg';
+import Wallet from 'components/icons/Wallet.svg';
+import Back from 'components/icons/Back.svg';
+import Star from 'components/icons/Star.svg';
 import { parties } from '../api/parties';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -64,7 +64,7 @@ const EventDetailsPage = () => {
 						</Typography>
 					</div>
 					<div className=" rounded-lg border-b-2 border-slate-300 p-5 hover:bg-slate-100 ">
-						<Music className="h-5 w-5 " aria-hidden="true" />
+						<Tune className="h-5 w-5 " aria-hidden="true" />
 						<Typography component="h2">Dj`e:</Typography>
 						<Typography component="h4">
 							{parties[Number(query)].dj[0]}, {parties[Number(query)].dj[1]},{' '}
@@ -79,14 +79,14 @@ const EventDetailsPage = () => {
 						</Typography>
 					</div>
 					<div className=" rounded-lg border-b-2 border-slate-300 p-5 hover:bg-slate-100 ">
-						<Up className="h-5 w-5 " aria-hidden="true" />
+						<TrendingUp className="h-5 w-5 " aria-hidden="true" />
 						<Typography component="h2">Zarobki:</Typography>
 						<Typography component="h4">
 							{parties[Number(query)].budget.party_income}
 						</Typography>
 					</div>
 					<div className=" rounded-lg border-b-2 border-slate-300 p-5 hover:bg-slate-100 ">
-						<Down className="h-5 w-5 " aria-hidden="true" />
+						<TrendingDown className="h-5 w-5 " aria-hidden="true" />
 						<Typography component="h2">Wydatki:</Typography>
 						<Typography component="h4">
 							{parties[Number(query)].budget.party_spend}
@@ -104,7 +104,7 @@ const EventDetailsPage = () => {
 					<Link href="http://localhost:3000/events">
 						<Button size="medium">
 							<Typography component="h2">Szczegolowy budzet</Typography>
-							<Budget className="h-5 w-5 " aria-hidden="true" />
+							<Dollar className="h-5 w-5 " aria-hidden="true" />
 						</Button>
 					</Link>
 				</div>

@@ -4,9 +4,9 @@ import { Button } from 'components/atoms/Button/Button';
 import Link from 'next/link';
 import Image from 'next/image';
 import { parties } from '../api/parties';
-import UserIcon from '../../public/UserIcon.svg';
-import Wallet from '../../public/Wallet.svg';
-import Clock from '../../public/Clock.svg';
+import UserIcon from 'components/icons/UserIcon.svg';
+import Wallet from 'components/icons/Wallet.svg';
+import Clock from 'components/icons/Clock.svg';
 
 const EventsPage = () => {
 	return (
