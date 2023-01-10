@@ -12,7 +12,7 @@ import Ticket from '../../public/Ticket.svg';
 import Wallet from '../../public/Wallet.svg';
 import Back from '../../public/Back.svg';
 import Star from '../../public/Star.svg';
-import { parties } from '../api/data.json';
+import { parties } from '../api/parties';
 import Image from 'next/image';
 import Link from 'next/link';
 

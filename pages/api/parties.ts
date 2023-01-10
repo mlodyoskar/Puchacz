@@ -1,0 +1,62 @@
+export const parties = [
+	{
+		id: 1,
+		name: 'Puchacz x-mass',
+		date: '26.12.2022',
+		start_time: '21:00',
+		end_time: '04:00',
+		description: 'sample text sample text sample text sample text sample text',
+		image: 'puch.png',
+		dj: ['og', 'pete', 'cnt'],
+		staff: {
+			photos: 'arti',
+			graphic: 'isitgold',
+		},
+		budget: {
+			people_in_party: 500,
+			party_income: 6250,
+			party_spend: 3000,
+			overall: 3250,
+		},
+	},
+	{
+		id: 2,
+		name: 'Puchacz new year',
+		date: '26.01.2023',
+		start_time: '21:00',
+		end_time: '04:00',
+		description: 'sample text sample text sample text sample text sample text',
+		image: 'part.png',
+		dj: ['og', 'kubulek', 'cnt'],
+		staff: {
+			photos: 'arti',
+			graphic: 'isitgold',
+		},
+		budget: {
+			people_in_party: 500,
+			party_income: 6250,
+			party_spend: 3000,
+			overall: 3250,
+		},
+	},
+	{
+		id: 3,
+		name: 'Puchacz party',
+		date: '26.05.2023',
+		start_time: '21:00',
+		end_time: '04:00',
+		description: 'sample text sample text sample text sample text sample text',
+		image: 'year.png',
+		dj: ['og', 'kubulek', 'pete'],
+		staff: {
+			photos: 'arti',
+			graphic: 'isitgold',
+		},
+		budget: {
+			people_in_party: 500,
+			party_income: 6250,
+			party_spend: 3000,
+			overall: 3250,
+		},
+	},
+];
