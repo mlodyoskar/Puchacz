@@ -1,0 +1,8 @@
+query first {
+	events {
+		id
+		name
+		slug
+		startTime
+	}
+}
