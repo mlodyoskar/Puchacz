@@ -30,7 +30,7 @@ const EventDetailsPage = () => {
 					<Back className="h-5 w-5 " aria-hidden="true" />
 				</Button>
 			</div>
-			<div className="mb-2 flex flex-col items-center">
+			<div className="mb-2 flex flex-col items-center ">
 				<Image
 					src={`/${parties[Number(query)].image}`}
 					height={800}
@@ -41,21 +41,21 @@ const EventDetailsPage = () => {
 			</div>
 			<div>
 				<div className="grid grid-cols-2 gap-4 lg:grid lg:grid-cols-4">
-					<div className=" rounded-lg border-b-2 border-slate-300 p-5 hover:bg-slate-100 ">
+					<div className=" rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
 						<Star className="h-5 w-5 " aria-hidden="true" />
 						<Typography component="h2">Wydarzenie:</Typography>
 						<Typography component="h4">
 							{parties[Number(query)].name}
 						</Typography>
 					</div>
-					<div className=" rounded-lg border-b-2 border-slate-300 p-5 hover:bg-slate-100 ">
+					<div className=" rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
 						<Calendar className="h-5 w-5 " aria-hidden="true" />
 						<Typography component="h2">Data:</Typography>
 						<Typography component="h4">
 							{parties[Number(query)].date}
 						</Typography>
 					</div>
-					<div className=" rounded-lg border-b-2 border-slate-300 p-5 hover:bg-slate-100 ">
+					<div className=" rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
 						<Clock className="h-5 w-5 " aria-hidden="true" />
 						<Typography component="h2">Godziny:</Typography>
 						<Typography component="h4">
@@ -63,7 +63,7 @@ const EventDetailsPage = () => {
 							{parties[Number(query)].end_time}
 						</Typography>
 					</div>
-					<div className=" rounded-lg border-b-2 border-slate-300 p-5 hover:bg-slate-100 ">
+					<div className=" rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
 						<Tune className="h-5 w-5 " aria-hidden="true" />
 						<Typography component="h2">Dj`e:</Typography>
 						<Typography component="h4">
@@ -71,28 +71,28 @@ const EventDetailsPage = () => {
 							{parties[Number(query)].dj[2]}
 						</Typography>
 					</div>
-					<div className="  rounded-lg border-b-2 border-slate-300 p-5 hover:bg-slate-100 ">
+					<div className="  rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
 						<Ticket className="h-5 w-5 " aria-hidden="true" />
 						<Typography component="h2">Obecnych:</Typography>
 						<Typography component="h4">
 							{parties[Number(query)].budget.people_in_party}
 						</Typography>
 					</div>
-					<div className=" rounded-lg border-b-2 border-slate-300 p-5 hover:bg-slate-100 ">
+					<div className=" rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
 						<TrendingUp className="h-5 w-5 " aria-hidden="true" />
 						<Typography component="h2">Zarobki:</Typography>
 						<Typography component="h4">
 							{parties[Number(query)].budget.party_income}
 						</Typography>
 					</div>
-					<div className=" rounded-lg border-b-2 border-slate-300 p-5 hover:bg-slate-100 ">
+					<div className=" rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
 						<TrendingDown className="h-5 w-5 " aria-hidden="true" />
 						<Typography component="h2">Wydatki:</Typography>
 						<Typography component="h4">
 							{parties[Number(query)].budget.party_spend}
 						</Typography>
 					</div>
-					<div className=" rounded-lg border-b-2 border-slate-300 p-5 hover:bg-slate-100 ">
+					<div className=" rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
 						<Wallet className="h-5 w-5 " aria-hidden="true" />
 						<Typography component="h2">Zysk ogółem:</Typography>
 						<Typography component="h4">

@@ -12,9 +12,13 @@ const EventsPage = () => {
 	return (
 		<MainLayout>
 			<Typography component="h1">Imprezy</Typography>
-			<Button>
-				<Link href="events/create">Utwórz nową imprezę</Link>
-			</Button>
+			<div className=" fixed bottom-0 w-full">
+				<div className="float-right mr-10 md:mr-72">
+					<Button>
+						<Link href="events/create">Utwórz nową imprezę</Link>
+					</Button>
+				</div>
+			</div>
 			<div className="mt-6">
 				{parties.map((data) => (
 					<Link href={`events/${data.id}`} key={data.id}>
