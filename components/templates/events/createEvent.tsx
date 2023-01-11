@@ -12,20 +12,10 @@ import {
 } from 'components/atoms/MultiSelect/MultiSelect';
 import { imageSchema } from 'utils/imageSchema';
 import { FileInput } from 'components/atoms/FileInput/FileInput';
-
-const peopleData = [
-	{ id: 1, name: 'Oskar' },
-	{ id: 2, name: 'Kuba' },
-	{ id: 3, name: 'Janek' },
-	{ id: 4, name: 'Oliwier' },
-	{ id: 5, name: 'DJ OG' },
-];
-
-const photograpghs = [
-	{ id: 1, name: 'Arti Jakob' },
-	{ id: 2, name: 'Madzia' },
-	{ id: 5, name: 'Marta' },
-];
+import Image from 'next/image';
+import TrashIcon from './../../icons/Trash.svg';
+import { useCreateEventMutation, useGetAllStuffQuery } from 'generated/graphql';
+import { useRouter } from 'next/router';
 
 const CreateEventSchema = z.object({
 	name: z.string().min(1, 'To pole nie może być puste').max(40),
@@ -38,6 +28,10 @@ const CreateEventSchema = z.object({
 type CreateEvent = z.infer<typeof CreateEventSchema>;
 
 export const CreateEventPage = () => {
+	const router = useRouter();
+	const [createEventMutation, { loading }] = useCreateEventMutation();
+	const { data: stuffData } = useGetAllStuffQuery();
+
 	const {
 		register,
 		handleSubmit,
@@ -45,11 +39,33 @@ export const CreateEventPage = () => {
 		resetField,
 		watch,
 		formState: { errors },
-	} = useForm<CreateEvent>({ resolver: zodResolver(CreateEventSchema) });
+	} = useForm<CreateEvent>({
+		resolver: zodResolver(CreateEventSchema),
+	});
 
-	const onSubmit: SubmitHandler<CreateEvent> = (data) => {
-		//TODO: Request to API to add event
-		console.log(data);
+	const onSubmit: SubmitHandler<CreateEvent> = async ({
+		date,
+		name,
+		stuffDj,
+		stuffPhoto,
+	}) => {
+		const stuff = [...stuffPhoto, ...stuffDj];
+
+		const variables = {
+			name,
+			day: date,
+			stuff: {
+				connect: stuff.map((p) => ({ id: p.id })),
+			},
+		};
+
+		const { data: createdEventData } = await createEventMutation({
+			variables,
+		});
+
+		console.log(createdEventData);
+
+		router.push(`/events/${createdEventData?.createEvent?.id}`);
 	};
 
 	const photo = watch('photo');
@@ -75,33 +91,51 @@ export const CreateEventPage = () => {
 						Data imprezy
 					</Input>
 				</div>
-				{photo ? (
-					<div>
-						<button onClick={() => resetField('photo')}>Reset</button>
-						{/* {photo[0].size} */}
+				{photo && photo.length > 0 ? (
+					<div className="relative">
+						<button
+							className="absolute top-0 right-0 m-2 rounded-md border-2 border-blue-700 bg-white "
+							onClick={() => resetField('photo')}
+						>
+							<TrashIcon className="h-6 w-6" />
+						</button>
+						<Image
+							className="max-h-64 w-full overflow-hidden rounded-md object-cover"
+							alt="Zdjęcie imprezy"
+							width={200}
+							height={200}
+							src={URL.createObjectURL(photo[0])}
+						/>
 					</div>
 				) : (
-					<FileInput {...register('photo')} />
+					<FileInput
+						errorMessage={errors.photo?.message}
+						{...register('photo')}
+					/>
 				)}
 				<Typography component="h2">Stuff na impreze</Typography>
-				<div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
-					<MultiSelect
-						control={control}
-						name="stuffDj"
-						label="Dj'e"
-						options={peopleData}
-						defaultValue={[]}
-					/>
-					<MultiSelect
-						control={control}
-						name="stuffPhoto"
-						label="Fotografowie"
-						options={photograpghs}
-						defaultValue={[]}
-					/>
-				</div>
+				{stuffData ? (
+					<div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+						<MultiSelect
+							control={control}
+							name="stuffDj"
+							label="Dj'e"
+							options={stuffData.stuffs.filter((p) => p.type === 'dj')}
+							defaultValue={[]}
+						/>
+						<MultiSelect
+							control={control}
+							name="stuffPhoto"
+							label="Fotografowie"
+							options={stuffData.stuffs.filter((p) => p.type === 'photograph')}
+							defaultValue={[]}
+						/>
+					</div>
+				) : (
+					<p>Nie udało się załadować dji i fotografów</p>
+				)}
 
-				<Button>Utwórz wydarzenie</Button>
+				<Button disabled={loading}>Utwórz wydarzenie</Button>
 			</form>
 		</MainLayout>
 	);
