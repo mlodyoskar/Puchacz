@@ -11,7 +11,7 @@
 		"cy:run": "cypress run",
 		"storybook": "start-storybook -p 6006",
 		"build-storybook": "build-storybook",
-		"graphql-codegen": "graphql-codegen --config codegen.ts"
+		"graphql-codegen": "DOTENV_CONFIG_PATH=./.env.local graphql-codegen --config codegen.ts -r dotenv/config"
 	},
 	"dependencies": {
 		"@apollo/client": "^3.7.3",

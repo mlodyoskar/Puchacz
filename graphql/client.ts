@@ -1,17 +1,24 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { invariant } from '@apollo/client/utilities/globals';
 
 const NEXT_PUBLIC_HYGRAPH_ENDPOINT = process.env.NEXT_PUBLIC_HYGRAPH_URL;
+const HYGRAPH_TOKEN = process.env.NEXT_PUBLIC_HYGRAPH_TOKEN;
 
-if (!NEXT_PUBLIC_HYGRAPH_ENDPOINT) {
-	throw new Error("NEXT_PUBLIC_HYGRAPH_ENDPOINT wasn't provided");
-}
+export const generateInvariantMessage = (envName: string) =>
+	`'missing ${envName} env'`;
+
+invariant(
+	NEXT_PUBLIC_HYGRAPH_ENDPOINT,
+	generateInvariantMessage('NEXT_PUBLIC_HYGRAPH_ENDPOINT')
+);
+invariant(HYGRAPH_TOKEN, generateInvariantMessage('HYGRAPH_TOKEN'));
 
 export const apolloClient = new ApolloClient({
 	ssrMode: true,
 	uri: NEXT_PUBLIC_HYGRAPH_ENDPOINT,
 	cache: new InMemoryCache(),
 	headers: {
-		authorization:
-			'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImdjbXMtbWFpbi1wcm9kdWN0aW9uIn0.eyJ2ZXJzaW9uIjozLCJpYXQiOjE2NzM0NjkyMjIsImF1ZCI6WyJodHRwczovL2FwaS1ldS1jZW50cmFsLTEtc2hhcmVkLWV1YzEtMDIuaHlncmFwaC5jb20vdjIvY2xiams4NjlvMmNucTAxdDY2dzd5YWJxZS9tYXN0ZXIiLCJtYW5hZ2VtZW50LW5leHQuZ3JhcGhjbXMuY29tIl0sImlzcyI6Imh0dHBzOi8vbWFuYWdlbWVudC5ncmFwaGNtcy5jb20vIiwic3ViIjoiM2I2MDI3YjYtNTE1MS00YmI3LWE3OTktNWY2MWQ5MmY2MmM2IiwianRpIjoiY2xjczRkOGd1MTR4cTAxdXIzaHo0OGhzdiJ9.XblJc07d0_BRumJVBvbKda8v3mB-KipvY-2pxW8wnyA1ILvbM4x743oH7n7r1CzsCon2FN_27QpEmxbuZKHckD34qYKSPj19a7hHD78qfeT35VGw1BfB-L_HZflJZ022M_iJtjH5bsDvzoLlFx2iz4MIjUL1ohlKybOCFIH1XGVa9YyGO1rf9ZfwKuKCGlsx3nk0VQvqIFgxBhUebIpCIFe8ynCuKnanLMO62lm0DH20-EHgcLGayUL9XIQB5LUTo059oECmUfsVgCheoqzKOakKudRHyuhrtADnWzWGRUH28zgv0zlEo2D7jlOeYv0fCa0Hf2OX5xWbb8oOyyUJI_Fo80IGsVLs-Xbh7bChBEcIcUNkber453famot65aBdVooqqwhl1Cs8D9UIlv39QinFyoG9lV0Dh77TCWIv8O15bwuUF617j_cFX8U4oEMhQbFKHc036VpLrmjmdJuTiBViWkAm3vt-4EaIqtvZCLsfuwI_9BX8UxiFmKTrwcP0TvqRAO5RQ40OxZPcjFtKydmh2VUclITgPb13zbNT4e-plbUdUQDyyncK3zrZcPbZuonQh08EJ9NXzBHLQNDw3bp9RUwzz5nUA0B8XJTavivlqSMyzuLu7fSHlhsz8THjf60lEduFmIU35wNP5Qes0bjx_JYUUxxmiP3cAQve5Uw',
+		authorization: `Bearer ${HYGRAPH_TOKEN}`,
 	},
 });
+``;
