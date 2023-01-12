@@ -23,9 +23,9 @@ export const Button = ({
 					'text-sm': size === 'small',
 					'text-base': size === 'medium',
 					'py-4': size === 'large',
-					'bg-blue-700 hover:bg-blue-800 focus:ring-blue-300':
+					'bg-blue-700 hover:bg-blue-800 hover:opacity-100 focus:ring-blue-300':
 						variant === 'default',
-					'bg-red-600 hover:bg-red-800  focus:ring-red-300':
+					'bg-red-600 hover:bg-red-800 hover:opacity-100  focus:ring-red-300':
 						variant === 'warning',
 					'w-full': fullWidth,
 				},

@@ -13,13 +13,13 @@ const EventsPage = () => {
 		<MainLayout>
 			<Typography component="h1">Imprezy</Typography>
 			<div className=" fixed bottom-0 w-full">
-				<div className="float-right mr-10 md:mr-72">
+				<div className="float-right mr-10 opacity-95 md:mr-72">
 					<Button>
 						<Link href="events/create">Utwórz nową imprezę</Link>
 					</Button>
 				</div>
 			</div>
-			<div className="mt-6">
+			<div className="mb-1 md:mb-10 md:mt-6">
 				{parties.map((data) => (
 					<Link href={`events/${data.id}`} key={data.id}>
 						<div className="flex justify-between rounded-lg border-b-2 border-slate-300 p-2 hover:bg-slate-100">
@@ -51,11 +51,8 @@ const EventsPage = () => {
 								</div>
 								<div className="mx-2 h-8 w-8 md:mx-10">
 									<Clock />
-									<Typography component="h4">
-										{data.start_time}
-										<br />
-										{data.end_time}
-									</Typography>
+									<Typography component="h4">{data.start_time}</Typography>
+									<Typography component="h4">{data.end_time}</Typography>
 								</div>
 							</div>
 						</div>

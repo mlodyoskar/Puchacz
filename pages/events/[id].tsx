@@ -41,67 +41,83 @@ const EventDetailsPage = () => {
 			</div>
 			<div>
 				<div className="grid grid-cols-2 gap-4 lg:grid lg:grid-cols-4">
-					<div className=" rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
-						<Star className="h-5 w-5 " aria-hidden="true" />
-						<Typography component="h2">Wydarzenie:</Typography>
+					<div className="flex flex-col rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
+						<div className=" flex flex-row">
+							<Star className="h-5 w-5 " aria-hidden="true" />
+							<Typography component="h2">Wydarzenie</Typography>
+						</div>
 						<Typography component="h4">
 							{parties[Number(query)].name}
 						</Typography>
 					</div>
-					<div className=" rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
-						<Calendar className="h-5 w-5 " aria-hidden="true" />
-						<Typography component="h2">Data:</Typography>
+					<div className=" flex flex-col rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
+						<div className=" flex flex-row">
+							<Calendar className="h-5 w-5 " aria-hidden="true" />
+							<Typography component="h2">Data</Typography>
+						</div>
 						<Typography component="h4">
 							{parties[Number(query)].date}
 						</Typography>
 					</div>
-					<div className=" rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
-						<Clock className="h-5 w-5 " aria-hidden="true" />
-						<Typography component="h2">Godziny:</Typography>
+					<div className=" flex flex-col rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
+						<div className=" flex flex-row">
+							<Clock className="h-5 w-5 " aria-hidden="true" />
+							<Typography component="h2">Godziny</Typography>
+						</div>
 						<Typography component="h4">
 							{parties[Number(query)].start_time} -{' '}
 							{parties[Number(query)].end_time}
 						</Typography>
 					</div>
-					<div className=" rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
-						<Tune className="h-5 w-5 " aria-hidden="true" />
-						<Typography component="h2">Dj`e:</Typography>
+					<div className=" flex flex-col rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
+						<div className=" flex flex-row">
+							<Tune className="h-5 w-5 " aria-hidden="true" />
+							<Typography component="h2">Dj`e</Typography>
+						</div>
 						<Typography component="h4">
 							{parties[Number(query)].dj[0]}, {parties[Number(query)].dj[1]},{' '}
 							{parties[Number(query)].dj[2]}
 						</Typography>
 					</div>
-					<div className="  rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
-						<Ticket className="h-5 w-5 " aria-hidden="true" />
-						<Typography component="h2">Obecnych:</Typography>
+					<div className="  flex flex-col rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
+						<div className=" flex flex-row">
+							<Ticket className="h-5 w-5 " aria-hidden="true" />
+							<Typography component="h2">Obecnych</Typography>
+						</div>
 						<Typography component="h4">
 							{parties[Number(query)].budget.people_in_party}
 						</Typography>
 					</div>
-					<div className=" rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
-						<TrendingUp className="h-5 w-5 " aria-hidden="true" />
-						<Typography component="h2">Zarobki:</Typography>
+					<div className=" flex flex-col rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
+						<div className=" flex flex-row">
+							<TrendingUp className="h-5 w-5 " aria-hidden="true" />
+							<Typography component="h2">Zarobki</Typography>
+						</div>
 						<Typography component="h4">
 							{parties[Number(query)].budget.party_income}
 						</Typography>
 					</div>
-					<div className=" rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
-						<TrendingDown className="h-5 w-5 " aria-hidden="true" />
-						<Typography component="h2">Wydatki:</Typography>
+					<div className=" flex flex-col rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
+						<div className=" flex flex-row">
+							<TrendingDown className="h-5 w-5 " aria-hidden="true" />
+							<Typography component="h2">Wydatki</Typography>
+						</div>
 						<Typography component="h4">
 							{parties[Number(query)].budget.party_spend}
 						</Typography>
 					</div>
-					<div className=" rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
-						<Wallet className="h-5 w-5 " aria-hidden="true" />
-						<Typography component="h2">Zysk ogółem:</Typography>
+					<div className=" flex flex-col rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
+						<div className=" flex flex-row">
+							<Wallet className="h-5 w-5 " aria-hidden="true" />
+							<Typography component="h2">Zysk ogółem</Typography>
+						</div>
 						<Typography component="h4">
 							{parties[Number(query)].budget.overall}
 						</Typography>
 					</div>
 				</div>
 				<div className="mt-4 flex justify-center">
-					<Link href="http://localhost:3000/events">
+					<Link href="http://localhost:3000/budzet">
 						<Button size="medium">
 							<Typography component="h2">Szczegolowy budzet</Typography>
 							<Dollar className="h-5 w-5 " aria-hidden="true" />
