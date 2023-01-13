@@ -1,0 +1,23 @@
+query GetAllEvents {
+	events {
+		id
+		name
+		slug
+		day
+		stuffs {
+			...StuffData
+		}
+	}
+}
+
+fragment StuffData on Stuff {
+	id
+	name
+	type
+}
+
+query GetAllStuff {
+	stuffs {
+		...StuffData
+	}
+}

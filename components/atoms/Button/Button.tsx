@@ -8,6 +8,7 @@ interface Props {
 	size?: 'small' | 'medium' | 'large';
 	variant?: Variants;
 	fullWidth?: boolean;
+	disabled?: boolean;
 }
 
 export const Button = ({
@@ -15,9 +16,11 @@ export const Button = ({
 	variant = 'default',
 	size = 'medium',
 	fullWidth = false,
+	disabled = false,
 }: Props) => {
 	return (
 		<button
+			disabled={disabled}
 			className={cx(
 				{
 					'text-sm': size === 'small',
@@ -28,8 +31,9 @@ export const Button = ({
 					'bg-red-600 hover:bg-red-800 hover:opacity-100  focus:ring-red-300':
 						variant === 'warning',
 					'w-full': fullWidth,
+					'cursor-not-allowed': disabled,
 				},
-				'mr-2 mb-2 flex justify-center gap-2 rounded-lg  px-5 py-2.5 text-sm font-medium text-white focus:outline-none focus:ring-4'
+				'mr-2 mb-2 flex justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-medium text-white transition-colors focus:outline-none focus:ring-4'
 			)}
 		>
 			{children}
