@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
-import { MainLayout } from 'components/layouts/MainLayout';
+import Image from 'next/image';
+import Link from 'next/link';
+import { parties } from '../api/parties';
 import { Typography } from 'components/atoms/Typography/Typography';
 import { Button } from 'components/atoms/Button/Button';
 import Dollar from 'components/icons/Dollar.svg';
@@ -12,9 +14,7 @@ import Ticket from 'components/icons/Ticket.svg';
 import Wallet from 'components/icons/Wallet.svg';
 import Back from 'components/icons/Back.svg';
 import Star from 'components/icons/Star.svg';
-import { parties } from '../api/parties';
-import Image from 'next/image';
-import Link from 'next/link';
+import { MainLayout } from 'components/layouts/MainLayout';
 
 const EventDetailsPage = () => {
 	const router = useRouter();

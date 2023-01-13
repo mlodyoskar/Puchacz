@@ -19,37 +19,37 @@ const EventsPage = () => {
 					</Button>
 				</div>
 			</div>
-			<div className="mb-1 md:mb-10 md:mt-6">
+			<div className="mb-12 md:mb-10 md:mt-6">
 				{parties.map((data) => (
 					<Link href={`events/${data.id}`} key={data.id}>
-						<div className="flex justify-between rounded-lg border-b-2 border-slate-300 p-2 hover:bg-slate-100">
-							<div className="flex md:mr-4">
-								<div className="mb-2 md:mr-2">
+						<div className="flex flex-col justify-between rounded-lg border-b-2 border-slate-300 p-2 hover:bg-slate-100 md:flex-row ">
+							<div className="flex flex-col items-center md:mr-4 md:flex-row md:items-start">
+								<div className="mb-2 md:mr-2 ">
 									<Image
 										src={`/${data.image}`}
 										height={300}
 										width={300}
 										alt="Parties picture"
-										className="hidden rounded-lg md:block"
+										className="rounded-lg"
 									/>
 								</div>
 								<div>
-									<Typography component="h2">{data.name}</Typography>
+									<Typography component="h1">{data.name}</Typography>
 									<Typography component="h4">{data.date}</Typography>
 								</div>
 							</div>
-							<div className="mb-12 flex justify-between md:mx-4">
-								<div className="mx-2 h-8 w-8 md:mx-10">
+							<div className="mx-4 mb-12 flex justify-between">
+								<div className=" h-8 w-8 md:ml-10">
 									<UserIcon />
 									<Typography component="h4">
 										{data.budget.people_in_party}
 									</Typography>
 								</div>
-								<div className="mx-2 h-8 w-8 md:mx-10">
+								<div className=" h-8 w-8 md:mx-10">
 									<Wallet />
 									<Typography component="h4">{data.budget.overall}</Typography>
 								</div>
-								<div className="mx-2 h-8 w-8 md:mx-10">
+								<div className=" h-8 w-8 md:mr-6">
 									<Clock />
 									<Typography component="h4">{data.start_time}</Typography>
 									<Typography component="h4">{data.end_time}</Typography>
