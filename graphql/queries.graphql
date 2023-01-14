@@ -22,3 +22,18 @@ query GetAllStuff {
 		...StuffData
 	}
 }
+
+query GetEventById($id: ID!) {
+	event(where: { id: $id }) {
+		name
+		id
+		day
+		stuffs {
+			id
+			name
+		}
+		image {
+			url
+		}
+	}
+}

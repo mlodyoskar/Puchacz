@@ -15,31 +15,63 @@ import Wallet from 'components/icons/Wallet.svg';
 import Back from 'components/icons/Back.svg';
 import Star from 'components/icons/Star.svg';
 import { MainLayout } from 'components/layouts/MainLayout';
+import { useGetEventByIdQuery } from 'generated/graphql';
 
 const EventDetailsPage = () => {
 	const router = useRouter();
-	const query = Number(router.query.id);
+	const id = router.query.id as string;
+	const { data, loading } = useGetEventByIdQuery({ variables: { id } });
+	if (loading) {
+		return (
+			<MainLayout>
+				<Typography component="h1">Szczegóły wydarzenia</Typography>
+				<div className="flex justify-center">
+					<Image
+						src={'/RingSpinner.svg'}
+						width={80}
+						height={80}
+						alt="Spinner"
+					/>
+				</div>
+			</MainLayout>
+		);
+	}
+	if (!data) {
+		return (
+			<MainLayout>
+				<Typography component="h1">Data not found</Typography>
+			</MainLayout>
+		);
+	}
 	return (
 		<MainLayout>
-			<div className="mb-2">
-				<Typography component="h1">Szczegóły wydarzenia</Typography>
-			</div>
-			<div onClick={() => router.back()}>
-				<Button size="large">
-					<Typography component="h4">Back</Typography>
-					<Back className="h-5 w-5 " aria-hidden="true" />
-				</Button>
-			</div>
-			<div className="mb-2 flex flex-col items-center ">
-				<Image
-					src={`/${parties[Number(query)].image}`}
-					height={800}
-					width={800}
-					alt="Parties picture"
-					className="rounded-lg"
-				/>
-			</div>
 			<div>
+				<div>
+					<Typography component="h1">Szczegóły wydarzenia</Typography>
+				</div>
+				<div onClick={() => router.back()}>
+					<Button size="large">
+						<Typography component="h4">Back</Typography>
+						<Back className="h-5 w-5 " aria-hidden="true" />
+					</Button>
+				</div>
+				<div>
+					<Image
+						src={data.event?.image?.url || '/part.png'}
+						height={800}
+						width={800}
+						alt="Parties picture"
+						className="rounded-lg"
+					/>
+					<div className=" flex flex-row">
+						<Calendar className="h-5 w-5 " aria-hidden="true" />
+						<Typography component="h3">{data.event?.day}</Typography>
+					</div>
+					<Typography component="h1">{data.event?.name}</Typography>
+				</div>
+			</div>
+
+			{/* <div>
 				<div className="grid grid-cols-2 gap-4 lg:grid lg:grid-cols-4">
 					<div className="flex flex-col rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
 						<div className=" flex flex-row">
@@ -124,7 +156,7 @@ const EventDetailsPage = () => {
 						</Button>
 					</Link>
 				</div>
-			</div>
+			</div> */}
 		</MainLayout>
 	);
 };
