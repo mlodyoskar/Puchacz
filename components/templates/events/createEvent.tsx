@@ -14,22 +14,27 @@ import { imageSchema } from 'utils/imageSchema';
 import { FileInput } from 'components/atoms/FileInput/FileInput';
 import Image from 'next/image';
 import TrashIcon from './../../icons/Trash.svg';
-import { useCreateEventMutation, useGetAllStuffQuery } from 'generated/graphql';
+import { useGetAllStuffQuery } from 'generated/graphql';
 import { useRouter } from 'next/router';
+import { fetcher } from 'utils/fetcher';
+import { invariant } from '@apollo/client/utilities/globals';
 
-const CreateEventSchema = z.object({
+const HYGRAPH_URL = process.env.NEXT_PUBLIC_HYGRAPH_URL;
+
+invariant(HYGRAPH_URL);
+
+export const CreateEvent = z.object({
 	name: z.string().min(1, 'To pole nie może być puste').max(40),
-	date: z.string(),
+	date: z.string().min(1, 'To pole nie może być puste'),
 	photo: imageSchema.optional(),
 	stuffDj: MultiSelectOptionSchema.array(),
 	stuffPhoto: MultiSelectOptionSchema.array(),
 });
 
-type CreateEvent = z.infer<typeof CreateEventSchema>;
+type CreateEvent = z.infer<typeof CreateEvent>;
 
 export const CreateEventPage = () => {
 	const router = useRouter();
-	const [createEventMutation, { loading }] = useCreateEventMutation();
 	const { data: stuffData } = useGetAllStuffQuery();
 
 	const {
@@ -40,12 +45,13 @@ export const CreateEventPage = () => {
 		watch,
 		formState: { errors },
 	} = useForm<CreateEvent>({
-		resolver: zodResolver(CreateEventSchema),
+		resolver: zodResolver(CreateEvent),
 	});
 
 	const onSubmit: SubmitHandler<CreateEvent> = async ({
 		date,
 		name,
+		photo,
 		stuffDj,
 		stuffPhoto,
 	}) => {
@@ -53,19 +59,17 @@ export const CreateEventPage = () => {
 
 		const variables = {
 			name,
-			day: date,
-			stuff: {
-				connect: stuff.map((p) => ({ id: p.id })),
-			},
+			date,
+			stuff: stuff.map((p) => ({ id: p.id })),
 		};
 
-		const { data: createdEventData } = await createEventMutation({
-			variables,
+		const res = await fetcher('/api/events/create', {
+			body: { ...variables },
 		});
 
-		console.log(createdEventData);
+		console.log(res);
 
-		router.push(`/events/${createdEventData?.createEvent?.id}`);
+		// router.push(`/events/${createdEventData?.createEvent?.id}`);
 	};
 
 	const photo = watch('photo');
@@ -135,7 +139,7 @@ export const CreateEventPage = () => {
 					<p>Nie udało się załadować dji i fotografów</p>
 				)}
 
-				<Button disabled={loading}>Utwórz wydarzenie</Button>
+				<Button disabled={false}>Utwórz wydarzenie</Button>
 			</form>
 		</MainLayout>
 	);

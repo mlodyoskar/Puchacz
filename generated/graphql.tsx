@@ -4973,6 +4973,13 @@ export type CreateEventMutationVariables = Exact<{
 
 export type CreateEventMutation = { __typename?: 'Mutation', createEvent?: { __typename?: 'Event', id: string } | null };
 
+export type PublishEventMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type PublishEventMutation = { __typename?: 'Mutation', publishEvent?: { __typename?: 'Event', id: string } | null };
+
 export type GetAllEventsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -5027,6 +5034,39 @@ export function useCreateEventMutation(baseOptions?: Apollo.MutationHookOptions<
 export type CreateEventMutationHookResult = ReturnType<typeof useCreateEventMutation>;
 export type CreateEventMutationResult = Apollo.MutationResult<CreateEventMutation>;
 export type CreateEventMutationOptions = Apollo.BaseMutationOptions<CreateEventMutation, CreateEventMutationVariables>;
+export const PublishEventDocument = gql`
+    mutation publishEvent($id: ID!) {
+  publishEvent(where: {id: $id}, to: PUBLISHED) {
+    id
+  }
+}
+    `;
+export type PublishEventMutationFn = Apollo.MutationFunction<PublishEventMutation, PublishEventMutationVariables>;
+
+/**
+ * __usePublishEventMutation__
+ *
+ * To run a mutation, you first call `usePublishEventMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `usePublishEventMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [publishEventMutation, { data, loading, error }] = usePublishEventMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function usePublishEventMutation(baseOptions?: Apollo.MutationHookOptions<PublishEventMutation, PublishEventMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<PublishEventMutation, PublishEventMutationVariables>(PublishEventDocument, options);
+      }
+export type PublishEventMutationHookResult = ReturnType<typeof usePublishEventMutation>;
+export type PublishEventMutationResult = Apollo.MutationResult<PublishEventMutation>;
+export type PublishEventMutationOptions = Apollo.BaseMutationOptions<PublishEventMutation, PublishEventMutationVariables>;
 export const GetAllEventsDocument = gql`
     query GetAllEvents {
   events {

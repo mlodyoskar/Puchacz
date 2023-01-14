@@ -5,6 +5,7 @@ const ACCEPTED_MIME_TYPES = ['image/gif', 'image/jpeg', 'image/png'];
 
 const imageSchema = z.lazy(() =>
 	z.instanceof(FileList).superRefine((f, ctx) => {
+		if (f.length <= 0) return;
 		if (!ACCEPTED_MIME_TYPES.includes(f[0].type)) {
 			ctx.addIssue({
 				code: z.ZodIssueCode.custom,
