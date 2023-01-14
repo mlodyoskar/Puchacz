@@ -1,11 +1,12 @@
 query GetAllEvents {
 	events {
-		id
 		name
+		id
 		slug
 		day
-		stuffs {
-			...StuffData
+		image {
+			id
+			url
 		}
 	}
 }

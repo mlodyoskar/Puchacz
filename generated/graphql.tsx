@@ -4976,7 +4976,7 @@ export type CreateEventMutation = { __typename?: 'Mutation', createEvent?: { __t
 export type GetAllEventsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAllEventsQuery = { __typename?: 'Query', events: Array<{ __typename?: 'Event', id: string, name: string, slug?: string | null, day?: any | null, stuffs: Array<{ __typename?: 'Stuff', id: string, name: string, type?: Stuff_Type | null }> }> };
+export type GetAllEventsQuery = { __typename?: 'Query', events: Array<{ __typename?: 'Event', name: string, id: string, slug?: string | null, day?: any | null, image?: { __typename?: 'Asset', id: string, url: string } | null }> };
 
 export type StuffDataFragment = { __typename?: 'Stuff', id: string, name: string, type?: Stuff_Type | null };
 
@@ -5030,16 +5030,17 @@ export type CreateEventMutationOptions = Apollo.BaseMutationOptions<CreateEventM
 export const GetAllEventsDocument = gql`
     query GetAllEvents {
   events {
-    id
     name
+    id
     slug
     day
-    stuffs {
-      ...StuffData
+    image {
+      id
+      url
     }
   }
 }
-    ${StuffDataFragmentDoc}`;
+    `;
 
 /**
  * __useGetAllEventsQuery__
