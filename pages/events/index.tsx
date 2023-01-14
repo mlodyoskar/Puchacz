@@ -48,14 +48,14 @@ const EventsPage = () => {
 					<Link
 						href={`events/${data.id}`}
 						key={data.id}
-						className="h-80 rounded-lg border-2 border-slate-300 hover:bg-slate-100"
+						className="rounded-lg border-2 border-slate-300 hover:bg-slate-100"
 					>
-						<div className="mb-2 truncate text-center">
+						<div className="truncate text-center">
 							<div>
 								<Image
 									src={data.image?.url || '/part.png'}
-									height={450}
-									width={450}
+									height={600}
+									width={600}
 									alt="Parties picture"
 									className="rounded-lg"
 								/>
@@ -65,7 +65,7 @@ const EventsPage = () => {
 								<Typography component="h4">{data.day}</Typography>
 							</div>
 						</div>
-						<div className="mt-4 flex justify-around">
+						<div className="my-10 flex justify-around">
 							<div className="h-8 w-8">
 								<UserIcon className="h-8 w-8" aria-hidden="true" />
 								<Typography component="h4">500</Typography>
