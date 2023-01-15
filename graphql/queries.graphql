@@ -25,6 +25,7 @@ query GetAllStuff {
 
 query GetEventById($id: ID!) {
 	event(where: { id: $id }) {
+		createdAt
 		name
 		id
 		day

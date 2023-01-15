@@ -4990,7 +4990,7 @@ export type GetEventByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetEventByIdQuery = { __typename?: 'Query', event?: { __typename?: 'Event', name: string, id: string, day?: any | null, stuffs: Array<{ __typename?: 'Stuff', id: string, name: string }>, image?: { __typename?: 'Asset', url: string } | null } | null };
+export type GetEventByIdQuery = { __typename?: 'Query', event?: { __typename?: 'Event', createdAt: any, name: string, id: string, day?: any | null, stuffs: Array<{ __typename?: 'Stuff', id: string, name: string }>, image?: { __typename?: 'Asset', url: string } | null } | null };
 
 export const StuffDataFragmentDoc = gql`
     fragment StuffData on Stuff {
@@ -5112,6 +5112,7 @@ export type GetAllStuffQueryResult = Apollo.QueryResult<GetAllStuffQuery, GetAll
 export const GetEventByIdDocument = gql`
     query GetEventById($id: ID!) {
   event(where: {id: $id}) {
+    createdAt
     name
     id
     day
