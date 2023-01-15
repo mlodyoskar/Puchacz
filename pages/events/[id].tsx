@@ -1,12 +1,10 @@
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
-import { parties } from '../api/parties';
 import { Typography } from 'components/atoms/Typography/Typography';
 import { Button } from 'components/atoms/Button/Button';
-import Dollar from 'components/icons/Dollar.svg';
+import Camera from 'components/icons/Camera.svg';
 import Calendar from 'components/icons/Calendar.svg';
-import Clock from 'components/icons/Clock.svg';
 import Tune from 'components/icons/Tune.svg';
 import TrendingUp from 'components/icons/TrendingUp.svg';
 import TrendingDown from 'components/icons/TrendingDown.svg';
@@ -14,6 +12,8 @@ import Ticket from 'components/icons/Ticket.svg';
 import Wallet from 'components/icons/Wallet.svg';
 import Back from 'components/icons/Back.svg';
 import Star from 'components/icons/Star.svg';
+import Dollar from 'components/icons/Dollar.svg';
+import Group from 'components/icons/Group.svg';
 import { MainLayout } from 'components/layouts/MainLayout';
 import { useGetEventByIdQuery } from 'generated/graphql';
 
@@ -43,6 +43,7 @@ const EventDetailsPage = () => {
 			</MainLayout>
 		);
 	}
+	console.log(data, loading);
 	return (
 		<MainLayout>
 			<div>
@@ -56,6 +57,9 @@ const EventDetailsPage = () => {
 					</Button>
 				</div>
 				<div>
+					<Typography component="h6">
+						Created at: {data.event?.createdAt}
+					</Typography>
 					<Image
 						src={data.event?.image?.url || '/part.png'}
 						height={800}
@@ -68,6 +72,29 @@ const EventDetailsPage = () => {
 						<Typography component="h3">{data.event?.day}</Typography>
 					</div>
 					<Typography component="h1">{data.event?.name}</Typography>
+					<div className=" flex flex-row">
+						<Group className="h-5 w-5 " aria-hidden="true" />
+						<Typography component="h3">
+							Stuff:
+							{data.event?.stuffs.map((stuff) => (
+								<Typography component="h3" key={stuff.id}>
+									{`-${stuff.name}`}
+								</Typography>
+							))}
+						</Typography>
+					</div>
+					<div className="flex flex-row">
+						<Ticket className="h-5 w-5 " aria-hidden="true" />
+						<Typography component="h3">Obecnych: tutaj </Typography>
+					</div>
+					<div>
+						<Link href="http://localhost:3000/budzet">
+							<Button size="medium">
+								<Typography component="h2">Szczegolowy budzet</Typography>
+								<Dollar className="h-5 w-5 " aria-hidden="true" />
+							</Button>
+						</Link>
+					</div>
 				</div>
 			</div>
 
@@ -109,15 +136,6 @@ const EventDetailsPage = () => {
 						<Typography component="h4">
 							{parties[Number(query)].dj[0]}, {parties[Number(query)].dj[1]},{' '}
 							{parties[Number(query)].dj[2]}
-						</Typography>
-					</div>
-					<div className="  flex flex-col rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
-						<div className=" flex flex-row">
-							<Ticket className="h-5 w-5 " aria-hidden="true" />
-							<Typography component="h2">Obecnych</Typography>
-						</div>
-						<Typography component="h4">
-							{parties[Number(query)].budget.people_in_party}
 						</Typography>
 					</div>
 					<div className=" flex flex-col rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
