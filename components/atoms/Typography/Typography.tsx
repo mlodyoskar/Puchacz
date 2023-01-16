@@ -11,12 +11,13 @@ export const Typography = ({ children, component = 'p' }: Props) => {
 	return (
 		<Component
 			className={cx({
-				'text-xs': component === 'h6' || component === 'p' || component === 'span',
-				'text-sm': component === 'h5',
-				'text-base': component === 'h4',
-				'text-lg': component === 'h3',
-				'text-xl': component === 'h2',
-				'text-2xl': component === 'h1',
+				'text-sm':
+					component === 'h6' || component === 'p' || component === 'span',
+				'text-base': component === 'h5',
+				'text-lg': component === 'h4',
+				'text-xl': component === 'h3',
+				'text-3xl': component === 'h2',
+				'text-4xl': component === 'h1',
 			})}
 		>
 			{children}

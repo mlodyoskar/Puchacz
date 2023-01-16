@@ -45,7 +45,7 @@ const EventDetailsPage = () => {
 		<MainLayout>
 			<div>
 				<div>
-					<Typography component="h1">Szczegóły wydarzenia</Typography>
+					<Typography component="h1">Wydarzenie</Typography>
 				</div>
 				<div onClick={() => router.back()}>
 					<Button size="large">
@@ -66,7 +66,7 @@ const EventDetailsPage = () => {
 							<Calendar className="h-5 w-5 " aria-hidden="true" />
 							<Typography component="h3">{data.event?.day}</Typography>
 						</div>
-						<Typography component="h1">{data.event?.name}</Typography>
+						<Typography component="h2">{data.event?.name}</Typography>
 						<div className=" my-2 flex flex-row">
 							<Group className="h-5 w-5 " aria-hidden="true" />
 							<Typography component="h3">
@@ -80,7 +80,7 @@ const EventDetailsPage = () => {
 						</div>
 						<div className="mb-2 flex flex-row">
 							<Ticket className="h-5 w-5 " aria-hidden="true" />
-							<Typography component="h3">Obecnych: 500 </Typography>
+							<Typography component="h3">Obecnych: 500 OSÓB</Typography>
 						</div>
 						<div className="mb-2 flex flex-row">
 							<TrendingUp className="h-5 w-5 " aria-hidden="true" />
@@ -97,7 +97,7 @@ const EventDetailsPage = () => {
 						<div className="mb-2">
 							<Link href="http://localhost:3000/budzet">
 								<Button size="medium">
-									<Typography component="h2">Szczegolowy budzet</Typography>
+									<Typography component="h3">Szczegolowy budzet</Typography>
 									<Dollar className="h-5 w-5 " aria-hidden="true" />
 								</Button>
 							</Link>

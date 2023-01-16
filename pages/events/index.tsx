@@ -43,7 +43,7 @@ const EventsPage = () => {
 					</Button>
 				</div>
 			</div>
-			<div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+			<div className="mb-10 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
 				{data.events.map((data) => (
 					<Link
 						href={`events/${data.id}`}
@@ -61,7 +61,7 @@ const EventsPage = () => {
 								/>
 							</div>
 							<div>
-								<Typography component="h1">{data.name}</Typography>
+								<Typography component="h2">{data.name}</Typography>
 								<div className="text-slate-600">
 									<Typography component="h4">{data.day}</Typography>
 								</div>
