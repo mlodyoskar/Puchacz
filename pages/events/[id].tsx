@@ -3,15 +3,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Typography } from 'components/atoms/Typography/Typography';
 import { Button } from 'components/atoms/Button/Button';
-import Camera from 'components/icons/Camera.svg';
 import Calendar from 'components/icons/Calendar.svg';
-import Tune from 'components/icons/Tune.svg';
 import TrendingUp from 'components/icons/TrendingUp.svg';
 import TrendingDown from 'components/icons/TrendingDown.svg';
 import Ticket from 'components/icons/Ticket.svg';
 import Wallet from 'components/icons/Wallet.svg';
 import Back from 'components/icons/Back.svg';
-import Star from 'components/icons/Star.svg';
 import Dollar from 'components/icons/Dollar.svg';
 import Group from 'components/icons/Group.svg';
 import { MainLayout } from 'components/layouts/MainLayout';
@@ -56,125 +53,63 @@ const EventDetailsPage = () => {
 						<Back className="h-5 w-5 " aria-hidden="true" />
 					</Button>
 				</div>
-				<div>
-					<Typography component="h6">
-						Created at: {data.event?.createdAt}
-					</Typography>
-					<Image
-						src={data.event?.image?.url || '/part.png'}
-						height={800}
-						width={800}
-						alt="Parties picture"
-						className="rounded-lg"
-					/>
-					<div className=" flex flex-row">
-						<Calendar className="h-5 w-5 " aria-hidden="true" />
-						<Typography component="h3">{data.event?.day}</Typography>
-					</div>
-					<Typography component="h1">{data.event?.name}</Typography>
-					<div className=" flex flex-row">
-						<Group className="h-5 w-5 " aria-hidden="true" />
-						<Typography component="h3">
-							Stuff:
-							{data.event?.stuffs.map((stuff) => (
-								<Typography component="h3" key={stuff.id}>
-									{`-${stuff.name}`}
-								</Typography>
-							))}
-						</Typography>
-					</div>
-					<div className="flex flex-row">
-						<Ticket className="h-5 w-5 " aria-hidden="true" />
-						<Typography component="h3">Obecnych: tutaj </Typography>
-					</div>
+				<div className="xl:b flex flex-col items-start xl:items-center">
 					<div>
-						<Link href="http://localhost:3000/budzet">
-							<Button size="medium">
-								<Typography component="h2">Szczegolowy budzet</Typography>
-								<Dollar className="h-5 w-5 " aria-hidden="true" />
-							</Button>
-						</Link>
+						<Image
+							src={data.event?.image?.url || '/part.png'}
+							height={1000}
+							width={1000}
+							alt="Parties picture"
+							className="mb-2 rounded-lg"
+						/>
+						<div className="mb-2 flex flex-row">
+							<Calendar className="h-5 w-5 " aria-hidden="true" />
+							<Typography component="h3">{data.event?.day}</Typography>
+						</div>
+						<Typography component="h1">{data.event?.name}</Typography>
+						<div className=" my-2 flex flex-row">
+							<Group className="h-5 w-5 " aria-hidden="true" />
+							<Typography component="h3">
+								Stuff:
+								{data.event?.stuffs.map((stuff) => (
+									<Typography component="h3" key={stuff.id}>
+										{`-${stuff.name}`}
+									</Typography>
+								))}
+							</Typography>
+						</div>
+						<div className="mb-2 flex flex-row">
+							<Ticket className="h-5 w-5 " aria-hidden="true" />
+							<Typography component="h3">Obecnych: 500 </Typography>
+						</div>
+						<div className="mb-2 flex flex-row">
+							<TrendingUp className="h-5 w-5 " aria-hidden="true" />
+							<Typography component="h3">Zarobek: 12500 PLN</Typography>
+						</div>
+						<div className="mb-2 flex flex-row">
+							<TrendingDown className="h-5 w-5 " aria-hidden="true" />
+							<Typography component="h3">Wydatki: 3500 PLN</Typography>
+						</div>
+						<div className="mb-2 flex flex-row">
+							<Wallet className="h-5 w-5 " aria-hidden="true" />
+							<Typography component="h3">Pozostało: 9500 PLN</Typography>
+						</div>
+						<div className="mb-2">
+							<Link href="http://localhost:3000/budzet">
+								<Button size="medium">
+									<Typography component="h2">Szczegolowy budzet</Typography>
+									<Dollar className="h-5 w-5 " aria-hidden="true" />
+								</Button>
+							</Link>
+						</div>
+						<div className="text-slate-600">
+							<Typography component="h6">
+								Created at: {data.event?.createdAt}
+							</Typography>
+						</div>
 					</div>
 				</div>
 			</div>
-
-			{/* <div>
-				<div className="grid grid-cols-2 gap-4 lg:grid lg:grid-cols-4">
-					<div className="flex flex-col rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
-						<div className=" flex flex-row">
-							<Star className="h-5 w-5 " aria-hidden="true" />
-							<Typography component="h2">Wydarzenie</Typography>
-						</div>
-						<Typography component="h4">
-							{parties[Number(query)].name}
-						</Typography>
-					</div>
-					<div className=" flex flex-col rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
-						<div className=" flex flex-row">
-							<Calendar className="h-5 w-5 " aria-hidden="true" />
-							<Typography component="h2">Data</Typography>
-						</div>
-						<Typography component="h4">
-							{parties[Number(query)].date}
-						</Typography>
-					</div>
-					<div className=" flex flex-col rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
-						<div className=" flex flex-row">
-							<Clock className="h-5 w-5 " aria-hidden="true" />
-							<Typography component="h2">Godziny</Typography>
-						</div>
-						<Typography component="h4">
-							{parties[Number(query)].start_time} -{' '}
-							{parties[Number(query)].end_time}
-						</Typography>
-					</div>
-					<div className=" flex flex-col rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
-						<div className=" flex flex-row">
-							<Tune className="h-5 w-5 " aria-hidden="true" />
-							<Typography component="h2">Dj`e</Typography>
-						</div>
-						<Typography component="h4">
-							{parties[Number(query)].dj[0]}, {parties[Number(query)].dj[1]},{' '}
-							{parties[Number(query)].dj[2]}
-						</Typography>
-					</div>
-					<div className=" flex flex-col rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
-						<div className=" flex flex-row">
-							<TrendingUp className="h-5 w-5 " aria-hidden="true" />
-							<Typography component="h2">Zarobki</Typography>
-						</div>
-						<Typography component="h4">
-							{parties[Number(query)].budget.party_income}
-						</Typography>
-					</div>
-					<div className=" flex flex-col rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
-						<div className=" flex flex-row">
-							<TrendingDown className="h-5 w-5 " aria-hidden="true" />
-							<Typography component="h2">Wydatki</Typography>
-						</div>
-						<Typography component="h4">
-							{parties[Number(query)].budget.party_spend}
-						</Typography>
-					</div>
-					<div className=" flex flex-col rounded-lg border-2 border-slate-300 p-5 shadow-md  ">
-						<div className=" flex flex-row">
-							<Wallet className="h-5 w-5 " aria-hidden="true" />
-							<Typography component="h2">Zysk ogółem</Typography>
-						</div>
-						<Typography component="h4">
-							{parties[Number(query)].budget.overall}
-						</Typography>
-					</div>
-				</div>
-				<div className="mt-4 flex justify-center">
-					<Link href="http://localhost:3000/budzet">
-						<Button size="medium">
-							<Typography component="h2">Szczegolowy budzet</Typography>
-							<Dollar className="h-5 w-5 " aria-hidden="true" />
-						</Button>
-					</Link>
-				</div>
-			</div> */}
 		</MainLayout>
 	);
 };

@@ -62,7 +62,9 @@ const EventsPage = () => {
 							</div>
 							<div>
 								<Typography component="h1">{data.name}</Typography>
-								<Typography component="h4">{data.day}</Typography>
+								<div className="text-slate-600">
+									<Typography component="h4">{data.day}</Typography>
+								</div>
 							</div>
 						</div>
 						<div className="my-10 flex justify-around">
