@@ -1,4 +1,3 @@
-import { Input } from 'components/atoms/Input/Input';
 import { Typography } from 'components/atoms/Typography/Typography';
 import { MainLayout } from 'components/layouts/MainLayout';
 

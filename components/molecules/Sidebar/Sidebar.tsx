@@ -3,7 +3,7 @@ import DollarIcon from '../../icons/Dollar.svg';
 import CalendarIcon from '../../icons/Calendar.svg';
 import TableIcon from '../../icons/TableCells.svg';
 import HamburgerIcon from '../../icons/Hamburger.svg';
-import XMarkIcon from '../../icons/Xmark.svg';
+import XMarkIcon from '../../icons/XMark.svg';
 import React, { Fragment, useState } from 'react';
 import { Dialog, Menu, Transition } from '@headlessui/react';
 import clsx from 'clsx';
