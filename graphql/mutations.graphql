@@ -1,0 +1,15 @@
+mutation CreateEvent(
+	$name: String!
+	$day: Date
+	$stuff: StuffCreateManyInlineInput
+) {
+	createEvent(data: { name: $name, day: $day, stuffs: $stuff }) {
+		id
+	}
+}
+
+mutation publishEvent($id: ID!) {
+	publishEvent(where: { id: $id }, to: PUBLISHED) {
+		id
+	}
+}
