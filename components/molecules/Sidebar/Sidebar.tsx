@@ -19,22 +19,22 @@ const userNavigation = [
 const sidebarItems = [
 	{
 		name: 'Statystyki',
-		href: '/',
+		href: '/statistics',
 		icon: HomeIcon,
 	},
 	{
 		name: 'Budżet',
-		href: '/budzet',
+		href: '/budget',
 		icon: DollarIcon,
 	},
 	{
 		name: 'Imprezy',
-		href: '/imprezy',
+		href: '/events',
 		icon: CalendarIcon,
 	},
 	{
 		name: 'Logi',
-		href: '/logi',
+		href: '/logs',
 		icon: TableIcon,
 	},
 ];
@@ -116,6 +116,7 @@ export const Sidebar = ({ children }: Props) => {
 												return (
 													<Link
 														key={item.name}
+														onClick={() => setSidebarOpen(false)}
 														href={item.href}
 														className={clsx(
 															isActive

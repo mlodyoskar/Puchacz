@@ -1,7 +1,6 @@
 import { Button } from 'components/atoms/Button/Button';
 import { Input } from 'components/atoms/Input/Input';
 import { Typography } from 'components/atoms/Typography/Typography';
-import { MainLayout } from 'components/layouts/MainLayout';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -65,7 +64,7 @@ export const CreateEventPage = () => {
 	};
 
 	return (
-		<MainLayout>
+		<>
 			<Typography component="h1">Stwórz nową imprezę</Typography>
 			<form
 				onSubmit={handleSubmit(onSubmit)}
@@ -138,6 +137,6 @@ export const CreateEventPage = () => {
 					</Button>
 				</div>
 			</form>
-		</MainLayout>
+		</>
 	);
 };
