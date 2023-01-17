@@ -19,7 +19,6 @@ const HomePage = () => {
 				deserunt ducimus quidem sed ex nisi dolor possimus amet omnis quia
 				tenetur quis. Perferendis libero ex hic.
 			</p>
-			<Input> Co jest nie ma zamulania</Input>
 		</MainLayout>
 	);
 };
