@@ -11,9 +11,6 @@ import {
 	MultiSelectOptionSchema,
 } from 'components/atoms/MultiSelect/MultiSelect';
 import { imageSchema } from 'utils/imageSchema';
-import { FileInput } from 'components/atoms/FileInput/FileInput';
-import Image from 'next/image';
-import TrashIcon from './../../icons/Trash.svg';
 import { useGetAllStuffQuery } from 'generated/graphql';
 import { useRouter } from 'next/router';
 import { fetcher } from 'utils/fetcher';
@@ -41,8 +38,6 @@ export const CreateEventPage = () => {
 		register,
 		handleSubmit,
 		control,
-		resetField,
-		watch,
 		formState: { errors },
 	} = useForm<CreateEvent>({
 		resolver: zodResolver(CreateEvent),
@@ -51,7 +46,6 @@ export const CreateEventPage = () => {
 	const onSubmit: SubmitHandler<CreateEvent> = async ({
 		date,
 		name,
-		photo,
 		stuffDj,
 		stuffPhoto,
 	}) => {
@@ -63,16 +57,12 @@ export const CreateEventPage = () => {
 			stuff: stuff.map((p) => ({ id: p.id })),
 		};
 
-		const res = await fetcher('/api/events/create', {
+		const res = await fetcher<{ id: string }>('/api/events/create', {
 			body: { ...variables },
 		});
 
-		console.log(res);
-
-		// router.push(`/events/${createdEventData?.createEvent?.id}`);
+		router.push(`/events/${res.id}`);
 	};
-
-	const photo = watch('photo');
 
 	return (
 		<MainLayout>
@@ -95,7 +85,7 @@ export const CreateEventPage = () => {
 						Data imprezy
 					</Input>
 				</div>
-				{photo && photo.length > 0 ? (
+				{/* {photo && photo.length > 0 ? (
 					<div className="relative">
 						<button
 							className="absolute top-0 right-0 m-2 rounded-md border-2 border-blue-700 bg-white "
@@ -116,30 +106,37 @@ export const CreateEventPage = () => {
 						errorMessage={errors.photo?.message}
 						{...register('photo')}
 					/>
-				)}
+				)} */}
 				<Typography component="h2">Stuff na impreze</Typography>
-				{stuffData ? (
-					<div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
-						<MultiSelect
-							control={control}
-							name="stuffDj"
-							label="Dj'e"
-							options={stuffData.stuffs.filter((p) => p.type === 'dj')}
-							defaultValue={[]}
-						/>
-						<MultiSelect
-							control={control}
-							name="stuffPhoto"
-							label="Fotografowie"
-							options={stuffData.stuffs.filter((p) => p.type === 'photograph')}
-							defaultValue={[]}
-						/>
-					</div>
-				) : (
-					<p>Nie udało się załadować dji i fotografów</p>
-				)}
 
-				<Button disabled={false}>Utwórz wydarzenie</Button>
+				<div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+					<MultiSelect
+						control={control}
+						name="stuffDj"
+						label="Dj'e"
+						options={
+							stuffData ? stuffData.stuffs.filter((p) => p.type === 'dj') : []
+						}
+						defaultValue={[]}
+					/>
+					<MultiSelect
+						control={control}
+						name="stuffPhoto"
+						label="Fotografowie"
+						options={
+							stuffData
+								? stuffData.stuffs.filter((p) => p.type === 'photograph')
+								: []
+						}
+						defaultValue={[]}
+					/>
+				</div>
+
+				<div className="fixed bottom-4 left-0 right-0 h-12 w-full px-4 md:static md:p-0">
+					<Button fullWidth={true} disabled={false}>
+						Utwórz wydarzenie
+					</Button>
+				</div>
 			</form>
 		</MainLayout>
 	);
