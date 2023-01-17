@@ -11,7 +11,7 @@ import { useState } from 'react';
 const sidebarItems = [
 	{
 		text: 'Statystyki',
-		link: '/',
+		link: '/statistics',
 		icon: HomeIcon,
 	},
 	{
@@ -21,7 +21,7 @@ const sidebarItems = [
 	},
 	{
 		text: 'Imprezy',
-		link: '/imprezy',
+		link: '/events',
 		icon: CalendarIcon,
 	},
 	{
@@ -42,7 +42,7 @@ export const Sidebar = () => {
 				</div>
 				<ul className="mt-4 space-y-2 md:mt-0">
 					{sidebarItems.map(({ text, link, icon: Icon }) => {
-						const isActive = link === router.pathname;
+						const isActive = router.pathname.includes(link);
 
 						return (
 							<SidebarItem
