@@ -9,6 +9,9 @@ import { Dialog, Menu, Transition } from '@headlessui/react';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { Open_Sans } from '@next/font/google';
+
+const openSans = Open_Sans({ subsets: ['latin'] });
 
 const userNavigation = [
 	{ name: 'Your Profile', href: '#' },
@@ -122,7 +125,8 @@ export const Sidebar = ({ children }: Props) => {
 															isActive
 																? 'bg-blue-600 text-white hover:bg-blue-700'
 																: 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-															'group flex items-center rounded-md px-2 py-2 text-base font-medium'
+															'group flex items-center rounded-md px-2 py-2 text-base font-medium',
+															openSans.className
 														)}
 													>
 														<item.icon
