@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 interface Props {
@@ -9,7 +10,7 @@ interface Props {
 
 export const Card = ({ name, amount, icon: Icon, href }: Props) => {
 	return (
-		<div key={name} className="overflow-hidden rounded-lg bg-white shadow">
+		<div className="overflow-hidden rounded-lg bg-white shadow">
 			<div className="p-5">
 				<div className="flex items-center">
 					<div className="flex-shrink-0">

@@ -21,3 +21,14 @@ query GetAllStuff {
 		...StuffData
 	}
 }
+
+query GetEventsSummary {
+	events {
+		name
+		slug
+		budgets {
+			amount
+			isIncome
+		}
+	}
+}
