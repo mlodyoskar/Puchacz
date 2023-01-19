@@ -7,9 +7,3 @@ mutation CreateEvent(
 		id
 	}
 }
-
-mutation publishEvent($id: ID!) {
-	publishEvent(where: { id: $id }, to: PUBLISHED) {
-		id
-	}
-}
