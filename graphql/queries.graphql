@@ -29,12 +29,21 @@ query GetEventById($id: ID!) {
 		name
 		id
 		day
+		participients
+		ticketPrice
 		stuffs {
 			id
 			name
+			type
 		}
 		image {
 			url
+		}
+		budgets {
+			id
+			name
+			amount
+			isIncome
 		}
 	}
 }

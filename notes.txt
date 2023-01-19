@@ -143,3 +143,73 @@ const EventDetailsPage = () => {
 	);
 };
 export default EventDetailsPage;
+
+
+<div className="xl:b flex flex-col items-start xl:items-center">
+					<div>
+						<Image
+							src={data.event?.image?.url || '/part.png'}
+							height={1000}
+							width={1000}
+							alt="Parties picture"
+							className="mb-2 rounded-lg"
+						/>
+						<div className="mb-2 flex flex-row">
+							<Calendar className="h-5 w-5 " aria-hidden="true" />
+							<Typography component="h3">{data.event?.day}</Typography>
+						</div>
+						<Typography component="h2">{data.event?.name}</Typography>
+						<div className=" my-2 flex flex-row">
+							<Group className="h-5 w-5 " aria-hidden="true" />
+							<Typography component="h3">
+								Stuff:
+								{data.event?.stuffs.map((stuff) => (
+									<Typography component="h3" key={stuff.id}>
+										{`-${stuff.name}`}
+									</Typography>
+								))}
+							</Typography>
+						</div>
+						<div className="mb-2 flex flex-row">
+							<Ticket className="h-5 w-5 " aria-hidden="true" />
+							<Typography component="h3">Obecnych: 500 OSÓB</Typography>
+						</div>
+						<div className="mb-2 flex flex-row">
+							<TrendingUp className="h-5 w-5 " aria-hidden="true" />
+							<Typography component="h3">Zarobek: 12500 PLN</Typography>
+						</div>
+						<div className="mb-2 flex flex-row">
+							<TrendingDown className="h-5 w-5 " aria-hidden="true" />
+							<Typography component="h3">Wydatki: 3500 PLN</Typography>
+						</div>
+						<div className="mb-2 flex flex-row">
+							<Wallet className="h-5 w-5 " aria-hidden="true" />
+							<Typography component="h3">Pozostało: 9500 PLN</Typography>
+						</div>
+						<div className="mb-2">
+							<Link href="http://localhost:3000/budzet">
+								<Button size="medium">
+									<Typography component="h3">Szczegolowy budzet</Typography>
+									<Dollar className="h-5 w-5 " aria-hidden="true" />
+								</Button>
+							</Link>
+						</div>
+						<div className="text-slate-600">
+							<Typography component="h6">
+								Created at: {data.event?.createdAt}
+							</Typography>
+						</div>
+					</div>
+				</div>
+
+import Dollar from 'components/icons/Dollar.svg';
+import Group from 'components/icons/Group.svg';
+
+import { Typography } from 'components/atoms/Typography/Typography';
+import { Button } from 'components/atoms/Button/Button';
+import Calendar from 'components/icons/Calendar.svg';
+import TrendingUp from 'components/icons/TrendingUp.svg';
+import TrendingDown from 'components/icons/TrendingDown.svg';
+import Ticket from 'components/icons/Ticket.svg';
+import Wallet from 'components/icons/Wallet.svg';
+import Link from 'next/link';

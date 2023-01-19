@@ -1,23 +1,21 @@
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import Link from 'next/link';
-import { Typography } from 'components/atoms/Typography/Typography';
-import { Button } from 'components/atoms/Button/Button';
-import Calendar from 'components/icons/Calendar.svg';
-import TrendingUp from 'components/icons/TrendingUp.svg';
-import TrendingDown from 'components/icons/TrendingDown.svg';
-import Ticket from 'components/icons/Ticket.svg';
-import Wallet from 'components/icons/Wallet.svg';
 import Back from 'components/icons/Back.svg';
-import Dollar from 'components/icons/Dollar.svg';
-import Group from 'components/icons/Group.svg';
 import { MainLayout } from 'components/layouts/MainLayout';
 import { useGetEventByIdQuery } from 'generated/graphql';
+import { Typography } from 'components/atoms/Typography/Typography';
+import { Button } from 'components/atoms/Button/Button';
+import { useState } from 'react';
+import Camera from 'components/icons/Camera.svg';
+import Star from 'components/icons/Star.svg';
+import UserIcon from 'components/icons/UserIcon.svg';
+import Ticket from 'components/icons/Ticket.svg';
 
 const EventDetailsPage = () => {
 	const router = useRouter();
 	const id = router.query.id as string;
 	const { data, loading } = useGetEventByIdQuery({ variables: { id } });
+	const [isEvent, setIsEvent] = useState(true);
 	if (loading) {
 		return (
 			<MainLayout>
@@ -44,71 +42,141 @@ const EventDetailsPage = () => {
 	return (
 		<MainLayout>
 			<div>
-				<div>
-					<Typography component="h1">Wydarzenie</Typography>
-				</div>
-				<div onClick={() => router.back()}>
-					<Button size="large">
-						<Typography component="h4">Back</Typography>
-						<Back className="h-5 w-5 " aria-hidden="true" />
-					</Button>
-				</div>
-				<div className="xl:b flex flex-col items-start xl:items-center">
-					<div>
-						<Image
-							src={data.event?.image?.url || '/part.png'}
-							height={1000}
-							width={1000}
-							alt="Parties picture"
-							className="mb-2 rounded-lg"
-						/>
-						<div className="mb-2 flex flex-row">
-							<Calendar className="h-5 w-5 " aria-hidden="true" />
-							<Typography component="h3">{data.event?.day}</Typography>
-						</div>
-						<Typography component="h2">{data.event?.name}</Typography>
-						<div className=" my-2 flex flex-row">
-							<Group className="h-5 w-5 " aria-hidden="true" />
-							<Typography component="h3">
-								Stuff:
-								{data.event?.stuffs.map((stuff) => (
-									<Typography component="h3" key={stuff.id}>
-										{`-${stuff.name}`}
-									</Typography>
-								))}
-							</Typography>
-						</div>
-						<div className="mb-2 flex flex-row">
-							<Ticket className="h-5 w-5 " aria-hidden="true" />
-							<Typography component="h3">Obecnych: 500 OSÓB</Typography>
-						</div>
-						<div className="mb-2 flex flex-row">
-							<TrendingUp className="h-5 w-5 " aria-hidden="true" />
-							<Typography component="h3">Zarobek: 12500 PLN</Typography>
-						</div>
-						<div className="mb-2 flex flex-row">
-							<TrendingDown className="h-5 w-5 " aria-hidden="true" />
-							<Typography component="h3">Wydatki: 3500 PLN</Typography>
-						</div>
-						<div className="mb-2 flex flex-row">
-							<Wallet className="h-5 w-5 " aria-hidden="true" />
-							<Typography component="h3">Pozostało: 9500 PLN</Typography>
-						</div>
-						<div className="mb-2">
-							<Link href="http://localhost:3000/budzet">
-								<Button size="medium">
-									<Typography component="h3">Szczegolowy budzet</Typography>
-									<Dollar className="h-5 w-5 " aria-hidden="true" />
-								</Button>
-							</Link>
-						</div>
-						<div className="text-slate-600">
-							<Typography component="h6">
-								Created at: {data.event?.createdAt}
-							</Typography>
+				<Typography component="h1">Wydarzenie</Typography>
+			</div>
+			<div onClick={() => router.back()}>
+				<Button size="large">
+					<Typography component="h4">Back</Typography>
+					<Back className="h-5 w-5 " aria-hidden="true" />
+				</Button>
+			</div>
+			<div>
+				<Image
+					className="h-32 w-full rounded-lg object-cover lg:h-48"
+					src={data.event?.image?.url || '/part.png'}
+					height={600}
+					width={600}
+					alt=""
+				/>
+				<div className="mt-6 sm:mt-2 2xl:mt-5">
+					<div className="border-b border-gray-200">
+						<div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+							<nav className="-mb-px flex space-x-8">
+								<button
+									onClick={() => setIsEvent(true)}
+									className={
+										isEvent
+											? 'border-b-2 border-blue-500 text-gray-900'
+											: 'whitespace-nowrap border-b-2 border-transparent py-4 px-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700'
+									}
+								>
+									Wydarzenie
+								</button>
+								<button
+									onClick={() => setIsEvent(false)}
+									className={
+										isEvent
+											? 'whitespace-nowrap border-b-2 border-transparent py-4 px-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700'
+											: 'border-b-2 border-blue-500 text-gray-900'
+									}
+								>
+									Budzet
+								</button>
+							</nav>
 						</div>
 					</div>
 				</div>
+				{isEvent ? (
+					<div className="mx-auto mt-6 max-w-5xl px-4 sm:px-6 lg:px-8">
+						<dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+							<div className="sm:col-span-1">
+								<dt className="text-md font-medium text-gray-500">
+									Nazwa wydarzenia
+								</dt>
+								<dd className="text-md mt-1 text-gray-900">
+									{data.event?.name}
+								</dd>
+							</div>
+							<div className="sm:col-span-1">
+								<dt className="text-md font-medium text-gray-500">
+									Data wydarzenia
+								</dt>
+								<dd className="text-md mt-1 text-gray-900">
+									{data.event?.day}
+								</dd>
+							</div>
+							<div className="sm:col-span-1">
+								<dt className="text-md font-medium text-gray-500">Stuff</dt>
+								{data.event?.stuffs.map((stuff) => (
+									<dd
+										className="text-md mt-1 flex flex-row text-gray-900"
+										key={stuff.id}
+									>
+										{stuff.type === 'photograph' ? (
+											<Camera className="mt-1 h-4 w-4" aria-hidden="true" />
+										) : (
+											<Star className="mt-1 h-4 w-4" aria-hidden="true" />
+										)}
+										{stuff.name}
+									</dd>
+								))}
+							</div>
+							<div className="sm:col-span-1">
+								<dt className="text-md font-medium text-gray-500">Stworzony</dt>
+								<dd className="text-md mt-1 text-gray-900">
+									{data.event?.createdAt}
+								</dd>
+							</div>
+						</dl>
+					</div>
+				) : (
+					<div className="mx-auto mt-6 max-w-5xl px-4 sm:px-6 lg:px-8">
+						<dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+							<div className="sm:col-span-1">
+								<dt className="text-md font-medium text-gray-500">Przychody</dt>
+								{data.event?.budgets.map((budget) => (
+									<dd
+										className={
+											budget.isIncome ? 'text-md mt-1 text-green-900' : 'hidden'
+										}
+										key={budget.id}
+									>
+										{budget.name} {budget.amount} PLN
+									</dd>
+								))}
+							</div>
+							<div className="sm:col-span-1">
+								<dt className="text-md font-medium text-gray-500">Wydatki</dt>
+								{data.event?.budgets.map((budget) => (
+									<dd
+										className={
+											budget.isIncome ? 'hidden' : 'text-md mt-1 text-red-900'
+										}
+										key={budget.id}
+									>
+										{budget.name} {budget.amount} PLN
+									</dd>
+								))}
+							</div>
+							<div className="sm:col-span-1">
+								<dt className="text-md font-medium text-gray-500">
+									Osób na imprezie
+								</dt>
+								<dd className="text-md mt-1 flex flex-row text-gray-900">
+									<UserIcon className="mt-1 h-4 w-4" aria-hidden="true" />
+									{data.event?.participients}
+								</dd>
+							</div>
+							<div className="sm:col-span-1">
+								<dt className="text-md font-medium text-gray-500">Tix cena</dt>
+								<dd className="text-md mt-1 flex flex-row text-gray-900">
+									<Ticket className="mt-1 h-4 w-4" aria-hidden="true" />
+									{data.event?.ticketPrice} PLN
+								</dd>
+							</div>
+						</dl>
+					</div>
+				)}
 			</div>
 		</MainLayout>
 	);
