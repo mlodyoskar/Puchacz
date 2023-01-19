@@ -1,10 +1,8 @@
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import Back from 'components/icons/Back.svg';
 import { MainLayout } from 'components/layouts/MainLayout';
 import { useGetEventByIdQuery } from 'generated/graphql';
 import { Typography } from 'components/atoms/Typography/Typography';
-import { Button } from 'components/atoms/Button/Button';
 import { useState } from 'react';
 import Camera from 'components/icons/Camera.svg';
 import Star from 'components/icons/Star.svg';
@@ -43,12 +41,6 @@ const EventDetailsPage = () => {
 		<MainLayout>
 			<div>
 				<Typography component="h1">Wydarzenie</Typography>
-			</div>
-			<div onClick={() => router.back()}>
-				<Button size="large">
-					<Typography component="h4">Back</Typography>
-					<Back className="h-5 w-5 " aria-hidden="true" />
-				</Button>
 			</div>
 			<div>
 				<Image
@@ -133,32 +125,6 @@ const EventDetailsPage = () => {
 					<div className="mx-auto mt-6 max-w-5xl px-4 sm:px-6 lg:px-8">
 						<dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
 							<div className="sm:col-span-1">
-								<dt className="text-md font-medium text-gray-500">Przychody</dt>
-								{data.event?.budgets.map((budget) => (
-									<dd
-										className={
-											budget.isIncome ? 'text-md mt-1 text-green-900' : 'hidden'
-										}
-										key={budget.id}
-									>
-										{budget.name} {budget.amount} PLN
-									</dd>
-								))}
-							</div>
-							<div className="sm:col-span-1">
-								<dt className="text-md font-medium text-gray-500">Wydatki</dt>
-								{data.event?.budgets.map((budget) => (
-									<dd
-										className={
-											budget.isIncome ? 'hidden' : 'text-md mt-1 text-red-900'
-										}
-										key={budget.id}
-									>
-										{budget.name} {budget.amount} PLN
-									</dd>
-								))}
-							</div>
-							<div className="sm:col-span-1">
 								<dt className="text-md font-medium text-gray-500">
 									Osób na imprezie
 								</dt>
@@ -173,6 +139,84 @@ const EventDetailsPage = () => {
 									<Ticket className="mt-1 h-4 w-4" aria-hidden="true" />
 									{data.event?.ticketPrice} PLN
 								</dd>
+							</div>
+							<div className="sm:col-span-1">
+								<nav
+									className="mt-2 h-full overflow-y-auto"
+									aria-label="Directory"
+								>
+									<dt className="text-md font-medium text-gray-500">
+										Przychody
+									</dt>
+									<div className="relative">
+										<ul role="list" className="relative z-0">
+											{data.event?.budgets.map((budget) => (
+												<li key={budget.id} className="bg-white">
+													<div
+														className={
+															budget.isIncome
+																? 'relative flex items-center space-x-3 border-b-2 border-gray-200 px-6 py-5'
+																: 'hidden'
+														}
+													>
+														<div className="min-w-0 flex-1">
+															<div className="focus:outline-none">
+																<span
+																	className="absolute inset-0"
+																	aria-hidden="true"
+																/>
+																<p className="text-sm font-medium text-gray-900">
+																	{budget.name}
+																</p>
+																<p className="truncate text-sm text-gray-500">
+																	{budget.amount} PLN
+																</p>
+															</div>
+														</div>
+													</div>
+												</li>
+											))}
+										</ul>
+									</div>
+								</nav>
+							</div>
+							<div className="sm:col-span-1">
+								<nav
+									className="mt-2 h-full overflow-y-auto"
+									aria-label="Directory"
+								>
+									<dt className="text-md font-medium text-gray-500">Wydatki</dt>
+									<div className="relative">
+										<ul role="list" className="relative z-0">
+											{data.event?.budgets.map((budget) => (
+												<li key={budget.id} className="bg-white">
+													<div
+														className={
+															budget.isIncome
+																? 'hidden'
+																: 'relative flex items-center space-x-3 border-b-2 border-gray-200 px-6 py-5 '
+														}
+													>
+														<div className="min-w-0 flex-1">
+															<div className="focus:outline-none">
+																<span
+																	className="absolute inset-0"
+																	aria-hidden="true"
+																/>
+																<p className="text-sm font-medium text-gray-900">
+																	{budget.name}
+																</p>
+																<p className="truncate text-sm text-gray-500">
+																	{budget.amount} PLN
+																</p>
+															</div>
+														</div>
+													</div>
+												</li>
+											))}
+										</ul>
+									</div>
+								</nav>
 							</div>
 						</dl>
 					</div>
