@@ -1,22 +1,54 @@
+import {
+	GetParticipantsSummaryDocument,
+	GetParticipantsSummaryQuery,
+} from './../../../generated/graphql';
+import { authorizedApolloClient } from 'graphql/authorizedClient';
 import type { NextApiHandler } from 'next';
 
 export interface StatisticsSummary {
-	summary: typeof cards;
+	summary: {
+		name: string;
+		value: number | string;
+		type: string;
+	}[];
 }
 
-const cards = [
-	{ name: 'Stan konta', href: '#', amount: '12 496 PLN', type: 'money' },
-	{
-		name: 'Na ostatniej imprezie',
-		href: '#',
-		amount: '378',
-		type: 'people',
-	},
-	{ name: 'Osób łącznie', href: '#', amount: '20 432', type: 'people' },
-];
-
 const handler: NextApiHandler = async (req, res) => {
-	res.status(201).json({ summary: cards });
+	const {
+		data: { events },
+	} = await authorizedApolloClient.query<GetParticipantsSummaryQuery>({
+		query: GetParticipantsSummaryDocument,
+	});
+
+	const lastPartyParticipants = events.find(
+		(event) => event.participients !== null
+	);
+
+	console.log(lastPartyParticipants);
+
+	const allPartiesParticipants = events.reduce((acc, curr) => {
+		if (curr.participients) {
+			return acc + curr.participients;
+		} else {
+			return acc + 0;
+		}
+	}, 0);
+
+	const summary = [
+		{ name: 'Stan konta', value: '12 496 PLN', type: 'money' },
+		{
+			name: 'Na ostatniej imprezie',
+			value: lastPartyParticipants?.participients,
+			type: 'participants',
+		},
+		{
+			name: 'Osób łącznie',
+			value: allPartiesParticipants,
+			type: 'participants',
+		},
+	];
+
+	res.status(201).json({ summary });
 };
 
 export default handler;

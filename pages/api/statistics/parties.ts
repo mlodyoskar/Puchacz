@@ -1,63 +1,50 @@
-import {
-	GetEventsSummaryDocument,
-	GetEventsSummaryQuery,
-} from './../../../generated/graphql';
+import type { GetEventsSummaryQuery } from './../../../generated/graphql';
+import { GetEventsSummaryDocument } from './../../../generated/graphql';
 import { authorizedApolloClient } from 'graphql/authorizedClient';
 import type { NextApiHandler } from 'next';
-import { setTimeout } from 'timers/promises';
-import { access } from 'fs';
 
 export interface StatisticsParties {
-	parties: typeof parties;
+	events: Party[];
 }
-
-const parties = [
-	{
-		id: 1,
-		name: 'American Party',
-		href: '#',
-		income: '4 300 PLN',
-		outcome: '2 100 PLN',
-		earned: '2 200',
-		date: 'July 11, 2020',
-	},
-	{
-		id: 2,
-		name: 'Hawai Party',
-		href: '#',
-		income: '4 300 PLN',
-		outcome: '2 100 PLN',
-		earned: '2 200',
-		date: 'July 11, 2020',
-	},
-	{
-		id: 3,
-		name: 'Pink party',
-		href: '#',
-		income: '4 300 PLN',
-		outcome: '2 100 PLN',
-		earned: '2 200',
-		date: 'July 11, 2020',
-	},
-	{
-		id: 4,
-		name: 'Puchacz roczek',
-		href: '#',
-		income: '4 300 PLN',
-		outcome: '2 100 PLN',
-		earned: '2 200',
-		date: 'July 11, 2020',
-	},
-];
+interface Party {
+	name: string;
+	slug: string | null | undefined;
+	day: string;
+	participients: number | null | undefined;
+	budget: {
+		income: number;
+		spending: number;
+	};
+}
 
 const handler: NextApiHandler = async (req, res) => {
 	const { data } = await authorizedApolloClient.query<GetEventsSummaryQuery>({
 		query: GetEventsSummaryDocument,
 	});
 
-	const events = data.events.map(({ name, slug, budgets }) => {});
+	const events = data.events.map<Party>(
+		({ name, slug, budgets, day, participients }) => {
+			const budget = budgets.reduce(
+				(acc, curr) => {
+					if (curr.isIncome) {
+						return { ...acc, income: acc.income + curr.amount };
+					} else {
+						return { ...acc, spending: acc.spending + curr.amount };
+					}
+				},
+				{ income: 0, spending: 0 }
+			);
+			return {
+				name,
+				slug,
+				day,
+				participients,
+				budget,
+			};
+		}
+	);
 
-	res.status(200).json({ data });
+	res.status(200).json({ events });
 };
 
 export default handler;

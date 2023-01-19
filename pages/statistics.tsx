@@ -141,27 +141,33 @@ const StatisticsPage = () => {
 											</tr>
 										</thead>
 										<tbody className="divide-y divide-gray-200 bg-white">
-											{/* {parties ? (
-												parties.parties.map(({ id, href, ...props }) => {
-													const values = Object.values(props).map((item) => {
-														return { value: item };
-													});
+											{parties ? (
+												parties.events.map(({ slug, budget, ...props }) => {
+													const values = [
+														...Object.values(budget).map((budget) => {
+															return { value: budget };
+														}),
+														...Object.values(props).map((item) => {
+															return { value: item };
+														}),
+													];
+
 													return (
 														<TableRow
-															key={id}
-															href={href}
+															key={slug}
+															href={''}
 															icon={UserIcon}
 															items={values}
 														/>
 													);
 												})
-											) : ( */}
-											<>
-												{Array.from({ length: 10 }).map((x, i) => (
-													<TableRowPlaceholder key={i} />
-												))}
-											</>
-											{/* )} */}
+											) : (
+												<>
+													{Array.from({ length: 10 }).map((x, i) => (
+														<TableRowPlaceholder key={i} />
+													))}
+												</>
+											)}
 										</tbody>
 									</table>
 									<Pagination />

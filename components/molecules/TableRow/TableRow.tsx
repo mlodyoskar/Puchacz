@@ -4,7 +4,7 @@ interface Props {
 	icon: any;
 	href: string;
 	items: {
-		value: string;
+		value: string | number | undefined | null;
 		type?: 'money' | 'people';
 	}[];
 }

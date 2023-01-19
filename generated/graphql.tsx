@@ -1224,7 +1224,7 @@ export type BatchPayload = {
 
 export type Budget = Node & {
   __typename?: 'Budget';
-  amount?: Maybe<Scalars['Int']>;
+  amount: Scalars['Int'];
   /** The time the document was created */
   createdAt: Scalars['DateTime'];
   /** User that created this document */
@@ -1236,7 +1236,7 @@ export type Budget = Node & {
   history: Array<Version>;
   /** The unique identifier */
   id: Scalars['ID'];
-  isIncome?: Maybe<Scalars['Boolean']>;
+  isIncome: Scalars['Boolean'];
   name?: Maybe<Scalars['String']>;
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']>;
@@ -1320,10 +1320,10 @@ export type BudgetConnection = {
 };
 
 export type BudgetCreateInput = {
-  amount?: InputMaybe<Scalars['Int']>;
+  amount: Scalars['Int'];
   createdAt?: InputMaybe<Scalars['DateTime']>;
   event?: InputMaybe<EventCreateOneInlineInput>;
-  isIncome?: InputMaybe<Scalars['Boolean']>;
+  isIncome: Scalars['Boolean'];
   name?: InputMaybe<Scalars['String']>;
   slug?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
@@ -5830,7 +5830,12 @@ export type GetAllStuffQuery = { __typename?: 'Query', stuffs: Array<{ __typenam
 export type GetEventsSummaryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetEventsSummaryQuery = { __typename?: 'Query', events: Array<{ __typename?: 'Event', name: string, slug?: string | null, budgets: Array<{ __typename?: 'Budget', amount?: number | null, isIncome?: boolean | null }> }> };
+export type GetEventsSummaryQuery = { __typename?: 'Query', events: Array<{ __typename?: 'Event', name: string, slug?: string | null, day?: any | null, participients?: number | null, budgets: Array<{ __typename?: 'Budget', amount: number, isIncome: boolean }> }> };
+
+export type GetParticipantsSummaryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetParticipantsSummaryQuery = { __typename?: 'Query', events: Array<{ __typename?: 'Event', participients?: number | null }> };
 
 export const StuffDataFragmentDoc = gql`
     fragment StuffData on Stuff {
@@ -5986,6 +5991,8 @@ export const GetEventsSummaryDocument = gql`
   events {
     name
     slug
+    day
+    participients
     budgets {
       amount
       isIncome
@@ -6020,3 +6027,37 @@ export function useGetEventsSummaryLazyQuery(baseOptions?: Apollo.LazyQueryHookO
 export type GetEventsSummaryQueryHookResult = ReturnType<typeof useGetEventsSummaryQuery>;
 export type GetEventsSummaryLazyQueryHookResult = ReturnType<typeof useGetEventsSummaryLazyQuery>;
 export type GetEventsSummaryQueryResult = Apollo.QueryResult<GetEventsSummaryQuery, GetEventsSummaryQueryVariables>;
+export const GetParticipantsSummaryDocument = gql`
+    query GetParticipantsSummary {
+  events(orderBy: publishedAt_DESC) {
+    participients
+  }
+}
+    `;
+
+/**
+ * __useGetParticipantsSummaryQuery__
+ *
+ * To run a query within a React component, call `useGetParticipantsSummaryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetParticipantsSummaryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetParticipantsSummaryQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetParticipantsSummaryQuery(baseOptions?: Apollo.QueryHookOptions<GetParticipantsSummaryQuery, GetParticipantsSummaryQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetParticipantsSummaryQuery, GetParticipantsSummaryQueryVariables>(GetParticipantsSummaryDocument, options);
+      }
+export function useGetParticipantsSummaryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetParticipantsSummaryQuery, GetParticipantsSummaryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetParticipantsSummaryQuery, GetParticipantsSummaryQueryVariables>(GetParticipantsSummaryDocument, options);
+        }
+export type GetParticipantsSummaryQueryHookResult = ReturnType<typeof useGetParticipantsSummaryQuery>;
+export type GetParticipantsSummaryLazyQueryHookResult = ReturnType<typeof useGetParticipantsSummaryLazyQuery>;
+export type GetParticipantsSummaryQueryResult = Apollo.QueryResult<GetParticipantsSummaryQuery, GetParticipantsSummaryQueryVariables>;

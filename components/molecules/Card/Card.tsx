@@ -1,14 +1,13 @@
-import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 interface Props {
 	name: string;
-	amount: string;
+	value: string | number;
 	icon: any;
 	href?: string;
 }
 
-export const Card = ({ name, amount, icon: Icon, href }: Props) => {
+export const Card = ({ name, value, icon: Icon, href }: Props) => {
 	return (
 		<div className="overflow-hidden rounded-lg bg-white shadow">
 			<div className="p-5">
@@ -22,9 +21,7 @@ export const Card = ({ name, amount, icon: Icon, href }: Props) => {
 								{name}
 							</dt>
 							<dd>
-								<div className="text-lg font-medium text-gray-900">
-									{amount}
-								</div>
+								<div className="text-lg font-medium text-gray-900">{value}</div>
 							</dd>
 						</dl>
 					</div>
