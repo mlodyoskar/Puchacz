@@ -5818,7 +5818,7 @@ export type PublishEventMutation = { __typename?: 'Mutation', publishEvent?: { _
 export type GetAllEventsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAllEventsQuery = { __typename?: 'Query', events: Array<{ __typename?: 'Event', id: string, name: string, slug?: string | null, day?: any | null, stuffs: Array<{ __typename?: 'Stuff', id: string, name: string, type?: Stuff_Type | null }>, image?: { __typename?: 'Asset', id: string, url: string } | null }> };
+export type GetAllEventsQuery = { __typename?: 'Query', events: Array<{ __typename?: 'Event', id: string, name: string, slug?: string | null, day?: any | null, participients?: number | null, ticketPrice?: number | null, stuffs: Array<{ __typename?: 'Stuff', id: string, name: string, type?: Stuff_Type | null }>, image?: { __typename?: 'Asset', id: string, url: string } | null }> };
 
 export type StuffDataFragment = { __typename?: 'Stuff', id: string, name: string, type?: Stuff_Type | null };
 
@@ -5916,6 +5916,8 @@ export const GetAllEventsDocument = gql`
     name
     slug
     day
+    participients
+    ticketPrice
     stuffs {
       ...StuffData
     }

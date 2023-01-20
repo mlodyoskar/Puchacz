@@ -4,6 +4,8 @@ query GetAllEvents {
 		name
 		slug
 		day
+		participients
+		ticketPrice
 		stuffs {
 			...StuffData
 		}

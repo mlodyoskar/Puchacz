@@ -3,8 +3,7 @@ import { Button } from 'components/atoms/Button/Button';
 import Link from 'next/link';
 import Image from 'next/image';
 import UserIcon from 'components/icons/UserIcon.svg';
-import Wallet from 'components/icons/Wallet.svg';
-import Clock from 'components/icons/Clock.svg';
+import Ticket from 'components/icons/Ticket.svg';
 import { useGetAllEventsQuery } from 'generated/graphql';
 
 const EventsPage = () => {
@@ -69,15 +68,13 @@ const EventsPage = () => {
 						<div className="my-10 flex justify-around">
 							<div className="h-8 w-8">
 								<UserIcon className="h-8 w-8" aria-hidden="true" />
-								<Typography component="h4">500</Typography>
+								<Typography component="h4">{data.participients}</Typography>
 							</div>
 							<div className="h-8 w-8">
-								<Wallet className="h-8 w-8" aria-hidden="true" />
-								<Typography component="h4">3500</Typography>
-							</div>
-							<div className="h-8 w-8">
-								<Clock className="h-8 w-8" aria-hidden="true" />
-								<Typography component="h4">3500</Typography>
+								<Ticket className="h-8 w-8" aria-hidden="true" />
+								<div className="ml-2">
+									<Typography component="h4">{data.ticketPrice}</Typography>
+								</div>
 							</div>
 						</div>
 					</Link>
