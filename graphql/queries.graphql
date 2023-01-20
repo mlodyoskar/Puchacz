@@ -24,6 +24,7 @@ query GetAllStuff {
 
 query GetEventsSummary {
 	events {
+		id
 		name
 		slug
 		day

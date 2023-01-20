@@ -1,7 +1,5 @@
-import {
-	GetParticipantsSummaryDocument,
-	GetParticipantsSummaryQuery,
-} from './../../../generated/graphql';
+import type { GetParticipantsSummaryQuery } from './../../../generated/graphql';
+import { GetParticipantsSummaryDocument } from './../../../generated/graphql';
 import { authorizedApolloClient } from 'graphql/authorizedClient';
 import type { NextApiHandler } from 'next';
 
@@ -23,8 +21,6 @@ const handler: NextApiHandler = async (req, res) => {
 	const lastPartyParticipants = events.find(
 		(event) => event.participients !== null
 	);
-
-	console.log(lastPartyParticipants);
 
 	const allPartiesParticipants = events.reduce((acc, curr) => {
 		if (curr.participients) {
@@ -48,7 +44,7 @@ const handler: NextApiHandler = async (req, res) => {
 		},
 	];
 
-	res.status(201).json({ summary });
+	res.status(200).json({ summary });
 };
 
 export default handler;

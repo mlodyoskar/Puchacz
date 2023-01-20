@@ -7,6 +7,7 @@ export interface StatisticsParties {
 	events: Party[];
 }
 interface Party {
+	id: string;
 	name: string;
 	slug: string | null | undefined;
 	day: string;
@@ -23,23 +24,32 @@ const handler: NextApiHandler = async (req, res) => {
 	});
 
 	const events = data.events.map<Party>(
-		({ name, slug, budgets, day, participients }) => {
+		({ id, name, slug, budgets, day, participients }) => {
 			const budget = budgets.reduce(
 				(acc, curr) => {
 					if (curr.isIncome) {
-						return { ...acc, income: acc.income + curr.amount };
+						return {
+							...acc,
+							income: acc.income + curr.amount,
+							profit: acc.profit + curr.amount,
+						};
 					} else {
-						return { ...acc, spending: acc.spending + curr.amount };
+						return {
+							...acc,
+							spending: acc.spending + curr.amount,
+							profit: acc.profit - curr.amount,
+						};
 					}
 				},
-				{ income: 0, spending: 0 }
+				{ income: 0, spending: 0, profit: 0 }
 			);
 			return {
+				id,
 				name,
-				slug,
-				day,
 				participients,
+				slug,
 				budget,
+				day,
 			};
 		}
 	);

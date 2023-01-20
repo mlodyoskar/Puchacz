@@ -5830,7 +5830,7 @@ export type GetAllStuffQuery = { __typename?: 'Query', stuffs: Array<{ __typenam
 export type GetEventsSummaryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetEventsSummaryQuery = { __typename?: 'Query', events: Array<{ __typename?: 'Event', name: string, slug?: string | null, day?: any | null, participients?: number | null, budgets: Array<{ __typename?: 'Budget', amount: number, isIncome: boolean }> }> };
+export type GetEventsSummaryQuery = { __typename?: 'Query', events: Array<{ __typename?: 'Event', id: string, name: string, slug?: string | null, day?: any | null, participients?: number | null, budgets: Array<{ __typename?: 'Budget', amount: number, isIncome: boolean }> }> };
 
 export type GetParticipantsSummaryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -5989,6 +5989,7 @@ export type GetAllStuffQueryResult = Apollo.QueryResult<GetAllStuffQuery, GetAll
 export const GetEventsSummaryDocument = gql`
     query GetEventsSummary {
   events {
+    id
     name
     slug
     day
