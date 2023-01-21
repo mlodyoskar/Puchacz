@@ -132,7 +132,7 @@ const EventDetailsPage = () => {
 								</dt>
 								<dd className="text-md mt-1 flex flex-row text-gray-900">
 									<UserIcon className="mt-1 mr-1 h-4 w-4" aria-hidden="true" />
-									{data.event?.participients}
+									{data.event?.participants}
 								</dd>
 							</div>
 							<div className="sm:col-span-1">

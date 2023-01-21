@@ -1860,7 +1860,7 @@ export type Event = Node & {
   id: Scalars['ID'];
   image?: Maybe<Asset>;
   name: Scalars['String'];
-  participients?: Maybe<Scalars['Int']>;
+  participants?: Maybe<Scalars['Int']>;
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']>;
   /** User that last published this document */
@@ -1976,7 +1976,7 @@ export type EventCreateInput = {
   day?: InputMaybe<Scalars['Date']>;
   image?: InputMaybe<AssetCreateOneInlineInput>;
   name: Scalars['String'];
-  participients?: InputMaybe<Scalars['Int']>;
+  participants?: InputMaybe<Scalars['Int']>;
   slug?: InputMaybe<Scalars['String']>;
   stuffs?: InputMaybe<StuffCreateManyInlineInput>;
   ticketPrice?: InputMaybe<Scalars['Int']>;
@@ -2092,21 +2092,21 @@ export type EventManyWhereInput = {
   name_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   name_starts_with?: InputMaybe<Scalars['String']>;
-  participients?: InputMaybe<Scalars['Int']>;
+  participants?: InputMaybe<Scalars['Int']>;
   /** All values greater than the given value. */
-  participients_gt?: InputMaybe<Scalars['Int']>;
+  participants_gt?: InputMaybe<Scalars['Int']>;
   /** All values greater than or equal the given value. */
-  participients_gte?: InputMaybe<Scalars['Int']>;
+  participants_gte?: InputMaybe<Scalars['Int']>;
   /** All values that are contained in given list. */
-  participients_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  participants_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   /** All values less than the given value. */
-  participients_lt?: InputMaybe<Scalars['Int']>;
+  participants_lt?: InputMaybe<Scalars['Int']>;
   /** All values less than or equal the given value. */
-  participients_lte?: InputMaybe<Scalars['Int']>;
+  participants_lte?: InputMaybe<Scalars['Int']>;
   /** All values that are not equal to given value. */
-  participients_not?: InputMaybe<Scalars['Int']>;
+  participants_not?: InputMaybe<Scalars['Int']>;
   /** All values that are not contained in given list. */
-  participients_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  participants_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -2190,8 +2190,8 @@ export enum EventOrderByInput {
   IdDesc = 'id_DESC',
   NameAsc = 'name_ASC',
   NameDesc = 'name_DESC',
-  ParticipientsAsc = 'participients_ASC',
-  ParticipientsDesc = 'participients_DESC',
+  ParticipantsAsc = 'participants_ASC',
+  ParticipantsDesc = 'participants_DESC',
   PublishedAtAsc = 'publishedAt_ASC',
   PublishedAtDesc = 'publishedAt_DESC',
   SlugAsc = 'slug_ASC',
@@ -2207,7 +2207,7 @@ export type EventUpdateInput = {
   day?: InputMaybe<Scalars['Date']>;
   image?: InputMaybe<AssetUpdateOneInlineInput>;
   name?: InputMaybe<Scalars['String']>;
-  participients?: InputMaybe<Scalars['Int']>;
+  participants?: InputMaybe<Scalars['Int']>;
   slug?: InputMaybe<Scalars['String']>;
   stuffs?: InputMaybe<StuffUpdateManyInlineInput>;
   ticketPrice?: InputMaybe<Scalars['Int']>;
@@ -2232,7 +2232,7 @@ export type EventUpdateManyInlineInput = {
 
 export type EventUpdateManyInput = {
   day?: InputMaybe<Scalars['Date']>;
-  participients?: InputMaybe<Scalars['Int']>;
+  participants?: InputMaybe<Scalars['Int']>;
   ticketPrice?: InputMaybe<Scalars['Int']>;
 };
 
@@ -2371,21 +2371,21 @@ export type EventWhereInput = {
   name_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   name_starts_with?: InputMaybe<Scalars['String']>;
-  participients?: InputMaybe<Scalars['Int']>;
+  participants?: InputMaybe<Scalars['Int']>;
   /** All values greater than the given value. */
-  participients_gt?: InputMaybe<Scalars['Int']>;
+  participants_gt?: InputMaybe<Scalars['Int']>;
   /** All values greater than or equal the given value. */
-  participients_gte?: InputMaybe<Scalars['Int']>;
+  participants_gte?: InputMaybe<Scalars['Int']>;
   /** All values that are contained in given list. */
-  participients_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  participants_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   /** All values less than the given value. */
-  participients_lt?: InputMaybe<Scalars['Int']>;
+  participants_lt?: InputMaybe<Scalars['Int']>;
   /** All values less than or equal the given value. */
-  participients_lte?: InputMaybe<Scalars['Int']>;
+  participants_lte?: InputMaybe<Scalars['Int']>;
   /** All values that are not equal to given value. */
-  participients_not?: InputMaybe<Scalars['Int']>;
+  participants_not?: InputMaybe<Scalars['Int']>;
   /** All values that are not contained in given list. */
-  participients_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  participants_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -5818,7 +5818,7 @@ export type PublishEventMutation = { __typename?: 'Mutation', publishEvent?: { _
 export type GetAllEventsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAllEventsQuery = { __typename?: 'Query', events: Array<{ __typename?: 'Event', id: string, name: string, slug?: string | null, day?: any | null, participients?: number | null, ticketPrice?: number | null, stuffs: Array<{ __typename?: 'Stuff', id: string, name: string, type?: Stuff_Type | null }>, image?: { __typename?: 'Asset', id: string, url: string } | null }> };
+export type GetAllEventsQuery = { __typename?: 'Query', events: Array<{ __typename?: 'Event', id: string, name: string, slug?: string | null, day?: any | null, participants?: number | null, ticketPrice?: number | null, stuffs: Array<{ __typename?: 'Stuff', id: string, name: string, type?: Stuff_Type | null }>, image?: { __typename?: 'Asset', id: string, url: string } | null }> };
 
 export type StuffDataFragment = { __typename?: 'Stuff', id: string, name: string, type?: Stuff_Type | null };
 
@@ -5832,7 +5832,7 @@ export type GetEventByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetEventByIdQuery = { __typename?: 'Query', event?: { __typename?: 'Event', createdAt: any, name: string, id: string, day?: any | null, participients?: number | null, ticketPrice?: number | null, stuffs: Array<{ __typename?: 'Stuff', id: string, name: string, type?: Stuff_Type | null }>, image?: { __typename?: 'Asset', url: string } | null, budgets: Array<{ __typename?: 'Budget', id: string, name?: string | null, amount: number, isIncome: boolean }> } | null };
+export type GetEventByIdQuery = { __typename?: 'Query', event?: { __typename?: 'Event', createdAt: any, name: string, id: string, day?: any | null, participants?: number | null, ticketPrice?: number | null, stuffs: Array<{ __typename?: 'Stuff', id: string, name: string, type?: Stuff_Type | null }>, image?: { __typename?: 'Asset', url: string } | null, budgets: Array<{ __typename?: 'Budget', id: string, name?: string | null, amount: number, isIncome: boolean }> } | null };
 
 export const StuffDataFragmentDoc = gql`
     fragment StuffData on Stuff {
@@ -5916,7 +5916,7 @@ export const GetAllEventsDocument = gql`
     name
     slug
     day
-    participients
+    participants
     ticketPrice
     stuffs {
       ...StuffData
@@ -5996,7 +5996,7 @@ export const GetEventByIdDocument = gql`
     name
     id
     day
-    participients
+    participants
     ticketPrice
     stuffs {
       id

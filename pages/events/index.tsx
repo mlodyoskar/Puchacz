@@ -68,7 +68,7 @@ const EventsPage = () => {
 						<div className="my-10 flex justify-around">
 							<div className="h-8 w-8">
 								<UserIcon className="h-8 w-8" aria-hidden="true" />
-								<Typography component="h4">{data.participients}</Typography>
+								<Typography component="h4">{data.participants}</Typography>
 							</div>
 							<div className="h-8 w-8">
 								<Ticket className="h-8 w-8" aria-hidden="true" />

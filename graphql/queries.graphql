@@ -4,7 +4,7 @@ query GetAllEvents {
 		name
 		slug
 		day
-		participients
+		participants
 		ticketPrice
 		stuffs {
 			...StuffData
@@ -34,7 +34,7 @@ query GetEventById($id: ID!) {
 		name
 		id
 		day
-		participients
+		participants
 		ticketPrice
 		stuffs {
 			id
