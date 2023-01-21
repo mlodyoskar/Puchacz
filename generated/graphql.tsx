@@ -1860,7 +1860,7 @@ export type Event = Node & {
   id: Scalars['ID'];
   image?: Maybe<Asset>;
   name: Scalars['String'];
-  participients?: Maybe<Scalars['Int']>;
+  participants?: Maybe<Scalars['Int']>;
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']>;
   /** User that last published this document */
@@ -1976,7 +1976,7 @@ export type EventCreateInput = {
   day?: InputMaybe<Scalars['Date']>;
   image?: InputMaybe<AssetCreateOneInlineInput>;
   name: Scalars['String'];
-  participients?: InputMaybe<Scalars['Int']>;
+  participants?: InputMaybe<Scalars['Int']>;
   slug?: InputMaybe<Scalars['String']>;
   stuffs?: InputMaybe<StuffCreateManyInlineInput>;
   ticketPrice?: InputMaybe<Scalars['Int']>;
@@ -2092,21 +2092,21 @@ export type EventManyWhereInput = {
   name_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   name_starts_with?: InputMaybe<Scalars['String']>;
-  participients?: InputMaybe<Scalars['Int']>;
+  participants?: InputMaybe<Scalars['Int']>;
   /** All values greater than the given value. */
-  participients_gt?: InputMaybe<Scalars['Int']>;
+  participants_gt?: InputMaybe<Scalars['Int']>;
   /** All values greater than or equal the given value. */
-  participients_gte?: InputMaybe<Scalars['Int']>;
+  participants_gte?: InputMaybe<Scalars['Int']>;
   /** All values that are contained in given list. */
-  participients_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  participants_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   /** All values less than the given value. */
-  participients_lt?: InputMaybe<Scalars['Int']>;
+  participants_lt?: InputMaybe<Scalars['Int']>;
   /** All values less than or equal the given value. */
-  participients_lte?: InputMaybe<Scalars['Int']>;
+  participants_lte?: InputMaybe<Scalars['Int']>;
   /** All values that are not equal to given value. */
-  participients_not?: InputMaybe<Scalars['Int']>;
+  participants_not?: InputMaybe<Scalars['Int']>;
   /** All values that are not contained in given list. */
-  participients_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  participants_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -2190,8 +2190,8 @@ export enum EventOrderByInput {
   IdDesc = 'id_DESC',
   NameAsc = 'name_ASC',
   NameDesc = 'name_DESC',
-  ParticipientsAsc = 'participients_ASC',
-  ParticipientsDesc = 'participients_DESC',
+  ParticipantsAsc = 'participants_ASC',
+  ParticipantsDesc = 'participants_DESC',
   PublishedAtAsc = 'publishedAt_ASC',
   PublishedAtDesc = 'publishedAt_DESC',
   SlugAsc = 'slug_ASC',
@@ -2207,7 +2207,7 @@ export type EventUpdateInput = {
   day?: InputMaybe<Scalars['Date']>;
   image?: InputMaybe<AssetUpdateOneInlineInput>;
   name?: InputMaybe<Scalars['String']>;
-  participients?: InputMaybe<Scalars['Int']>;
+  participants?: InputMaybe<Scalars['Int']>;
   slug?: InputMaybe<Scalars['String']>;
   stuffs?: InputMaybe<StuffUpdateManyInlineInput>;
   ticketPrice?: InputMaybe<Scalars['Int']>;
@@ -2232,7 +2232,7 @@ export type EventUpdateManyInlineInput = {
 
 export type EventUpdateManyInput = {
   day?: InputMaybe<Scalars['Date']>;
-  participients?: InputMaybe<Scalars['Int']>;
+  participants?: InputMaybe<Scalars['Int']>;
   ticketPrice?: InputMaybe<Scalars['Int']>;
 };
 
@@ -2371,21 +2371,21 @@ export type EventWhereInput = {
   name_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   name_starts_with?: InputMaybe<Scalars['String']>;
-  participients?: InputMaybe<Scalars['Int']>;
+  participants?: InputMaybe<Scalars['Int']>;
   /** All values greater than the given value. */
-  participients_gt?: InputMaybe<Scalars['Int']>;
+  participants_gt?: InputMaybe<Scalars['Int']>;
   /** All values greater than or equal the given value. */
-  participients_gte?: InputMaybe<Scalars['Int']>;
+  participants_gte?: InputMaybe<Scalars['Int']>;
   /** All values that are contained in given list. */
-  participients_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  participants_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   /** All values less than the given value. */
-  participients_lt?: InputMaybe<Scalars['Int']>;
+  participants_lt?: InputMaybe<Scalars['Int']>;
   /** All values less than or equal the given value. */
-  participients_lte?: InputMaybe<Scalars['Int']>;
+  participants_lte?: InputMaybe<Scalars['Int']>;
   /** All values that are not equal to given value. */
-  participients_not?: InputMaybe<Scalars['Int']>;
+  participants_not?: InputMaybe<Scalars['Int']>;
   /** All values that are not contained in given list. */
-  participients_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  participants_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -5830,12 +5830,12 @@ export type GetAllStuffQuery = { __typename?: 'Query', stuffs: Array<{ __typenam
 export type GetEventsSummaryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetEventsSummaryQuery = { __typename?: 'Query', events: Array<{ __typename?: 'Event', id: string, name: string, slug?: string | null, day?: any | null, participients?: number | null, budgets: Array<{ __typename?: 'Budget', amount: number, isIncome: boolean }> }> };
+export type GetEventsSummaryQuery = { __typename?: 'Query', events: Array<{ __typename?: 'Event', id: string, name: string, slug?: string | null, day?: any | null, participants?: number | null, budgets: Array<{ __typename?: 'Budget', amount: number, isIncome: boolean }> }> };
 
 export type GetParticipantsSummaryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetParticipantsSummaryQuery = { __typename?: 'Query', events: Array<{ __typename?: 'Event', participients?: number | null }> };
+export type GetParticipantsSummaryQuery = { __typename?: 'Query', events: Array<{ __typename?: 'Event', participants?: number | null }> };
 
 export const StuffDataFragmentDoc = gql`
     fragment StuffData on Stuff {
@@ -5993,7 +5993,7 @@ export const GetEventsSummaryDocument = gql`
     name
     slug
     day
-    participients
+    participants
     budgets {
       amount
       isIncome
@@ -6031,7 +6031,7 @@ export type GetEventsSummaryQueryResult = Apollo.QueryResult<GetEventsSummaryQue
 export const GetParticipantsSummaryDocument = gql`
     query GetParticipantsSummary {
   events(orderBy: publishedAt_DESC) {
-    participients
+    participants
   }
 }
     `;

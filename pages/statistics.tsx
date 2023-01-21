@@ -118,14 +118,9 @@ const StatisticsPage = () => {
 													className="bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900"
 													scope="col"
 												>
-													Uczestników
+													Uczestnicy
 												</th>
-												<th
-													className="bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900"
-													scope="col"
-												>
-													Data
-												</th>
+
 												<th
 													className="bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900"
 													scope="col"
@@ -144,24 +139,27 @@ const StatisticsPage = () => {
 												>
 													Dochód
 												</th>
+												<th
+													className="bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900"
+													scope="col"
+												>
+													Data
+												</th>
 											</tr>
 										</thead>
 										<tbody className="divide-y divide-gray-200 bg-white">
 											{parties ? (
-												parties.events.map(({ id, slug, budget, ...props }) => {
+												parties.events.map(({ id, slug, ...event }) => {
 													const values = [
-														...Object.values(props).map((item) => {
+														...Object.values(event).map((item) => {
 															return { value: item };
-														}),
-														...Object.values(budget).map((budget) => {
-															return { value: budget };
 														}),
 													];
 
 													return (
 														<TableRow
 															key={slug}
-															href={''}
+															href={`/events/${id}`}
 															icon={UserIcon}
 															items={values}
 														/>

@@ -28,7 +28,7 @@ query GetEventsSummary {
 		name
 		slug
 		day
-		participients
+		participants
 		budgets {
 			amount
 			isIncome
@@ -38,6 +38,6 @@ query GetEventsSummary {
 
 query GetParticipantsSummary {
 	events(orderBy: publishedAt_DESC) {
-		participients
+		participants
 	}
 }

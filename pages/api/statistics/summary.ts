@@ -19,12 +19,12 @@ const handler: NextApiHandler = async (req, res) => {
 	});
 
 	const lastPartyParticipants = events.find(
-		(event) => event.participients !== null
+		(event) => event.participants !== null
 	);
 
 	const allPartiesParticipants = events.reduce((acc, curr) => {
-		if (curr.participients) {
-			return acc + curr.participients;
+		if (curr.participants) {
+			return acc + curr.participants;
 		} else {
 			return acc + 0;
 		}
@@ -34,7 +34,7 @@ const handler: NextApiHandler = async (req, res) => {
 		{ name: 'Stan konta', value: '12 496 PLN', type: 'money' },
 		{
 			name: 'Na ostatniej imprezie',
-			value: lastPartyParticipants?.participients,
+			value: lastPartyParticipants?.participants,
 			type: 'participants',
 		},
 		{

@@ -2,6 +2,8 @@ import type { GetEventsSummaryQuery } from './../../../generated/graphql';
 import { GetEventsSummaryDocument } from './../../../generated/graphql';
 import { authorizedApolloClient } from 'graphql/authorizedClient';
 import type { NextApiHandler } from 'next';
+import dayjs from 'dayjs';
+require('dayjs/locale/pl');
 
 export interface StatisticsParties {
 	events: Party[];
@@ -11,12 +13,13 @@ interface Party {
 	name: string;
 	slug: string | null | undefined;
 	day: string;
-	participients: number | null | undefined;
-	budget: {
-		income: number;
-		spending: number;
-	};
+	participants: number | null | undefined;
+	income: string;
+	spending: string;
+	profit: string;
 }
+
+dayjs.locale('pl');
 
 const handler: NextApiHandler = async (req, res) => {
 	const { data } = await authorizedApolloClient.query<GetEventsSummaryQuery>({
@@ -24,7 +27,7 @@ const handler: NextApiHandler = async (req, res) => {
 	});
 
 	const events = data.events.map<Party>(
-		({ id, name, slug, budgets, day, participients }) => {
+		({ id, name, slug, budgets, day, participants }) => {
 			const budget = budgets.reduce(
 				(acc, curr) => {
 					if (curr.isIncome) {
@@ -46,10 +49,12 @@ const handler: NextApiHandler = async (req, res) => {
 			return {
 				id,
 				name,
-				participients,
 				slug,
-				budget,
-				day,
+				participants,
+				income: `${budget.income / 100} PLN`,
+				spending: `${budget.spending / 100} PLN `,
+				profit: `${budget.profit / 100} PLN`,
+				day: dayjs(day).format('D MMM YYYY'),
 			};
 		}
 	);
