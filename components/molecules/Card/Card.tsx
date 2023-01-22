@@ -1,13 +1,23 @@
 import Link from 'next/link';
+import DollarIcon from '../../../components/icons/Dollar.svg';
+import UserGroupIcon from '../../../components/icons/UserGroup.svg';
 
+export type CardType = 'money' | 'participants';
 interface Props {
 	name: string;
 	value: string | number;
-	icon: any;
 	href?: string;
+	type: CardType;
 }
 
-export const Card = ({ name, value, icon: Icon, href }: Props) => {
+const typeToIcon = {
+	money: DollarIcon,
+	participants: UserGroupIcon,
+};
+
+export const Card = ({ name, value, href, type }: Props) => {
+	const Icon = typeToIcon[type];
+
 	return (
 		<div className="overflow-hidden rounded-lg bg-white shadow">
 			<div className="p-5">

@@ -3,7 +3,6 @@ import { Card } from 'components/molecules/Card/Card';
 import UserIcon from './../components/icons/User.svg';
 import ChevronIcon from './../components/icons/Chevron.svg';
 import DollarIcon from './../components/icons/Dollar.svg';
-import UserGroupIcon from './../components/icons/UserGroup.svg';
 import { motion } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
 import { fetcher } from 'utils/fetcher';
@@ -38,7 +37,7 @@ const StatisticsPage = () => {
 						<div className="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 ">
 							{summary ? (
 								summary.summary.map((card) => (
-									<Card icon={UserGroupIcon} key={card.name} {...card} />
+									<Card key={card.name} {...card} />
 								))
 							) : (
 								<>

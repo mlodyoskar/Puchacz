@@ -2,12 +2,13 @@ import type { GetParticipantsSummaryQuery } from './../../../generated/graphql';
 import { GetParticipantsSummaryDocument } from './../../../generated/graphql';
 import { authorizedApolloClient } from 'graphql/authorizedClient';
 import type { NextApiHandler } from 'next';
+import type { CardType } from 'components/molecules/Card/Card';
 
 export interface StatisticsSummary {
 	summary: {
 		name: string;
 		value: number | string;
-		type: string;
+		type: CardType;
 	}[];
 }
 

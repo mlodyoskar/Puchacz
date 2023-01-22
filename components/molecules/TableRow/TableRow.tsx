@@ -5,7 +5,6 @@ interface Props {
 	href: string;
 	items: {
 		value: string | number | undefined | null;
-		type?: 'money' | 'people';
 	}[];
 }
 
@@ -28,13 +27,12 @@ export const TableRow = ({ href, icon: Icon, items }: Props) => {
 					</Link>
 				</div>
 			</td>
-			{items.slice(1).map(({ value, type }, i) => (
+			{items.slice(1).map(({ value }, i) => (
 				<td
 					key={`${value}-${i}`}
 					className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500"
 				>
 					<span className="font-medium text-gray-900">{value}</span>{' '}
-					{type === 'money' && <span>PLN</span>}
 				</td>
 			))}
 		</tr>

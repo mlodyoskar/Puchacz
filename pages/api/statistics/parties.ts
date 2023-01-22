@@ -3,7 +3,7 @@ import { GetEventsSummaryDocument } from './../../../generated/graphql';
 import { authorizedApolloClient } from 'graphql/authorizedClient';
 import type { NextApiHandler } from 'next';
 import dayjs from 'dayjs';
-require('dayjs/locale/pl');
+import * as dayjsLocale from 'dayjs/locale/pl';
 
 export interface StatisticsParties {
 	events: Party[];
