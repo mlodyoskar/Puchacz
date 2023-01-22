@@ -12,6 +12,7 @@ import { TableRow } from 'components/molecules/TableRow/TableRow';
 import { CardPlaceholder } from 'components/molecules/Card/CardPlaceholder';
 import { TableRowPlaceholder } from 'components/molecules/TableRow/TableRowPlaceholder';
 import type { StatisticsParties } from './api/statistics/parties';
+import Link from 'next/link';
 
 const StatisticsPage = () => {
 	const { data: summary } = useQuery({
@@ -56,45 +57,52 @@ const StatisticsPage = () => {
 							role="list"
 							className="mt-2 divide-y divide-gray-200 overflow-hidden shadow sm:hidden"
 						>
-							{/* {transactions.map((transaction) => (
-								<li key={transaction.id}>
-									<Link
-										href={transaction.href}
-										className="block bg-white px-4 py-4 hover:bg-gray-50"
-									>
-										<span className="flex items-center space-x-4">
-											<span className="flex flex-1 space-x-2 truncate">
-												<UserGroupIcon
+							{parties ? (
+								parties.events.map(({ id, name, profit, day }) => (
+									<li key={id}>
+										<Link
+											href={`/events/${id}`}
+											className="block bg-white px-4 py-4 hover:bg-gray-50"
+										>
+											<span className="flex items-center space-x-4">
+												<span className="flex flex-1 space-x-2 truncate">
+													<UserIcon
+														className="h-5 w-5 flex-shrink-0 text-gray-400"
+														aria-hidden="true"
+													/>
+													<span className="flex flex-col truncate text-sm text-gray-500">
+														<span className="truncate">{name}</span>
+														<span>
+															<span className="font-small text-gray-900">
+																+ {profit}
+															</span>
+														</span>
+														<time>{day}</time>
+													</span>
+												</span>
+												<ChevronIcon
 													className="h-5 w-5 flex-shrink-0 text-gray-400"
 													aria-hidden="true"
 												/>
-												<span className="flex flex-col truncate text-sm text-gray-500">
-													<span className="truncate">{transaction.name}</span>
-													<span>
-														<span className="font-medium text-gray-900">
-															{transaction.income}
-														</span>{' '}
-														{transaction.currency}
-													</span>
-													<span>
-														<span className="font-medium text-gray-900">
-															{transaction.outcome}
-														</span>{' '}
-														{transaction.currency}
-													</span>
-													<time dateTime={transaction.datetime}>
-														{transaction.date}
-													</time>
-												</span>
 											</span>
+										</Link>
+									</li>
+								))
+							) : (
+								<>
+									{Array.from({ length: 10 }).map((x, i) => (
+										<div key={i} className="relative h-24 w-full space-y-1 p-4">
+											<div className="skeleton h-4 w-3/5" />
+											<div className="skeleton h-4 w-1/4" />
+											<div className="skeleton h-4 w-1/4" />
 											<ChevronIcon
-												className="h-5 w-5 flex-shrink-0 text-gray-400"
+												className="absolute top-1/3 right-4 h-5 w-5 flex-shrink-0 text-gray-400"
 												aria-hidden="true"
 											/>
-										</span>
-									</Link>
-								</li>
-							))} */}
+										</div>
+									))}
+								</>
+							)}
 						</ul>
 						<Pagination />
 					</div>
