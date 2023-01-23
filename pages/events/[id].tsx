@@ -11,7 +11,8 @@ const EventDetailsPage = () => {
 	const router = useRouter();
 	const id = router.query.id as string;
 	const { data, loading } = useGetEventByIdQuery({ variables: { id } });
-	const [isEvent, setIsEvent] = useState('event');
+	type View = 'event' | 'budget';
+	const [view, setView] = useState<View>('event');
 	function RenderPage({ props }) {
 		if (props === 'event') {
 			return <EventDetails data={data} />;
@@ -58,9 +59,9 @@ const EventDetailsPage = () => {
 						<div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
 							<nav className="-mb-px flex space-x-8">
 								<button
-									onClick={() => setIsEvent('event')}
+									onClick={() => setView('event')}
 									className={
-										isEvent === 'event'
+										view === 'event'
 											? 'border-b-2 border-blue-500 text-gray-900'
 											: 'whitespace-nowrap border-b-2 border-transparent py-4 px-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700'
 									}
@@ -68,9 +69,9 @@ const EventDetailsPage = () => {
 									Wydarzenie
 								</button>
 								<button
-									onClick={() => setIsEvent('budget')}
+									onClick={() => setView('budget')}
 									className={
-										isEvent === 'event'
+										view === 'event'
 											? 'whitespace-nowrap border-b-2 border-transparent py-4 px-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700'
 											: 'border-b-2 border-blue-500 text-gray-900'
 									}
@@ -82,7 +83,7 @@ const EventDetailsPage = () => {
 					</div>
 				</div>
 
-				<RenderPage props={isEvent} />
+				<RenderPage props={view} />
 			</div>
 		</div>
 	);

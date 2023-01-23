@@ -1,5 +1,5 @@
 import UserIcon from 'components/icons/UserIcon.svg';
-import Ticket from 'components/icons/Ticket.svg';
+import TicketIcon from 'components/icons/TicketIcon.svg';
 
 export const BudgetDetails = ({ data }) => {
 	return (
@@ -15,9 +15,9 @@ export const BudgetDetails = ({ data }) => {
 					</dd>
 				</div>
 				<div className="sm:col-span-1">
-					<dt className="text-md font-medium text-gray-500">Tix cena</dt>
+					<dt className="text-md font-medium text-gray-500">Cena biletu</dt>
 					<dd className="text-md mt-1 flex flex-row text-gray-900">
-						<Ticket className="mt-1 mr-1 h-4 w-4" aria-hidden="true" />
+						<TicketIcon className="mt-1 mr-1 h-4 w-4" aria-hidden="true" />
 						{data.event?.ticketPrice} PLN
 					</dd>
 				</div>
