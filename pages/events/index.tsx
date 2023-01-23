@@ -1,5 +1,4 @@
 import { Typography } from 'components/atoms/Typography/Typography';
-import { Button } from 'components/atoms/Button/Button';
 import Link from 'next/link';
 import Image from 'next/image';
 import UserIcon from 'components/icons/UserIcon.svg';
@@ -34,10 +33,8 @@ const EventsPage = () => {
 		<div>
 			<Typography component="h1">Imprezy</Typography>
 			<div className=" fixed bottom-0 w-full">
-				<div className="float-right mr-10 opacity-95 md:mr-72">
-					<Button>
-						<Link href="events/create">Utwórz nową imprezę</Link>
-					</Button>
+				<div className="float-right mr-10 mb-2 flex h-full items-center justify-center gap-2 rounded-lg bg-blue-700 px-5 py-2.5  text-center text-sm font-medium text-white opacity-95 transition-colors hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 md:mr-72">
+					<Link href="events/create">Utwórz nową imprezę</Link>
 				</div>
 			</div>
 			<div className="mb-10 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
