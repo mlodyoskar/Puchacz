@@ -1,7 +1,6 @@
 import Camera from 'components/icons/Camera.svg';
 import Star from 'components/icons/Star.svg';
-
-export const EventDetails = ({ data }) => {
+export const EventDetails = ({ name, day, createdAt, stuffs }) => {
 	return (
 		<div className="mx-auto mt-6 max-w-5xl px-4 sm:px-6 lg:px-8">
 			<dl className="grid grid-cols-2 gap-x-4 gap-y-8">
@@ -9,15 +8,15 @@ export const EventDetails = ({ data }) => {
 					<dt className="text-md font-medium text-gray-500">
 						Nazwa wydarzenia
 					</dt>
-					<dd className="text-md mt-1 text-gray-900">{data.event?.name}</dd>
+					<dd className="text-md mt-1 text-gray-900">{name}</dd>
 				</div>
 				<div className="sm:col-span-1">
 					<dt className="text-md font-medium text-gray-500">Data wydarzenia</dt>
-					<dd className="text-md mt-1 text-gray-900">{data.event?.day}</dd>
+					<dd className="text-md mt-1 text-gray-900">{day}</dd>
 				</div>
 				<div className="sm:col-span-1">
 					<dt className="text-md font-medium text-gray-500">Stuff</dt>
-					{data.event?.stuffs.map((stuff) => (
+					{stuffs.map((stuff) => (
 						<dd
 							className="text-md mt-1 flex flex-row text-gray-900"
 							key={stuff.id}
@@ -33,9 +32,7 @@ export const EventDetails = ({ data }) => {
 				</div>
 				<div className="sm:col-span-1">
 					<dt className="text-md font-medium text-gray-500">Stworzony</dt>
-					<dd className="text-md mt-1 text-gray-900">
-						{data.event?.createdAt}
-					</dd>
+					<dd className="text-md mt-1 text-gray-900">{createdAt}</dd>
 				</div>
 			</dl>
 		</div>

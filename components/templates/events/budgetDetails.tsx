@@ -1,7 +1,7 @@
 import UserIcon from 'components/icons/UserIcon.svg';
 import TicketIcon from 'components/icons/TicketIcon.svg';
 
-export const BudgetDetails = ({ data }) => {
+export const BudgetDetails = ({ participants, ticketPrice, budgets }) => {
 	return (
 		<div className="mx-auto mt-6 max-w-5xl px-4 sm:px-6 lg:px-8">
 			<dl className="grid grid-cols-2 gap-x-4 gap-y-8">
@@ -11,14 +11,14 @@ export const BudgetDetails = ({ data }) => {
 					</dt>
 					<dd className="text-md mt-1 flex flex-row text-gray-900">
 						<UserIcon className="mt-1 mr-1 h-4 w-4" aria-hidden="true" />
-						{data.event?.participants}
+						{participants}
 					</dd>
 				</div>
 				<div className="sm:col-span-1">
 					<dt className="text-md font-medium text-gray-500">Cena biletu</dt>
 					<dd className="text-md mt-1 flex flex-row text-gray-900">
 						<TicketIcon className="mt-1 mr-1 h-4 w-4" aria-hidden="true" />
-						{data.event?.ticketPrice} PLN
+						{ticketPrice} PLN
 					</dd>
 				</div>
 			</dl>
@@ -28,7 +28,7 @@ export const BudgetDetails = ({ data }) => {
 						<dt className="text-md font-medium text-gray-500">Przychody</dt>
 						<div className="relative">
 							<ul role="list" className="relative z-0">
-								{data.event?.budgets.map((budget) => (
+								{budgets.map((budget) => (
 									<li key={budget.id} className="bg-white">
 										<div
 											className={
@@ -63,7 +63,7 @@ export const BudgetDetails = ({ data }) => {
 						<dt className="text-md font-medium text-gray-500">Wydatki</dt>
 						<div className="relative">
 							<ul role="list" className="relative z-0">
-								{data.event?.budgets.map((budget) => (
+								{budgets.map((budget) => (
 									<li key={budget.id} className="bg-white">
 										<div
 											className={
