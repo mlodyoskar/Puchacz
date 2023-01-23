@@ -8,7 +8,6 @@ import { useGetAllEventsQuery } from 'generated/graphql';
 
 const EventsPage = () => {
 	const { data, loading } = useGetAllEventsQuery();
-	console.log(data, loading);
 	if (loading) {
 		return (
 			<div>

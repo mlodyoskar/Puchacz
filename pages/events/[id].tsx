@@ -35,7 +35,6 @@ const EventDetailsPage = () => {
 			</div>
 		);
 	}
-	console.log(data, loading);
 	return (
 		<div>
 			<div>
