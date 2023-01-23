@@ -12,7 +12,12 @@ const EventDetailsPage = () => {
 	const id = router.query.id as string;
 	const { data, loading } = useGetEventByIdQuery({ variables: { id } });
 	const [isEvent, setIsEvent] = useState('event');
-
+	function RenderPage({ props }) {
+		if (props === 'event') {
+			return <EventDetails data={data} />;
+		}
+		return <BudgetDetails data={data} />;
+	}
 	if (loading) {
 		return (
 			<div>
@@ -77,11 +82,7 @@ const EventDetailsPage = () => {
 					</div>
 				</div>
 
-				{isEvent === 'event' ? (
-					<EventDetails data={data} />
-				) : (
-					<BudgetDetails data={data} />
-				)}
+				<RenderPage props={isEvent} />
 			</div>
 		</div>
 	);
