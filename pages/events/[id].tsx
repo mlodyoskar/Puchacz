@@ -12,7 +12,8 @@ const EventDetailsPage = () => {
 	const router = useRouter();
 	const id = router.query.id as string;
 	const { data, loading } = useGetEventByIdQuery({ variables: { id } });
-	const [isEvent, setIsEvent] = useState(true);
+	const [isEvent, setIsEvent] = useState('event');
+
 	if (loading) {
 		return (
 			<div>
@@ -53,9 +54,9 @@ const EventDetailsPage = () => {
 						<div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
 							<nav className="-mb-px flex space-x-8">
 								<button
-									onClick={() => setIsEvent(true)}
+									onClick={() => setIsEvent('event')}
 									className={
-										isEvent
+										isEvent === 'event'
 											? 'border-b-2 border-blue-500 text-gray-900'
 											: 'whitespace-nowrap border-b-2 border-transparent py-4 px-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700'
 									}
@@ -63,9 +64,9 @@ const EventDetailsPage = () => {
 									Wydarzenie
 								</button>
 								<button
-									onClick={() => setIsEvent(false)}
+									onClick={() => setIsEvent('budget')}
 									className={
-										isEvent
+										isEvent === 'event'
 											? 'whitespace-nowrap border-b-2 border-transparent py-4 px-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700'
 											: 'border-b-2 border-blue-500 text-gray-900'
 									}
@@ -76,7 +77,7 @@ const EventDetailsPage = () => {
 						</div>
 					</div>
 				</div>
-				{isEvent ? (
+				{isEvent === 'event' ? (
 					<div className="mx-auto mt-6 max-w-5xl px-4 sm:px-6 lg:px-8">
 						<dl className="grid grid-cols-2 gap-x-4 gap-y-8">
 							<div className="sm:col-span-1">
