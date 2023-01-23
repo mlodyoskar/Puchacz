@@ -1,7 +1,8 @@
 import Link from 'next/link';
+import type { SVGIcon } from '../Card/Card';
 
 interface Props {
-	icon: any;
+	icon: SVGIcon;
 	href: string;
 	items: {
 		value: string | number | undefined | null;

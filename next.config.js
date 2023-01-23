@@ -11,6 +11,9 @@ const nextConfig = {
 
     return config
   },
+  images: {
+    disableStaticImages: true
+  },
   async redirects() {
     return [
       {

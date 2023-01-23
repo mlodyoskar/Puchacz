@@ -1,6 +1,9 @@
 import Link from 'next/link';
+import type { ReactElement, SVGProps } from 'react';
 import DollarIcon from '../../../components/icons/Dollar.svg';
 import UserGroupIcon from '../../../components/icons/UserGroup.svg';
+
+export type SVGIcon = (props: SVGProps<SVGElement>) => ReactElement;
 
 export type CardType = 'money' | 'participants';
 interface Props {
@@ -10,7 +13,7 @@ interface Props {
 	type: CardType;
 }
 
-const typeToIcon = {
+const typeToIcon: Record<CardType, SVGIcon> = {
 	money: DollarIcon,
 	participants: UserGroupIcon,
 };

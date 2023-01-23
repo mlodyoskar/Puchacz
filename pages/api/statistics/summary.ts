@@ -26,9 +26,8 @@ const handler: NextApiHandler = async (req, res) => {
 	const allPartiesParticipants = events.reduce((acc, curr) => {
 		if (curr.participants) {
 			return acc + curr.participants;
-		} else {
-			return acc + 0;
 		}
+		return acc + 0;
 	}, 0);
 
 	const summary = [

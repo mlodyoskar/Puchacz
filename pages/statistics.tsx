@@ -2,7 +2,6 @@ import { Typography } from 'components/atoms/Typography/Typography';
 import { Card } from 'components/molecules/Card/Card';
 import UserIcon from './../components/icons/User.svg';
 import ChevronIcon from './../components/icons/Chevron.svg';
-import DollarIcon from './../components/icons/Dollar.svg';
 import { motion } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
 import { fetcher } from 'utils/fetcher';
@@ -14,16 +13,23 @@ import { TableRowPlaceholder } from 'components/molecules/TableRow/TableRowPlace
 import type { StatisticsParties } from './api/statistics/parties';
 import Link from 'next/link';
 
-const StatisticsPage = () => {
-	const { data: summary } = useQuery({
+const useGetStatisticsSummary = () => {
+	return useQuery({
 		queryKey: ['statistcs', 'summary'],
 		queryFn: () => fetcher<StatisticsSummary>('/api/statistics/summary'),
 	});
+};
 
-	const { data: parties } = useQuery({
+const useGetStatisticsParties = () => {
+	return useQuery({
 		queryKey: ['statistics', 'parties'],
 		queryFn: () => fetcher<StatisticsParties>('/api/statistics/parties'),
 	});
+};
+
+const StatisticsPage = () => {
+	const { data: summary } = useGetStatisticsSummary();
+	const { data: parties } = useGetStatisticsParties();
 
 	return (
 		<motion.div
