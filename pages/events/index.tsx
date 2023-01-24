@@ -2,7 +2,7 @@ import { Typography } from 'components/atoms/Typography/Typography';
 import Link from 'next/link';
 import Image from 'next/image';
 import UserIcon from 'components/icons/UserIcon.svg';
-import Ticket from 'components/icons/Ticket.svg';
+import TicketIcon from 'components/icons/TicketIcon.svg';
 import { useGetAllEventsQuery } from 'generated/graphql';
 
 const EventsPage = () => {
@@ -67,7 +67,7 @@ const EventsPage = () => {
 								<Typography component="h4">{data.participants}</Typography>
 							</div>
 							<div className="h-8 w-8">
-								<Ticket className="h-8 w-8" aria-hidden="true" />
+								<TicketIcon className="h-8 w-8" aria-hidden="true" />
 								<div className="ml-2">
 									<Typography component="h4">{data.ticketPrice}</Typography>
 								</div>

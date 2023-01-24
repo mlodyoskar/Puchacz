@@ -12,8 +12,8 @@ const EventDetailsPage = () => {
 	const { data, loading } = useGetEventByIdQuery({ variables: { id } });
 	type View = 'event' | 'budget';
 	const [view, setView] = useState<View>('event');
-	function RenderPage({ props }) {
-		if (props === 'event') {
+	function RenderPage({ viewProps }: { viewProps: string }) {
+		if (viewProps === 'event') {
 			return (
 				<EventDetails
 					name={data?.event?.name}
@@ -95,7 +95,7 @@ const EventDetailsPage = () => {
 					</div>
 				</div>
 
-				<RenderPage props={view} />
+				<RenderPage viewProps={view} />
 			</div>
 		</div>
 	);

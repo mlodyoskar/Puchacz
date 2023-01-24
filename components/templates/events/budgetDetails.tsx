@@ -1,8 +1,8 @@
 import UserIcon from 'components/icons/UserIcon.svg';
 import TicketIcon from 'components/icons/TicketIcon.svg';
 interface Budget {
-	participants: number;
-	ticketPrice: number;
+	participants?: number;
+	ticketPrice?: number;
 	budgets: [
 		{
 			id: string;

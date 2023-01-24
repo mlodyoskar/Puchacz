@@ -1237,7 +1237,7 @@ export type Budget = Node & {
   /** The unique identifier */
   id: Scalars['ID'];
   isIncome: Scalars['Boolean'];
-  name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']>;
   /** User that last published this document */
@@ -1324,7 +1324,7 @@ export type BudgetCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   event?: InputMaybe<EventCreateOneInlineInput>;
   isIncome: Scalars['Boolean'];
-  name?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
   slug?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
@@ -5832,7 +5832,7 @@ export type GetEventByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetEventByIdQuery = { __typename?: 'Query', event?: { __typename?: 'Event', createdAt: any, name: string, id: string, day?: any | null, participants?: number | null, ticketPrice?: number | null, stuffs: Array<{ __typename?: 'Stuff', id: string, name: string, type?: Stuff_Type | null }>, image?: { __typename?: 'Asset', url: string } | null, budgets: Array<{ __typename?: 'Budget', id: string, name?: string | null, amount: number, isIncome: boolean }> } | null };
+export type GetEventByIdQuery = { __typename?: 'Query', event?: { __typename?: 'Event', createdAt: any, name: string, id: string, day?: any | null, participants?: number | null, ticketPrice?: number | null, stuffs: Array<{ __typename?: 'Stuff', id: string, name: string, type?: Stuff_Type | null }>, image?: { __typename?: 'Asset', url: string } | null, budgets: Array<{ __typename?: 'Budget', id: string, name: string, amount: number, isIncome: boolean }> } | null };
 
 export const StuffDataFragmentDoc = gql`
     fragment StuffData on Stuff {

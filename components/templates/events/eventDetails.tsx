@@ -1,10 +1,10 @@
 import Camera from 'components/icons/Camera.svg';
 import Star from 'components/icons/Star.svg';
 interface Event {
-	name: string;
+	name?: string;
 	day: string;
 	createdAt: string;
-	stuffs: [
+	stuffs?: [
 		{
 			id: string;
 			type: string;
@@ -28,7 +28,7 @@ export const EventDetails = ({ name, day, createdAt, stuffs }: Event) => {
 				</div>
 				<div className="sm:col-span-1">
 					<dt className="text-md font-medium text-gray-500">Stuff</dt>
-					{stuffs.map((stuff) => (
+					{stuffs?.map((stuff) => (
 						<dd
 							className="text-md mt-1 flex flex-row text-gray-900"
 							key={stuff.id}
