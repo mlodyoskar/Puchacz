@@ -4,8 +4,14 @@ query GetAllEvents {
 		name
 		slug
 		day
+		participants
+		ticketPrice
 		stuffs {
 			...StuffData
+		}
+		image {
+			id
+			url
 		}
 	}
 }
@@ -19,5 +25,30 @@ fragment StuffData on Stuff {
 query GetAllStuff {
 	stuffs {
 		...StuffData
+	}
+}
+
+query GetEventById($id: ID!) {
+	event(where: { id: $id }) {
+		createdAt
+		name
+		id
+		day
+		participants
+		ticketPrice
+		stuffs {
+			id
+			name
+			type
+		}
+		image {
+			url
+		}
+		budgets {
+			id
+			name
+			amount
+			isIncome
+		}
 	}
 }

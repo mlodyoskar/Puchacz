@@ -1222,6 +1222,539 @@ export type BatchPayload = {
   count: Scalars['Long'];
 };
 
+export type Budget = Node & {
+  __typename?: 'Budget';
+  amount: Scalars['Int'];
+  /** The time the document was created */
+  createdAt: Scalars['DateTime'];
+  /** User that created this document */
+  createdBy?: Maybe<User>;
+  /** Get the document in other stages */
+  documentInStages: Array<Budget>;
+  event?: Maybe<Event>;
+  /** List of Budget versions */
+  history: Array<Version>;
+  /** The unique identifier */
+  id: Scalars['ID'];
+  isIncome: Scalars['Boolean'];
+  name: Scalars['String'];
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  /** User that last published this document */
+  publishedBy?: Maybe<User>;
+  scheduledIn: Array<ScheduledOperation>;
+  slug?: Maybe<Scalars['String']>;
+  /** System stage field */
+  stage: Stage;
+  /** The time the document was updated */
+  updatedAt: Scalars['DateTime'];
+  /** User that last updated this document */
+  updatedBy?: Maybe<User>;
+};
+
+
+export type BudgetCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type BudgetDocumentInStagesArgs = {
+  includeCurrent?: Scalars['Boolean'];
+  inheritLocale?: Scalars['Boolean'];
+  stages?: Array<Stage>;
+};
+
+
+export type BudgetEventArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type BudgetHistoryArgs = {
+  limit?: Scalars['Int'];
+  skip?: Scalars['Int'];
+  stageOverride?: InputMaybe<Stage>;
+};
+
+
+export type BudgetPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type BudgetScheduledInArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ScheduledOperationWhereInput>;
+};
+
+
+export type BudgetUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+export type BudgetConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: BudgetWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type BudgetConnection = {
+  __typename?: 'BudgetConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<BudgetEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type BudgetCreateInput = {
+  amount: Scalars['Int'];
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  event?: InputMaybe<EventCreateOneInlineInput>;
+  isIncome: Scalars['Boolean'];
+  name: Scalars['String'];
+  slug?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type BudgetCreateManyInlineInput = {
+  /** Connect multiple existing Budget documents */
+  connect?: InputMaybe<Array<BudgetWhereUniqueInput>>;
+  /** Create and connect multiple existing Budget documents */
+  create?: InputMaybe<Array<BudgetCreateInput>>;
+};
+
+export type BudgetCreateOneInlineInput = {
+  /** Connect one existing Budget document */
+  connect?: InputMaybe<BudgetWhereUniqueInput>;
+  /** Create and connect one Budget document */
+  create?: InputMaybe<BudgetCreateInput>;
+};
+
+/** An edge in a connection. */
+export type BudgetEdge = {
+  __typename?: 'BudgetEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  node: Budget;
+};
+
+/** Identifies documents */
+export type BudgetManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<BudgetWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<BudgetWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<BudgetWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']>;
+  amount?: InputMaybe<Scalars['Int']>;
+  /** All values greater than the given value. */
+  amount_gt?: InputMaybe<Scalars['Int']>;
+  /** All values greater than or equal the given value. */
+  amount_gte?: InputMaybe<Scalars['Int']>;
+  /** All values that are contained in given list. */
+  amount_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  /** All values less than the given value. */
+  amount_lt?: InputMaybe<Scalars['Int']>;
+  /** All values less than or equal the given value. */
+  amount_lte?: InputMaybe<Scalars['Int']>;
+  /** All values that are not equal to given value. */
+  amount_not?: InputMaybe<Scalars['Int']>;
+  /** All values that are not contained in given list. */
+  amount_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  documentInStages_every?: InputMaybe<BudgetWhereStageInput>;
+  documentInStages_none?: InputMaybe<BudgetWhereStageInput>;
+  documentInStages_some?: InputMaybe<BudgetWhereStageInput>;
+  event?: InputMaybe<EventWhereInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values that are not equal to given value. */
+  id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']>;
+  isIncome?: InputMaybe<Scalars['Boolean']>;
+  /** All values that are not equal to given value. */
+  isIncome_not?: InputMaybe<Scalars['Boolean']>;
+  name?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  name_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  name_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  name_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values that are not equal to given value. */
+  name_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  name_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  name_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  name_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  name_starts_with?: InputMaybe<Scalars['String']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  slug?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  slug_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  slug_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  slug_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values that are not equal to given value. */
+  slug_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  slug_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  slug_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  slug_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  slug_starts_with?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+export enum BudgetOrderByInput {
+  AmountAsc = 'amount_ASC',
+  AmountDesc = 'amount_DESC',
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  IsIncomeAsc = 'isIncome_ASC',
+  IsIncomeDesc = 'isIncome_DESC',
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  PublishedAtAsc = 'publishedAt_ASC',
+  PublishedAtDesc = 'publishedAt_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC'
+}
+
+export type BudgetUpdateInput = {
+  amount?: InputMaybe<Scalars['Int']>;
+  event?: InputMaybe<EventUpdateOneInlineInput>;
+  isIncome?: InputMaybe<Scalars['Boolean']>;
+  name?: InputMaybe<Scalars['String']>;
+  slug?: InputMaybe<Scalars['String']>;
+};
+
+export type BudgetUpdateManyInlineInput = {
+  /** Connect multiple existing Budget documents */
+  connect?: InputMaybe<Array<BudgetConnectInput>>;
+  /** Create and connect multiple Budget documents */
+  create?: InputMaybe<Array<BudgetCreateInput>>;
+  /** Delete multiple Budget documents */
+  delete?: InputMaybe<Array<BudgetWhereUniqueInput>>;
+  /** Disconnect multiple Budget documents */
+  disconnect?: InputMaybe<Array<BudgetWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing Budget documents */
+  set?: InputMaybe<Array<BudgetWhereUniqueInput>>;
+  /** Update multiple Budget documents */
+  update?: InputMaybe<Array<BudgetUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple Budget documents */
+  upsert?: InputMaybe<Array<BudgetUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type BudgetUpdateManyInput = {
+  amount?: InputMaybe<Scalars['Int']>;
+  isIncome?: InputMaybe<Scalars['Boolean']>;
+  name?: InputMaybe<Scalars['String']>;
+};
+
+export type BudgetUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: BudgetUpdateManyInput;
+  /** Document search */
+  where: BudgetWhereInput;
+};
+
+export type BudgetUpdateOneInlineInput = {
+  /** Connect existing Budget document */
+  connect?: InputMaybe<BudgetWhereUniqueInput>;
+  /** Create and connect one Budget document */
+  create?: InputMaybe<BudgetCreateInput>;
+  /** Delete currently connected Budget document */
+  delete?: InputMaybe<Scalars['Boolean']>;
+  /** Disconnect currently connected Budget document */
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  /** Update single Budget document */
+  update?: InputMaybe<BudgetUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single Budget document */
+  upsert?: InputMaybe<BudgetUpsertWithNestedWhereUniqueInput>;
+};
+
+export type BudgetUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: BudgetUpdateInput;
+  /** Unique document search */
+  where: BudgetWhereUniqueInput;
+};
+
+export type BudgetUpsertInput = {
+  /** Create document if it didn't exist */
+  create: BudgetCreateInput;
+  /** Update document if it exists */
+  update: BudgetUpdateInput;
+};
+
+export type BudgetUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: BudgetUpsertInput;
+  /** Unique document search */
+  where: BudgetWhereUniqueInput;
+};
+
+/** This contains a set of filters that can be used to compare values internally */
+export type BudgetWhereComparatorInput = {
+  /** This field can be used to request to check if the entry is outdated by internal comparison */
+  outdated_to?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Identifies documents */
+export type BudgetWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<BudgetWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<BudgetWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<BudgetWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']>;
+  amount?: InputMaybe<Scalars['Int']>;
+  /** All values greater than the given value. */
+  amount_gt?: InputMaybe<Scalars['Int']>;
+  /** All values greater than or equal the given value. */
+  amount_gte?: InputMaybe<Scalars['Int']>;
+  /** All values that are contained in given list. */
+  amount_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  /** All values less than the given value. */
+  amount_lt?: InputMaybe<Scalars['Int']>;
+  /** All values less than or equal the given value. */
+  amount_lte?: InputMaybe<Scalars['Int']>;
+  /** All values that are not equal to given value. */
+  amount_not?: InputMaybe<Scalars['Int']>;
+  /** All values that are not contained in given list. */
+  amount_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  documentInStages_every?: InputMaybe<BudgetWhereStageInput>;
+  documentInStages_none?: InputMaybe<BudgetWhereStageInput>;
+  documentInStages_some?: InputMaybe<BudgetWhereStageInput>;
+  event?: InputMaybe<EventWhereInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values that are not equal to given value. */
+  id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']>;
+  isIncome?: InputMaybe<Scalars['Boolean']>;
+  /** All values that are not equal to given value. */
+  isIncome_not?: InputMaybe<Scalars['Boolean']>;
+  name?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  name_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  name_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  name_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values that are not equal to given value. */
+  name_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  name_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  name_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  name_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  name_starts_with?: InputMaybe<Scalars['String']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  slug?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  slug_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  slug_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  slug_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values that are not equal to given value. */
+  slug_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  slug_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  slug_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  slug_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  slug_starts_with?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
+export type BudgetWhereStageInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<BudgetWhereStageInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<BudgetWhereStageInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<BudgetWhereStageInput>>;
+  /** This field contains fields which can be set as true or false to specify an internal comparison */
+  compareWithParent?: InputMaybe<BudgetWhereComparatorInput>;
+  /** Specify the stage to compare with */
+  stage?: InputMaybe<Stage>;
+};
+
+/** References Budget record uniquely */
+export type BudgetWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']>;
+  slug?: InputMaybe<Scalars['String']>;
+};
+
 /** Representing a color value comprising of HEX, RGBA and css color values */
 export type Color = {
   __typename?: 'Color';
@@ -1313,6 +1846,7 @@ export type DocumentVersion = {
 
 export type Event = Node & {
   __typename?: 'Event';
+  budgets: Array<Budget>;
   /** The time the document was created */
   createdAt: Scalars['DateTime'];
   /** User that created this document */
@@ -1326,6 +1860,7 @@ export type Event = Node & {
   id: Scalars['ID'];
   image?: Maybe<Asset>;
   name: Scalars['String'];
+  participants?: Maybe<Scalars['Int']>;
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']>;
   /** User that last published this document */
@@ -1335,10 +1870,24 @@ export type Event = Node & {
   /** System stage field */
   stage: Stage;
   stuffs: Array<Stuff>;
+  ticketPrice?: Maybe<Scalars['Int']>;
   /** The time the document was updated */
   updatedAt: Scalars['DateTime'];
   /** User that last updated this document */
   updatedBy?: Maybe<User>;
+};
+
+
+export type EventBudgetsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<BudgetOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<BudgetWhereInput>;
 };
 
 
@@ -1422,12 +1971,15 @@ export type EventConnection = {
 };
 
 export type EventCreateInput = {
+  budgets?: InputMaybe<BudgetCreateManyInlineInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   day?: InputMaybe<Scalars['Date']>;
   image?: InputMaybe<AssetCreateOneInlineInput>;
   name: Scalars['String'];
+  participants?: InputMaybe<Scalars['Int']>;
   slug?: InputMaybe<Scalars['String']>;
   stuffs?: InputMaybe<StuffCreateManyInlineInput>;
+  ticketPrice?: InputMaybe<Scalars['Int']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -1464,6 +2016,9 @@ export type EventManyWhereInput = {
   OR?: InputMaybe<Array<EventWhereInput>>;
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']>;
+  budgets_every?: InputMaybe<BudgetWhereInput>;
+  budgets_none?: InputMaybe<BudgetWhereInput>;
+  budgets_some?: InputMaybe<BudgetWhereInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -1537,6 +2092,21 @@ export type EventManyWhereInput = {
   name_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   name_starts_with?: InputMaybe<Scalars['String']>;
+  participants?: InputMaybe<Scalars['Int']>;
+  /** All values greater than the given value. */
+  participants_gt?: InputMaybe<Scalars['Int']>;
+  /** All values greater than or equal the given value. */
+  participants_gte?: InputMaybe<Scalars['Int']>;
+  /** All values that are contained in given list. */
+  participants_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  /** All values less than the given value. */
+  participants_lt?: InputMaybe<Scalars['Int']>;
+  /** All values less than or equal the given value. */
+  participants_lte?: InputMaybe<Scalars['Int']>;
+  /** All values that are not equal to given value. */
+  participants_not?: InputMaybe<Scalars['Int']>;
+  /** All values that are not contained in given list. */
+  participants_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -1578,6 +2148,21 @@ export type EventManyWhereInput = {
   stuffs_every?: InputMaybe<StuffWhereInput>;
   stuffs_none?: InputMaybe<StuffWhereInput>;
   stuffs_some?: InputMaybe<StuffWhereInput>;
+  ticketPrice?: InputMaybe<Scalars['Int']>;
+  /** All values greater than the given value. */
+  ticketPrice_gt?: InputMaybe<Scalars['Int']>;
+  /** All values greater than or equal the given value. */
+  ticketPrice_gte?: InputMaybe<Scalars['Int']>;
+  /** All values that are contained in given list. */
+  ticketPrice_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  /** All values less than the given value. */
+  ticketPrice_lt?: InputMaybe<Scalars['Int']>;
+  /** All values less than or equal the given value. */
+  ticketPrice_lte?: InputMaybe<Scalars['Int']>;
+  /** All values that are not equal to given value. */
+  ticketPrice_not?: InputMaybe<Scalars['Int']>;
+  /** All values that are not contained in given list. */
+  ticketPrice_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -1605,20 +2190,27 @@ export enum EventOrderByInput {
   IdDesc = 'id_DESC',
   NameAsc = 'name_ASC',
   NameDesc = 'name_DESC',
+  ParticipantsAsc = 'participants_ASC',
+  ParticipantsDesc = 'participants_DESC',
   PublishedAtAsc = 'publishedAt_ASC',
   PublishedAtDesc = 'publishedAt_DESC',
   SlugAsc = 'slug_ASC',
   SlugDesc = 'slug_DESC',
+  TicketPriceAsc = 'ticketPrice_ASC',
+  TicketPriceDesc = 'ticketPrice_DESC',
   UpdatedAtAsc = 'updatedAt_ASC',
   UpdatedAtDesc = 'updatedAt_DESC'
 }
 
 export type EventUpdateInput = {
+  budgets?: InputMaybe<BudgetUpdateManyInlineInput>;
   day?: InputMaybe<Scalars['Date']>;
   image?: InputMaybe<AssetUpdateOneInlineInput>;
   name?: InputMaybe<Scalars['String']>;
+  participants?: InputMaybe<Scalars['Int']>;
   slug?: InputMaybe<Scalars['String']>;
   stuffs?: InputMaybe<StuffUpdateManyInlineInput>;
+  ticketPrice?: InputMaybe<Scalars['Int']>;
 };
 
 export type EventUpdateManyInlineInput = {
@@ -1640,6 +2232,8 @@ export type EventUpdateManyInlineInput = {
 
 export type EventUpdateManyInput = {
   day?: InputMaybe<Scalars['Date']>;
+  participants?: InputMaybe<Scalars['Int']>;
+  ticketPrice?: InputMaybe<Scalars['Int']>;
 };
 
 export type EventUpdateManyWithNestedWhereInput = {
@@ -1701,6 +2295,9 @@ export type EventWhereInput = {
   OR?: InputMaybe<Array<EventWhereInput>>;
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']>;
+  budgets_every?: InputMaybe<BudgetWhereInput>;
+  budgets_none?: InputMaybe<BudgetWhereInput>;
+  budgets_some?: InputMaybe<BudgetWhereInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -1774,6 +2371,21 @@ export type EventWhereInput = {
   name_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   name_starts_with?: InputMaybe<Scalars['String']>;
+  participants?: InputMaybe<Scalars['Int']>;
+  /** All values greater than the given value. */
+  participants_gt?: InputMaybe<Scalars['Int']>;
+  /** All values greater than or equal the given value. */
+  participants_gte?: InputMaybe<Scalars['Int']>;
+  /** All values that are contained in given list. */
+  participants_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  /** All values less than the given value. */
+  participants_lt?: InputMaybe<Scalars['Int']>;
+  /** All values less than or equal the given value. */
+  participants_lte?: InputMaybe<Scalars['Int']>;
+  /** All values that are not equal to given value. */
+  participants_not?: InputMaybe<Scalars['Int']>;
+  /** All values that are not contained in given list. */
+  participants_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -1815,6 +2427,21 @@ export type EventWhereInput = {
   stuffs_every?: InputMaybe<StuffWhereInput>;
   stuffs_none?: InputMaybe<StuffWhereInput>;
   stuffs_some?: InputMaybe<StuffWhereInput>;
+  ticketPrice?: InputMaybe<Scalars['Int']>;
+  /** All values greater than the given value. */
+  ticketPrice_gt?: InputMaybe<Scalars['Int']>;
+  /** All values greater than or equal the given value. */
+  ticketPrice_gte?: InputMaybe<Scalars['Int']>;
+  /** All values that are contained in given list. */
+  ticketPrice_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  /** All values less than the given value. */
+  ticketPrice_lt?: InputMaybe<Scalars['Int']>;
+  /** All values less than or equal the given value. */
+  ticketPrice_lte?: InputMaybe<Scalars['Int']>;
+  /** All values that are not equal to given value. */
+  ticketPrice_not?: InputMaybe<Scalars['Int']>;
+  /** All values that are not contained in given list. */
+  ticketPrice_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -1915,6 +2542,8 @@ export type Mutation = {
    * @deprecated Asset mutations will be overhauled soon
    */
   createAsset?: Maybe<Asset>;
+  /** Create one budget */
+  createBudget?: Maybe<Budget>;
   /** Create one event */
   createEvent?: Maybe<Event>;
   /** Create one scheduledRelease */
@@ -1925,6 +2554,8 @@ export type Mutation = {
   deleteAccount?: Maybe<Account>;
   /** Delete one asset from _all_ existing stages. Returns deleted document. */
   deleteAsset?: Maybe<Asset>;
+  /** Delete one budget from _all_ existing stages. Returns deleted document. */
+  deleteBudget?: Maybe<Budget>;
   /** Delete one event from _all_ existing stages. Returns deleted document. */
   deleteEvent?: Maybe<Event>;
   /**
@@ -1941,6 +2572,13 @@ export type Mutation = {
   deleteManyAssets: BatchPayload;
   /** Delete many Asset documents, return deleted documents */
   deleteManyAssetsConnection: AssetConnection;
+  /**
+   * Delete many Budget documents
+   * @deprecated Please use the new paginated many mutation (deleteManyBudgetsConnection)
+   */
+  deleteManyBudgets: BatchPayload;
+  /** Delete many Budget documents, return deleted documents */
+  deleteManyBudgetsConnection: BudgetConnection;
   /**
    * Delete many Event documents
    * @deprecated Please use the new paginated many mutation (deleteManyEventsConnection)
@@ -1965,6 +2603,8 @@ export type Mutation = {
   publishAccount?: Maybe<Account>;
   /** Publish one asset */
   publishAsset?: Maybe<Asset>;
+  /** Publish one budget */
+  publishBudget?: Maybe<Budget>;
   /** Publish one event */
   publishEvent?: Maybe<Event>;
   /**
@@ -1981,6 +2621,13 @@ export type Mutation = {
   publishManyAssets: BatchPayload;
   /** Publish many Asset documents */
   publishManyAssetsConnection: AssetConnection;
+  /**
+   * Publish many Budget documents
+   * @deprecated Please use the new paginated many mutation (publishManyBudgetsConnection)
+   */
+  publishManyBudgets: BatchPayload;
+  /** Publish many Budget documents */
+  publishManyBudgetsConnection: BudgetConnection;
   /**
    * Publish many Event documents
    * @deprecated Please use the new paginated many mutation (publishManyEventsConnection)
@@ -2001,6 +2648,8 @@ export type Mutation = {
   schedulePublishAccount?: Maybe<Account>;
   /** Schedule to publish one asset */
   schedulePublishAsset?: Maybe<Asset>;
+  /** Schedule to publish one budget */
+  schedulePublishBudget?: Maybe<Budget>;
   /** Schedule to publish one event */
   schedulePublishEvent?: Maybe<Event>;
   /** Schedule to publish one stuff */
@@ -2009,6 +2658,8 @@ export type Mutation = {
   scheduleUnpublishAccount?: Maybe<Account>;
   /** Unpublish one asset from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishAsset?: Maybe<Asset>;
+  /** Unpublish one budget from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  scheduleUnpublishBudget?: Maybe<Budget>;
   /** Unpublish one event from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishEvent?: Maybe<Event>;
   /** Unpublish one stuff from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
@@ -2017,6 +2668,8 @@ export type Mutation = {
   unpublishAccount?: Maybe<Account>;
   /** Unpublish one asset from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishAsset?: Maybe<Asset>;
+  /** Unpublish one budget from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  unpublishBudget?: Maybe<Budget>;
   /** Unpublish one event from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishEvent?: Maybe<Event>;
   /**
@@ -2033,6 +2686,13 @@ export type Mutation = {
   unpublishManyAssets: BatchPayload;
   /** Find many Asset documents that match criteria in specified stage and unpublish from target stages */
   unpublishManyAssetsConnection: AssetConnection;
+  /**
+   * Unpublish many Budget documents
+   * @deprecated Please use the new paginated many mutation (unpublishManyBudgetsConnection)
+   */
+  unpublishManyBudgets: BatchPayload;
+  /** Find many Budget documents that match criteria in specified stage and unpublish from target stages */
+  unpublishManyBudgetsConnection: BudgetConnection;
   /**
    * Unpublish many Event documents
    * @deprecated Please use the new paginated many mutation (unpublishManyEventsConnection)
@@ -2053,6 +2713,8 @@ export type Mutation = {
   updateAccount?: Maybe<Account>;
   /** Update one asset */
   updateAsset?: Maybe<Asset>;
+  /** Update one budget */
+  updateBudget?: Maybe<Budget>;
   /** Update one event */
   updateEvent?: Maybe<Event>;
   /**
@@ -2069,6 +2731,13 @@ export type Mutation = {
   updateManyAssets: BatchPayload;
   /** Update many Asset documents */
   updateManyAssetsConnection: AssetConnection;
+  /**
+   * Update many budgets
+   * @deprecated Please use the new paginated many mutation (updateManyBudgetsConnection)
+   */
+  updateManyBudgets: BatchPayload;
+  /** Update many Budget documents */
+  updateManyBudgetsConnection: BudgetConnection;
   /**
    * Update many events
    * @deprecated Please use the new paginated many mutation (updateManyEventsConnection)
@@ -2091,6 +2760,8 @@ export type Mutation = {
   upsertAccount?: Maybe<Account>;
   /** Upsert one asset */
   upsertAsset?: Maybe<Asset>;
+  /** Upsert one budget */
+  upsertBudget?: Maybe<Budget>;
   /** Upsert one event */
   upsertEvent?: Maybe<Event>;
   /** Upsert one stuff */
@@ -2105,6 +2776,11 @@ export type MutationCreateAccountArgs = {
 
 export type MutationCreateAssetArgs = {
   data: AssetCreateInput;
+};
+
+
+export type MutationCreateBudgetArgs = {
+  data: BudgetCreateInput;
 };
 
 
@@ -2130,6 +2806,11 @@ export type MutationDeleteAccountArgs = {
 
 export type MutationDeleteAssetArgs = {
   where: AssetWhereUniqueInput;
+};
+
+
+export type MutationDeleteBudgetArgs = {
+  where: BudgetWhereUniqueInput;
 };
 
 
@@ -2165,6 +2846,21 @@ export type MutationDeleteManyAssetsConnectionArgs = {
   last?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<AssetManyWhereInput>;
+};
+
+
+export type MutationDeleteManyBudgetsArgs = {
+  where?: InputMaybe<BudgetManyWhereInput>;
+};
+
+
+export type MutationDeleteManyBudgetsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<BudgetManyWhereInput>;
 };
 
 
@@ -2228,6 +2924,12 @@ export type MutationPublishAssetArgs = {
 };
 
 
+export type MutationPublishBudgetArgs = {
+  to?: Array<Stage>;
+  where: BudgetWhereUniqueInput;
+};
+
+
 export type MutationPublishEventArgs = {
   to?: Array<Stage>;
   where: EventWhereUniqueInput;
@@ -2273,6 +2975,24 @@ export type MutationPublishManyAssetsConnectionArgs = {
   to?: Array<Stage>;
   where?: InputMaybe<AssetManyWhereInput>;
   withDefaultLocale?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type MutationPublishManyBudgetsArgs = {
+  to?: Array<Stage>;
+  where?: InputMaybe<BudgetManyWhereInput>;
+};
+
+
+export type MutationPublishManyBudgetsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Stage>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  to?: Array<Stage>;
+  where?: InputMaybe<BudgetManyWhereInput>;
 };
 
 
@@ -2337,6 +3057,14 @@ export type MutationSchedulePublishAssetArgs = {
 };
 
 
+export type MutationSchedulePublishBudgetArgs = {
+  releaseAt?: InputMaybe<Scalars['DateTime']>;
+  releaseId?: InputMaybe<Scalars['String']>;
+  to?: Array<Stage>;
+  where: BudgetWhereUniqueInput;
+};
+
+
 export type MutationSchedulePublishEventArgs = {
   releaseAt?: InputMaybe<Scalars['DateTime']>;
   releaseId?: InputMaybe<Scalars['String']>;
@@ -2371,6 +3099,14 @@ export type MutationScheduleUnpublishAssetArgs = {
 };
 
 
+export type MutationScheduleUnpublishBudgetArgs = {
+  from?: Array<Stage>;
+  releaseAt?: InputMaybe<Scalars['DateTime']>;
+  releaseId?: InputMaybe<Scalars['String']>;
+  where: BudgetWhereUniqueInput;
+};
+
+
 export type MutationScheduleUnpublishEventArgs = {
   from?: Array<Stage>;
   releaseAt?: InputMaybe<Scalars['DateTime']>;
@@ -2398,6 +3134,12 @@ export type MutationUnpublishAssetArgs = {
   locales?: InputMaybe<Array<Locale>>;
   unpublishBase?: InputMaybe<Scalars['Boolean']>;
   where: AssetWhereUniqueInput;
+};
+
+
+export type MutationUnpublishBudgetArgs = {
+  from?: Array<Stage>;
+  where: BudgetWhereUniqueInput;
 };
 
 
@@ -2444,6 +3186,24 @@ export type MutationUnpublishManyAssetsConnectionArgs = {
   stage?: InputMaybe<Stage>;
   unpublishBase?: InputMaybe<Scalars['Boolean']>;
   where?: InputMaybe<AssetManyWhereInput>;
+};
+
+
+export type MutationUnpublishManyBudgetsArgs = {
+  from?: Array<Stage>;
+  where?: InputMaybe<BudgetManyWhereInput>;
+};
+
+
+export type MutationUnpublishManyBudgetsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  from?: Array<Stage>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: InputMaybe<Stage>;
+  where?: InputMaybe<BudgetManyWhereInput>;
 };
 
 
@@ -2501,6 +3261,12 @@ export type MutationUpdateAssetArgs = {
 };
 
 
+export type MutationUpdateBudgetArgs = {
+  data: BudgetUpdateInput;
+  where: BudgetWhereUniqueInput;
+};
+
+
 export type MutationUpdateEventArgs = {
   data: EventUpdateInput;
   where: EventWhereUniqueInput;
@@ -2538,6 +3304,23 @@ export type MutationUpdateManyAssetsConnectionArgs = {
   last?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<AssetManyWhereInput>;
+};
+
+
+export type MutationUpdateManyBudgetsArgs = {
+  data: BudgetUpdateManyInput;
+  where?: InputMaybe<BudgetManyWhereInput>;
+};
+
+
+export type MutationUpdateManyBudgetsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  data: BudgetUpdateManyInput;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<BudgetManyWhereInput>;
 };
 
 
@@ -2596,6 +3379,12 @@ export type MutationUpsertAccountArgs = {
 export type MutationUpsertAssetArgs = {
   upsert: AssetUpsertInput;
   where: AssetWhereUniqueInput;
+};
+
+
+export type MutationUpsertBudgetArgs = {
+  upsert: BudgetUpsertInput;
+  where: BudgetWhereUniqueInput;
 };
 
 
@@ -2658,6 +3447,14 @@ export type Query = {
   assets: Array<Asset>;
   /** Retrieve multiple assets using the Relay connection interface */
   assetsConnection: AssetConnection;
+  /** Retrieve a single budget */
+  budget?: Maybe<Budget>;
+  /** Retrieve document version */
+  budgetVersion?: Maybe<DocumentVersion>;
+  /** Retrieve multiple budgets */
+  budgets: Array<Budget>;
+  /** Retrieve multiple budgets using the Relay connection interface */
+  budgetsConnection: BudgetConnection;
   /** Retrieve a single event */
   event?: Maybe<Event>;
   /** Retrieve document version */
@@ -2770,6 +3567,44 @@ export type QueryAssetsConnectionArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   stage?: Stage;
   where?: InputMaybe<AssetWhereInput>;
+};
+
+
+export type QueryBudgetArgs = {
+  locales?: Array<Locale>;
+  stage?: Stage;
+  where: BudgetWhereUniqueInput;
+};
+
+
+export type QueryBudgetVersionArgs = {
+  where: VersionWhereInput;
+};
+
+
+export type QueryBudgetsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<BudgetOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<BudgetWhereInput>;
+};
+
+
+export type QueryBudgetsConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<BudgetOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<BudgetWhereInput>;
 };
 
 
@@ -3066,7 +3901,7 @@ export type ScheduledOperationUpdatedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
 
-export type ScheduledOperationAffectedDocument = Account | Asset | Event | Stuff;
+export type ScheduledOperationAffectedDocument = Account | Asset | Budget | Event | Stuff;
 
 export type ScheduledOperationConnectInput = {
   /** Allow to specify document position in list of connected documents, will default to appending at end of list */
@@ -4983,7 +5818,7 @@ export type PublishEventMutation = { __typename?: 'Mutation', publishEvent?: { _
 export type GetAllEventsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAllEventsQuery = { __typename?: 'Query', events: Array<{ __typename?: 'Event', id: string, name: string, slug?: string | null, day?: any | null, stuffs: Array<{ __typename?: 'Stuff', id: string, name: string, type?: Stuff_Type | null }> }> };
+export type GetAllEventsQuery = { __typename?: 'Query', events: Array<{ __typename?: 'Event', id: string, name: string, slug?: string | null, day?: any | null, participants?: number | null, ticketPrice?: number | null, stuffs: Array<{ __typename?: 'Stuff', id: string, name: string, type?: Stuff_Type | null }>, image?: { __typename?: 'Asset', id: string, url: string } | null }> };
 
 export type StuffDataFragment = { __typename?: 'Stuff', id: string, name: string, type?: Stuff_Type | null };
 
@@ -4991,6 +5826,13 @@ export type GetAllStuffQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetAllStuffQuery = { __typename?: 'Query', stuffs: Array<{ __typename?: 'Stuff', id: string, name: string, type?: Stuff_Type | null }> };
+
+export type GetEventByIdQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetEventByIdQuery = { __typename?: 'Query', event?: { __typename?: 'Event', createdAt: any, name: string, id: string, day?: any | null, participants?: number | null, ticketPrice?: number | null, stuffs: Array<{ __typename?: 'Stuff', id: string, name: string, type?: Stuff_Type | null }>, image?: { __typename?: 'Asset', url: string } | null, budgets: Array<{ __typename?: 'Budget', id: string, name: string, amount: number, isIncome: boolean }> } | null };
 
 export const StuffDataFragmentDoc = gql`
     fragment StuffData on Stuff {
@@ -5074,8 +5916,14 @@ export const GetAllEventsDocument = gql`
     name
     slug
     day
+    participants
+    ticketPrice
     stuffs {
       ...StuffData
+    }
+    image {
+      id
+      url
     }
   }
 }
@@ -5141,3 +5989,57 @@ export function useGetAllStuffLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type GetAllStuffQueryHookResult = ReturnType<typeof useGetAllStuffQuery>;
 export type GetAllStuffLazyQueryHookResult = ReturnType<typeof useGetAllStuffLazyQuery>;
 export type GetAllStuffQueryResult = Apollo.QueryResult<GetAllStuffQuery, GetAllStuffQueryVariables>;
+export const GetEventByIdDocument = gql`
+    query GetEventById($id: ID!) {
+  event(where: {id: $id}) {
+    createdAt
+    name
+    id
+    day
+    participants
+    ticketPrice
+    stuffs {
+      id
+      name
+      type
+    }
+    image {
+      url
+    }
+    budgets {
+      id
+      name
+      amount
+      isIncome
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetEventByIdQuery__
+ *
+ * To run a query within a React component, call `useGetEventByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetEventByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetEventByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetEventByIdQuery(baseOptions: Apollo.QueryHookOptions<GetEventByIdQuery, GetEventByIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetEventByIdQuery, GetEventByIdQueryVariables>(GetEventByIdDocument, options);
+      }
+export function useGetEventByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetEventByIdQuery, GetEventByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetEventByIdQuery, GetEventByIdQueryVariables>(GetEventByIdDocument, options);
+        }
+export type GetEventByIdQueryHookResult = ReturnType<typeof useGetEventByIdQuery>;
+export type GetEventByIdLazyQueryHookResult = ReturnType<typeof useGetEventByIdLazyQuery>;
+export type GetEventByIdQueryResult = Apollo.QueryResult<GetEventByIdQuery, GetEventByIdQueryVariables>;
