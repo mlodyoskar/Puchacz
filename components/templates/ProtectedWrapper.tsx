@@ -25,7 +25,7 @@ export const ProtectedWrapper = ({
 							width={900}
 							height={900}
 							src="/../public/assets/login.jpg"
-							className="absolute inset-0 h-full w-full object-cover opacity-80"
+							className="absolute inset-0 h-full w-full rounded-sm object-cover opacity-80"
 						/>
 
 						<div className="hidden lg:relative lg:block lg:p-12">
