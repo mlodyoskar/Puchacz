@@ -21,3 +21,23 @@ query GetAllStuff {
 		...StuffData
 	}
 }
+
+query GetEventsSummary {
+	events {
+		id
+		name
+		slug
+		day
+		participants
+		budgets {
+			amount
+			isIncome
+		}
+	}
+}
+
+query GetParticipantsSummary {
+	events(orderBy: publishedAt_DESC) {
+		participants
+	}
+}
