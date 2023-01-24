@@ -1,3 +1,4 @@
+import { Error } from './../../../components/atoms/Input/Input.stories';
 import type { GetParticipantsSummaryQuery } from './../../../generated/graphql';
 import { GetParticipantsSummaryDocument } from './../../../generated/graphql';
 import { authorizedApolloClient } from 'graphql/authorizedClient';
@@ -13,38 +14,42 @@ export interface StatisticsSummary {
 }
 
 const handler: NextApiHandler = async (req, res) => {
-	const {
-		data: { events },
-	} = await authorizedApolloClient.query<GetParticipantsSummaryQuery>({
-		query: GetParticipantsSummaryDocument,
-	});
+	try {
+		const {
+			data: { events },
+		} = await authorizedApolloClient.query<GetParticipantsSummaryQuery>({
+			query: GetParticipantsSummaryDocument,
+		});
 
-	const lastPartyParticipants = events.find(
-		(event) => event.participants !== null
-	);
+		const lastPartyParticipants = events.find(
+			(event) => event.participants !== null
+		);
 
-	const allPartiesParticipants = events.reduce((acc, curr) => {
-		if (curr.participants) {
-			return acc + curr.participants;
-		}
-		return acc + 0;
-	}, 0);
+		const allPartiesParticipants = events.reduce((acc, curr) => {
+			if (curr.participants) {
+				return acc + curr.participants;
+			}
+			return acc + 0;
+		}, 0);
 
-	const summary = [
-		{ name: 'Stan konta', value: '12 496 PLN', type: 'money' },
-		{
-			name: 'Na ostatniej imprezie',
-			value: lastPartyParticipants?.participants,
-			type: 'participants',
-		},
-		{
-			name: 'Osób łącznie',
-			value: allPartiesParticipants,
-			type: 'participants',
-		},
-	];
+		const summary = [
+			{ name: 'Stan konta', value: '12 496 PLN', type: 'money' },
+			{
+				name: 'Na ostatniej imprezie',
+				value: lastPartyParticipants?.participants,
+				type: 'participants',
+			},
+			{
+				name: 'Osób łącznie',
+				value: allPartiesParticipants,
+				type: 'participants',
+			},
+		];
 
-	res.status(200).json({ summary });
+		res.status(200).json({ summary });
+	} catch (error) {
+		res.status(501).json({ error });
+	}
 };
 
 export default handler;
