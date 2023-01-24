@@ -1,18 +1,12 @@
 import UserIcon from 'components/icons/UserIcon.svg';
 import TicketIcon from 'components/icons/TicketIcon.svg';
-interface Budget {
-	participants?: number;
-	ticketPrice?: number;
-	budgets: [
-		{
-			id: string;
-			isIncome: boolean;
-			name: string;
-			amount: number;
-		}
-	];
-}
-export const BudgetDetails = ({
+import type { GetEventByIdQuery } from 'generated/graphql';
+
+type Budget = Pick<
+	NonNullable<GetEventByIdQuery['event']>,
+	'participants' | 'ticketPrice' | 'budgets'
+>;
+export const EventBudgetDetails = ({
 	participants,
 	ticketPrice,
 	budgets,

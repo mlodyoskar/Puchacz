@@ -3,13 +3,13 @@ import Image from 'next/image';
 import { useGetEventByIdQuery } from 'generated/graphql';
 import { Typography } from 'components/atoms/Typography/Typography';
 import { useState } from 'react';
-import { EventDetails } from 'components/templates/events/eventDetails';
-import { BudgetDetails } from 'components/templates/events/budgetDetails';
+import { EventDetailsSummary } from 'components/templates/events/eventDetails';
+import { EventBudgetDetails } from 'components/templates/events/budgetDetails';
 
 const RenderPage = ({ viewProps, data }: { viewProps: string; data: any }) => {
 	if (viewProps === 'event') {
 		return (
-			<EventDetails
+			<EventDetailsSummary
 				name={data?.event?.name}
 				day={data?.event?.day}
 				createdAt={data?.event?.createdAt}
@@ -18,7 +18,7 @@ const RenderPage = ({ viewProps, data }: { viewProps: string; data: any }) => {
 		);
 	}
 	return (
-		<BudgetDetails
+		<EventBudgetDetails
 			participants={data?.event?.participants}
 			ticketPrice={data?.event?.ticketPrice}
 			budgets={data?.event?.budgets}

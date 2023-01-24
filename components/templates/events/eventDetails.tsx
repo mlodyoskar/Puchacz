@@ -1,18 +1,18 @@
-import Camera from 'components/icons/Camera.svg';
-import Star from 'components/icons/Star.svg';
-interface Event {
-	name?: string;
-	day: string;
-	createdAt: string;
-	stuffs: [
-		{
-			id: string;
-			type: string;
-			name: string;
-		}
-	];
-}
-export const EventDetails = ({ name, day, createdAt, stuffs }: Event) => {
+import CameraIcon from 'components/icons/CameraIcon.svg';
+import StarIcon from 'components/icons/StarIcon.svg';
+import type { GetEventByIdQuery } from 'generated/graphql';
+
+type Event = Pick<
+	NonNullable<GetEventByIdQuery['event']>,
+	'name' | 'day' | 'createdAt' | 'stuffs'
+>;
+
+export const EventDetailsSummary = ({
+	name,
+	day,
+	createdAt,
+	stuffs,
+}: Event) => {
 	return (
 		<div className="mx-auto mt-6 max-w-5xl px-4 sm:px-6 lg:px-8">
 			<dl className="grid grid-cols-2 gap-x-4 gap-y-8">
@@ -34,9 +34,9 @@ export const EventDetails = ({ name, day, createdAt, stuffs }: Event) => {
 							key={stuff.id}
 						>
 							{stuff.type === 'photograph' ? (
-								<Camera className="mt-1 mr-1 h-4 w-4" aria-hidden="true" />
+								<CameraIcon className="mt-1 mr-1 h-4 w-4" aria-hidden="true" />
 							) : (
-								<Star className="mt-1 mr-1 h-4 w-4" aria-hidden="true" />
+								<StarIcon className="mt-1 mr-1 h-4 w-4" aria-hidden="true" />
 							)}
 							{stuff.name}
 						</dd>
