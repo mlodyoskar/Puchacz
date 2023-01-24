@@ -4,7 +4,7 @@ interface Event {
 	name?: string;
 	day: string;
 	createdAt: string;
-	stuffs?: [
+	stuffs: [
 		{
 			id: string;
 			type: string;

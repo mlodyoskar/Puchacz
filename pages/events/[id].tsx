@@ -6,31 +6,32 @@ import { useState } from 'react';
 import { EventDetails } from 'components/templates/events/eventDetails';
 import { BudgetDetails } from 'components/templates/events/budgetDetails';
 
+const RenderPage = ({ viewProps, data }: { viewProps: string; data: any }) => {
+	if (viewProps === 'event') {
+		return (
+			<EventDetails
+				name={data?.event?.name}
+				day={data?.event?.day}
+				createdAt={data?.event?.createdAt}
+				stuffs={data?.event?.stuffs}
+			/>
+		);
+	}
+	return (
+		<BudgetDetails
+			participants={data?.event?.participants}
+			ticketPrice={data?.event?.ticketPrice}
+			budgets={data?.event?.budgets}
+		/>
+	);
+};
 const EventDetailsPage = () => {
 	const router = useRouter();
 	const id = router.query.id as string;
 	const { data, loading } = useGetEventByIdQuery({ variables: { id } });
 	type View = 'event' | 'budget';
 	const [view, setView] = useState<View>('event');
-	function RenderPage({ viewProps }: { viewProps: string }) {
-		if (viewProps === 'event') {
-			return (
-				<EventDetails
-					name={data?.event?.name}
-					day={data?.event?.day}
-					createdAt={data?.event?.createdAt}
-					stuffs={data?.event?.stuffs}
-				/>
-			);
-		}
-		return (
-			<BudgetDetails
-				participants={data?.event?.participants}
-				ticketPrice={data?.event?.ticketPrice}
-				budgets={data?.event?.budgets}
-			/>
-		);
-	}
+
 	if (loading) {
 		return (
 			<div>
@@ -95,7 +96,7 @@ const EventDetailsPage = () => {
 					</div>
 				</div>
 
-				<RenderPage viewProps={view} />
+				<RenderPage viewProps={view} data={data} />
 			</div>
 		</div>
 	);
