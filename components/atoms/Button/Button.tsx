@@ -9,6 +9,7 @@ interface Props {
 	variant?: Variants;
 	fullWidth?: boolean;
 	disabled?: boolean;
+	onClick?: () => void;
 }
 
 export const Button = ({
@@ -17,9 +18,11 @@ export const Button = ({
 	size = 'medium',
 	fullWidth = false,
 	disabled = false,
+	onClick,
 }: Props) => {
 	return (
 		<button
+			onClick={onClick}
 			disabled={disabled}
 			className={cx(
 				{

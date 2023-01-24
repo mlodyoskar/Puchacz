@@ -25,7 +25,6 @@ export type Scalars = {
 
 export type Account = Node & {
   __typename?: 'Account';
-  avatar?: Maybe<Asset>;
   /** The time the document was created */
   createdAt: Scalars['DateTime'];
   /** User that created this document */
@@ -49,12 +48,6 @@ export type Account = Node & {
   updatedAt: Scalars['DateTime'];
   /** User that last updated this document */
   updatedBy?: Maybe<User>;
-};
-
-
-export type AccountAvatarArgs = {
-  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
-  locales?: InputMaybe<Array<Locale>>;
 };
 
 
@@ -119,7 +112,6 @@ export type AccountConnection = {
 };
 
 export type AccountCreateInput = {
-  avatar?: InputMaybe<AssetCreateOneInlineInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   password: Scalars['String'];
@@ -159,7 +151,6 @@ export type AccountManyWhereInput = {
   OR?: InputMaybe<Array<AccountWhereInput>>;
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']>;
-  avatar?: InputMaybe<AssetWhereInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -289,7 +280,6 @@ export enum AccountOrderByInput {
 }
 
 export type AccountUpdateInput = {
-  avatar?: InputMaybe<AssetUpdateOneInlineInput>;
   email?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
 };
@@ -374,7 +364,6 @@ export type AccountWhereInput = {
   OR?: InputMaybe<Array<AccountWhereInput>>;
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']>;
-  avatar?: InputMaybe<AssetWhereInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -516,7 +505,6 @@ export type Aggregate = {
 /** Asset system model */
 export type Asset = Node & {
   __typename?: 'Asset';
-  avatarAccount: Array<Account>;
   /** The time the document was created */
   createdAt: Scalars['DateTime'];
   /** User that created this document */
@@ -557,20 +545,6 @@ export type Asset = Node & {
   url: Scalars['String'];
   /** The file width */
   width?: Maybe<Scalars['Float']>;
-};
-
-
-/** Asset system model */
-export type AssetAvatarAccountArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  before?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
-  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
-  last?: InputMaybe<Scalars['Int']>;
-  locales?: InputMaybe<Array<Locale>>;
-  orderBy?: InputMaybe<AccountOrderByInput>;
-  skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<AccountWhereInput>;
 };
 
 
@@ -686,7 +660,6 @@ export type AssetConnection = {
 };
 
 export type AssetCreateInput = {
-  avatarAccount?: InputMaybe<AccountCreateManyInlineInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   fileName: Scalars['String'];
   handle: Scalars['String'];
@@ -755,9 +728,6 @@ export type AssetManyWhereInput = {
   OR?: InputMaybe<Array<AssetWhereInput>>;
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']>;
-  avatarAccount_every?: InputMaybe<AccountWhereInput>;
-  avatarAccount_none?: InputMaybe<AccountWhereInput>;
-  avatarAccount_some?: InputMaybe<AccountWhereInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -868,7 +838,6 @@ export type AssetTransformationInput = {
 };
 
 export type AssetUpdateInput = {
-  avatarAccount?: InputMaybe<AccountUpdateManyInlineInput>;
   fileName?: InputMaybe<Scalars['String']>;
   handle?: InputMaybe<Scalars['String']>;
   height?: InputMaybe<Scalars['Float']>;
@@ -1014,9 +983,6 @@ export type AssetWhereInput = {
   OR?: InputMaybe<Array<AssetWhereInput>>;
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']>;
-  avatarAccount_every?: InputMaybe<AccountWhereInput>;
-  avatarAccount_none?: InputMaybe<AccountWhereInput>;
-  avatarAccount_some?: InputMaybe<AccountWhereInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -1237,7 +1203,7 @@ export type Budget = Node & {
   /** The unique identifier */
   id: Scalars['ID'];
   isIncome: Scalars['Boolean'];
-  name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']>;
   /** User that last published this document */
@@ -1324,7 +1290,7 @@ export type BudgetCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   event?: InputMaybe<EventCreateOneInlineInput>;
   isIncome: Scalars['Boolean'];
-  name?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
   slug?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
@@ -2533,6 +2499,396 @@ export type LocationInput = {
   longitude: Scalars['Float'];
 };
 
+export type Log = Node & {
+  __typename?: 'Log';
+  /** The time the document was created */
+  createdAt: Scalars['DateTime'];
+  /** User that created this document */
+  createdBy?: Maybe<User>;
+  /** Get the document in other stages */
+  documentInStages: Array<Log>;
+  /** List of Log versions */
+  history: Array<Version>;
+  /** The unique identifier */
+  id: Scalars['ID'];
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  /** User that last published this document */
+  publishedBy?: Maybe<User>;
+  scheduledIn: Array<ScheduledOperation>;
+  /** System stage field */
+  stage: Stage;
+  /** The time the document was updated */
+  updatedAt: Scalars['DateTime'];
+  /** User that last updated this document */
+  updatedBy?: Maybe<User>;
+};
+
+
+export type LogCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type LogDocumentInStagesArgs = {
+  includeCurrent?: Scalars['Boolean'];
+  inheritLocale?: Scalars['Boolean'];
+  stages?: Array<Stage>;
+};
+
+
+export type LogHistoryArgs = {
+  limit?: Scalars['Int'];
+  skip?: Scalars['Int'];
+  stageOverride?: InputMaybe<Stage>;
+};
+
+
+export type LogPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type LogScheduledInArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ScheduledOperationWhereInput>;
+};
+
+
+export type LogUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+export type LogConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: LogWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type LogConnection = {
+  __typename?: 'LogConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<LogEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type LogCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type LogCreateManyInlineInput = {
+  /** Connect multiple existing Log documents */
+  connect?: InputMaybe<Array<LogWhereUniqueInput>>;
+  /** Create and connect multiple existing Log documents */
+  create?: InputMaybe<Array<LogCreateInput>>;
+};
+
+export type LogCreateOneInlineInput = {
+  /** Connect one existing Log document */
+  connect?: InputMaybe<LogWhereUniqueInput>;
+  /** Create and connect one Log document */
+  create?: InputMaybe<LogCreateInput>;
+};
+
+/** An edge in a connection. */
+export type LogEdge = {
+  __typename?: 'LogEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  node: Log;
+};
+
+/** Identifies documents */
+export type LogManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<LogWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<LogWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<LogWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  documentInStages_every?: InputMaybe<LogWhereStageInput>;
+  documentInStages_none?: InputMaybe<LogWhereStageInput>;
+  documentInStages_some?: InputMaybe<LogWhereStageInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values that are not equal to given value. */
+  id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+export enum LogOrderByInput {
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  PublishedAtAsc = 'publishedAt_ASC',
+  PublishedAtDesc = 'publishedAt_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC'
+}
+
+export type LogUpdateInput = {
+  /** No fields in update input */
+  _?: InputMaybe<Scalars['String']>;
+};
+
+export type LogUpdateManyInlineInput = {
+  /** Connect multiple existing Log documents */
+  connect?: InputMaybe<Array<LogConnectInput>>;
+  /** Create and connect multiple Log documents */
+  create?: InputMaybe<Array<LogCreateInput>>;
+  /** Delete multiple Log documents */
+  delete?: InputMaybe<Array<LogWhereUniqueInput>>;
+  /** Disconnect multiple Log documents */
+  disconnect?: InputMaybe<Array<LogWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing Log documents */
+  set?: InputMaybe<Array<LogWhereUniqueInput>>;
+  /** Update multiple Log documents */
+  update?: InputMaybe<Array<LogUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple Log documents */
+  upsert?: InputMaybe<Array<LogUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type LogUpdateManyInput = {
+  /** No fields in updateMany data input */
+  _?: InputMaybe<Scalars['String']>;
+};
+
+export type LogUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: LogUpdateManyInput;
+  /** Document search */
+  where: LogWhereInput;
+};
+
+export type LogUpdateOneInlineInput = {
+  /** Connect existing Log document */
+  connect?: InputMaybe<LogWhereUniqueInput>;
+  /** Create and connect one Log document */
+  create?: InputMaybe<LogCreateInput>;
+  /** Delete currently connected Log document */
+  delete?: InputMaybe<Scalars['Boolean']>;
+  /** Disconnect currently connected Log document */
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  /** Update single Log document */
+  update?: InputMaybe<LogUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single Log document */
+  upsert?: InputMaybe<LogUpsertWithNestedWhereUniqueInput>;
+};
+
+export type LogUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: LogUpdateInput;
+  /** Unique document search */
+  where: LogWhereUniqueInput;
+};
+
+export type LogUpsertInput = {
+  /** Create document if it didn't exist */
+  create: LogCreateInput;
+  /** Update document if it exists */
+  update: LogUpdateInput;
+};
+
+export type LogUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: LogUpsertInput;
+  /** Unique document search */
+  where: LogWhereUniqueInput;
+};
+
+/** This contains a set of filters that can be used to compare values internally */
+export type LogWhereComparatorInput = {
+  /** This field can be used to request to check if the entry is outdated by internal comparison */
+  outdated_to?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Identifies documents */
+export type LogWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<LogWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<LogWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<LogWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  documentInStages_every?: InputMaybe<LogWhereStageInput>;
+  documentInStages_none?: InputMaybe<LogWhereStageInput>;
+  documentInStages_some?: InputMaybe<LogWhereStageInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values that are not equal to given value. */
+  id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
+export type LogWhereStageInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<LogWhereStageInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<LogWhereStageInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<LogWhereStageInput>>;
+  /** This field contains fields which can be set as true or false to specify an internal comparison */
+  compareWithParent?: InputMaybe<LogWhereComparatorInput>;
+  /** Specify the stage to compare with */
+  stage?: InputMaybe<Stage>;
+};
+
+/** References Log record uniquely */
+export type LogWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   /** Create one account */
@@ -2546,6 +2902,8 @@ export type Mutation = {
   createBudget?: Maybe<Budget>;
   /** Create one event */
   createEvent?: Maybe<Event>;
+  /** Create one log */
+  createLog?: Maybe<Log>;
   /** Create one scheduledRelease */
   createScheduledRelease?: Maybe<ScheduledRelease>;
   /** Create one stuff */
@@ -2558,6 +2916,8 @@ export type Mutation = {
   deleteBudget?: Maybe<Budget>;
   /** Delete one event from _all_ existing stages. Returns deleted document. */
   deleteEvent?: Maybe<Event>;
+  /** Delete one log from _all_ existing stages. Returns deleted document. */
+  deleteLog?: Maybe<Log>;
   /**
    * Delete many Account documents
    * @deprecated Please use the new paginated many mutation (deleteManyAccountsConnection)
@@ -2587,6 +2947,13 @@ export type Mutation = {
   /** Delete many Event documents, return deleted documents */
   deleteManyEventsConnection: EventConnection;
   /**
+   * Delete many Log documents
+   * @deprecated Please use the new paginated many mutation (deleteManyLogsConnection)
+   */
+  deleteManyLogs: BatchPayload;
+  /** Delete many Log documents, return deleted documents */
+  deleteManyLogsConnection: LogConnection;
+  /**
    * Delete many Stuff documents
    * @deprecated Please use the new paginated many mutation (deleteManyStuffsConnection)
    */
@@ -2607,6 +2974,8 @@ export type Mutation = {
   publishBudget?: Maybe<Budget>;
   /** Publish one event */
   publishEvent?: Maybe<Event>;
+  /** Publish one log */
+  publishLog?: Maybe<Log>;
   /**
    * Publish many Account documents
    * @deprecated Please use the new paginated many mutation (publishManyAccountsConnection)
@@ -2636,6 +3005,13 @@ export type Mutation = {
   /** Publish many Event documents */
   publishManyEventsConnection: EventConnection;
   /**
+   * Publish many Log documents
+   * @deprecated Please use the new paginated many mutation (publishManyLogsConnection)
+   */
+  publishManyLogs: BatchPayload;
+  /** Publish many Log documents */
+  publishManyLogsConnection: LogConnection;
+  /**
    * Publish many Stuff documents
    * @deprecated Please use the new paginated many mutation (publishManyStuffsConnection)
    */
@@ -2652,6 +3028,8 @@ export type Mutation = {
   schedulePublishBudget?: Maybe<Budget>;
   /** Schedule to publish one event */
   schedulePublishEvent?: Maybe<Event>;
+  /** Schedule to publish one log */
+  schedulePublishLog?: Maybe<Log>;
   /** Schedule to publish one stuff */
   schedulePublishStuff?: Maybe<Stuff>;
   /** Unpublish one account from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
@@ -2662,6 +3040,8 @@ export type Mutation = {
   scheduleUnpublishBudget?: Maybe<Budget>;
   /** Unpublish one event from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishEvent?: Maybe<Event>;
+  /** Unpublish one log from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  scheduleUnpublishLog?: Maybe<Log>;
   /** Unpublish one stuff from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishStuff?: Maybe<Stuff>;
   /** Unpublish one account from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
@@ -2672,6 +3052,8 @@ export type Mutation = {
   unpublishBudget?: Maybe<Budget>;
   /** Unpublish one event from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishEvent?: Maybe<Event>;
+  /** Unpublish one log from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  unpublishLog?: Maybe<Log>;
   /**
    * Unpublish many Account documents
    * @deprecated Please use the new paginated many mutation (unpublishManyAccountsConnection)
@@ -2701,6 +3083,13 @@ export type Mutation = {
   /** Find many Event documents that match criteria in specified stage and unpublish from target stages */
   unpublishManyEventsConnection: EventConnection;
   /**
+   * Unpublish many Log documents
+   * @deprecated Please use the new paginated many mutation (unpublishManyLogsConnection)
+   */
+  unpublishManyLogs: BatchPayload;
+  /** Find many Log documents that match criteria in specified stage and unpublish from target stages */
+  unpublishManyLogsConnection: LogConnection;
+  /**
    * Unpublish many Stuff documents
    * @deprecated Please use the new paginated many mutation (unpublishManyStuffsConnection)
    */
@@ -2717,6 +3106,8 @@ export type Mutation = {
   updateBudget?: Maybe<Budget>;
   /** Update one event */
   updateEvent?: Maybe<Event>;
+  /** Update one log */
+  updateLog?: Maybe<Log>;
   /**
    * Update many accounts
    * @deprecated Please use the new paginated many mutation (updateManyAccountsConnection)
@@ -2746,6 +3137,13 @@ export type Mutation = {
   /** Update many Event documents */
   updateManyEventsConnection: EventConnection;
   /**
+   * Update many logs
+   * @deprecated Please use the new paginated many mutation (updateManyLogsConnection)
+   */
+  updateManyLogs: BatchPayload;
+  /** Update many Log documents */
+  updateManyLogsConnection: LogConnection;
+  /**
    * Update many stuffs
    * @deprecated Please use the new paginated many mutation (updateManyStuffsConnection)
    */
@@ -2764,6 +3162,8 @@ export type Mutation = {
   upsertBudget?: Maybe<Budget>;
   /** Upsert one event */
   upsertEvent?: Maybe<Event>;
+  /** Upsert one log */
+  upsertLog?: Maybe<Log>;
   /** Upsert one stuff */
   upsertStuff?: Maybe<Stuff>;
 };
@@ -2786,6 +3186,11 @@ export type MutationCreateBudgetArgs = {
 
 export type MutationCreateEventArgs = {
   data: EventCreateInput;
+};
+
+
+export type MutationCreateLogArgs = {
+  data: LogCreateInput;
 };
 
 
@@ -2816,6 +3221,11 @@ export type MutationDeleteBudgetArgs = {
 
 export type MutationDeleteEventArgs = {
   where: EventWhereUniqueInput;
+};
+
+
+export type MutationDeleteLogArgs = {
+  where: LogWhereUniqueInput;
 };
 
 
@@ -2879,6 +3289,21 @@ export type MutationDeleteManyEventsConnectionArgs = {
 };
 
 
+export type MutationDeleteManyLogsArgs = {
+  where?: InputMaybe<LogManyWhereInput>;
+};
+
+
+export type MutationDeleteManyLogsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<LogManyWhereInput>;
+};
+
+
 export type MutationDeleteManyStuffsArgs = {
   where?: InputMaybe<StuffManyWhereInput>;
 };
@@ -2933,6 +3358,12 @@ export type MutationPublishBudgetArgs = {
 export type MutationPublishEventArgs = {
   to?: Array<Stage>;
   where: EventWhereUniqueInput;
+};
+
+
+export type MutationPublishLogArgs = {
+  to?: Array<Stage>;
+  where: LogWhereUniqueInput;
 };
 
 
@@ -3014,6 +3445,24 @@ export type MutationPublishManyEventsConnectionArgs = {
 };
 
 
+export type MutationPublishManyLogsArgs = {
+  to?: Array<Stage>;
+  where?: InputMaybe<LogManyWhereInput>;
+};
+
+
+export type MutationPublishManyLogsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Stage>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  to?: Array<Stage>;
+  where?: InputMaybe<LogManyWhereInput>;
+};
+
+
 export type MutationPublishManyStuffsArgs = {
   to?: Array<Stage>;
   where?: InputMaybe<StuffManyWhereInput>;
@@ -3073,6 +3522,14 @@ export type MutationSchedulePublishEventArgs = {
 };
 
 
+export type MutationSchedulePublishLogArgs = {
+  releaseAt?: InputMaybe<Scalars['DateTime']>;
+  releaseId?: InputMaybe<Scalars['String']>;
+  to?: Array<Stage>;
+  where: LogWhereUniqueInput;
+};
+
+
 export type MutationSchedulePublishStuffArgs = {
   releaseAt?: InputMaybe<Scalars['DateTime']>;
   releaseId?: InputMaybe<Scalars['String']>;
@@ -3115,6 +3572,14 @@ export type MutationScheduleUnpublishEventArgs = {
 };
 
 
+export type MutationScheduleUnpublishLogArgs = {
+  from?: Array<Stage>;
+  releaseAt?: InputMaybe<Scalars['DateTime']>;
+  releaseId?: InputMaybe<Scalars['String']>;
+  where: LogWhereUniqueInput;
+};
+
+
 export type MutationScheduleUnpublishStuffArgs = {
   from?: Array<Stage>;
   releaseAt?: InputMaybe<Scalars['DateTime']>;
@@ -3146,6 +3611,12 @@ export type MutationUnpublishBudgetArgs = {
 export type MutationUnpublishEventArgs = {
   from?: Array<Stage>;
   where: EventWhereUniqueInput;
+};
+
+
+export type MutationUnpublishLogArgs = {
+  from?: Array<Stage>;
+  where: LogWhereUniqueInput;
 };
 
 
@@ -3225,6 +3696,24 @@ export type MutationUnpublishManyEventsConnectionArgs = {
 };
 
 
+export type MutationUnpublishManyLogsArgs = {
+  from?: Array<Stage>;
+  where?: InputMaybe<LogManyWhereInput>;
+};
+
+
+export type MutationUnpublishManyLogsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  from?: Array<Stage>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: InputMaybe<Stage>;
+  where?: InputMaybe<LogManyWhereInput>;
+};
+
+
 export type MutationUnpublishManyStuffsArgs = {
   from?: Array<Stage>;
   where?: InputMaybe<StuffManyWhereInput>;
@@ -3270,6 +3759,12 @@ export type MutationUpdateBudgetArgs = {
 export type MutationUpdateEventArgs = {
   data: EventUpdateInput;
   where: EventWhereUniqueInput;
+};
+
+
+export type MutationUpdateLogArgs = {
+  data: LogUpdateInput;
+  where: LogWhereUniqueInput;
 };
 
 
@@ -3341,6 +3836,23 @@ export type MutationUpdateManyEventsConnectionArgs = {
 };
 
 
+export type MutationUpdateManyLogsArgs = {
+  data: LogUpdateManyInput;
+  where?: InputMaybe<LogManyWhereInput>;
+};
+
+
+export type MutationUpdateManyLogsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  data: LogUpdateManyInput;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<LogManyWhereInput>;
+};
+
+
 export type MutationUpdateManyStuffsArgs = {
   data: StuffUpdateManyInput;
   where?: InputMaybe<StuffManyWhereInput>;
@@ -3391,6 +3903,12 @@ export type MutationUpsertBudgetArgs = {
 export type MutationUpsertEventArgs = {
   upsert: EventUpsertInput;
   where: EventWhereUniqueInput;
+};
+
+
+export type MutationUpsertLogArgs = {
+  upsert: LogUpsertInput;
+  where: LogWhereUniqueInput;
 };
 
 
@@ -3463,6 +3981,14 @@ export type Query = {
   events: Array<Event>;
   /** Retrieve multiple events using the Relay connection interface */
   eventsConnection: EventConnection;
+  /** Retrieve a single log */
+  log?: Maybe<Log>;
+  /** Retrieve document version */
+  logVersion?: Maybe<DocumentVersion>;
+  /** Retrieve multiple logs */
+  logs: Array<Log>;
+  /** Retrieve multiple logs using the Relay connection interface */
+  logsConnection: LogConnection;
   /** Fetches an object given its ID */
   node?: Maybe<Node>;
   /** Retrieve a single scheduledOperation */
@@ -3643,6 +4169,44 @@ export type QueryEventsConnectionArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   stage?: Stage;
   where?: InputMaybe<EventWhereInput>;
+};
+
+
+export type QueryLogArgs = {
+  locales?: Array<Locale>;
+  stage?: Stage;
+  where: LogWhereUniqueInput;
+};
+
+
+export type QueryLogVersionArgs = {
+  where: VersionWhereInput;
+};
+
+
+export type QueryLogsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<LogOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<LogWhereInput>;
+};
+
+
+export type QueryLogsConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<LogOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<LogWhereInput>;
 };
 
 
@@ -3901,7 +4465,7 @@ export type ScheduledOperationUpdatedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
 
-export type ScheduledOperationAffectedDocument = Account | Asset | Budget | Event | Stuff;
+export type ScheduledOperationAffectedDocument = Account | Asset | Budget | Event | Log | Stuff;
 
 export type ScheduledOperationConnectInput = {
   /** Allow to specify document position in list of connected documents, will default to appending at end of list */
@@ -5837,6 +6401,13 @@ export type GetParticipantsSummaryQueryVariables = Exact<{ [key: string]: never;
 
 export type GetParticipantsSummaryQuery = { __typename?: 'Query', events: Array<{ __typename?: 'Event', participants?: number | null }> };
 
+export type GetAccountByEmailQueryVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type GetAccountByEmailQuery = { __typename?: 'Query', account?: { __typename?: 'Account', id: string, email: string, password: string } | null };
+
 export const StuffDataFragmentDoc = gql`
     fragment StuffData on Stuff {
   id
@@ -6062,3 +6633,40 @@ export function useGetParticipantsSummaryLazyQuery(baseOptions?: Apollo.LazyQuer
 export type GetParticipantsSummaryQueryHookResult = ReturnType<typeof useGetParticipantsSummaryQuery>;
 export type GetParticipantsSummaryLazyQueryHookResult = ReturnType<typeof useGetParticipantsSummaryLazyQuery>;
 export type GetParticipantsSummaryQueryResult = Apollo.QueryResult<GetParticipantsSummaryQuery, GetParticipantsSummaryQueryVariables>;
+export const GetAccountByEmailDocument = gql`
+    query GetAccountByEmail($email: String!) {
+  account(where: {email: $email}) {
+    id
+    email
+    password
+  }
+}
+    `;
+
+/**
+ * __useGetAccountByEmailQuery__
+ *
+ * To run a query within a React component, call `useGetAccountByEmailQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAccountByEmailQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAccountByEmailQuery({
+ *   variables: {
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useGetAccountByEmailQuery(baseOptions: Apollo.QueryHookOptions<GetAccountByEmailQuery, GetAccountByEmailQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAccountByEmailQuery, GetAccountByEmailQueryVariables>(GetAccountByEmailDocument, options);
+      }
+export function useGetAccountByEmailLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAccountByEmailQuery, GetAccountByEmailQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAccountByEmailQuery, GetAccountByEmailQueryVariables>(GetAccountByEmailDocument, options);
+        }
+export type GetAccountByEmailQueryHookResult = ReturnType<typeof useGetAccountByEmailQuery>;
+export type GetAccountByEmailLazyQueryHookResult = ReturnType<typeof useGetAccountByEmailLazyQuery>;
+export type GetAccountByEmailQueryResult = Apollo.QueryResult<GetAccountByEmailQuery, GetAccountByEmailQueryVariables>;

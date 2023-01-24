@@ -10,13 +10,14 @@ import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Open_Sans } from '@next/font/google';
+import { signOut } from 'next-auth/react';
 
 const openSans = Open_Sans({ subsets: ['latin'] });
 
 const userNavigation = [
 	{ name: 'Your Profile', href: '#' },
 	{ name: 'Settings', href: '#' },
-	{ name: 'Sign out', href: '#' },
+	{ name: 'Wyloguj się', onClick: () => signOut() },
 ];
 
 const sidebarItems = [
@@ -232,19 +233,31 @@ export const Sidebar = ({ children }: Props) => {
 										leaveTo="transform opacity-0 scale-95"
 									>
 										<Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-											{userNavigation.map((item) => (
-												<Menu.Item key={item.name}>
-													{({ active }) => (
-														<a
-															href={item.href}
-															className={clsx(
-																active ? 'bg-gray-100' : '',
-																'block px-4 py-2 text-sm text-gray-700'
-															)}
-														>
-															{item.name}
-														</a>
-													)}
+											{userNavigation.map(({ name, href, onClick }) => (
+												<Menu.Item key={name}>
+													{({ active }) =>
+														href ? (
+															<Link
+																href={href}
+																className={clsx(
+																	active ? 'bg-gray-100' : '',
+																	'block px-4 py-2 text-sm text-gray-700'
+																)}
+															>
+																{name}
+															</Link>
+														) : (
+															<button
+																onClick={onClick}
+																className={clsx(
+																	active ? 'bg-gray-100' : '',
+																	'w-full px-4 py-2 text-start text-sm text-gray-700'
+																)}
+															>
+																{name}
+															</button>
+														)
+													}
 												</Menu.Item>
 											))}
 										</Menu.Items>
