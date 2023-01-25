@@ -11,15 +11,15 @@ const LoginForm = z.object({
 	password: z.string().min(1),
 });
 
-export const ProtectedWrapper = ({
-	children,
-}: {
+interface Props {
 	children: React.ReactNode;
-}) => {
+}
+
+export const ProtectedWrapper = ({ children }: Props) => {
 	const { data: session, status } = useSession();
 	const { register, handleSubmit } = useZodForm({ schema: LoginForm });
 	const [errorLoginMessage, setErrorLoginMessage] = useState<
-		string | undefined
+		'Podano błędne dane logowania' | undefined
 	>(undefined);
 
 	interface onSubmit {

@@ -12,7 +12,6 @@ import { CardPlaceholder } from 'components/molecules/Card/CardPlaceholder';
 import { TableRowPlaceholder } from 'components/molecules/TableRow/TableRowPlaceholder';
 import type { StatisticsParties } from './api/statistics/parties';
 import Link from 'next/link';
-import { useSession } from 'next-auth/react';
 
 const useGetStatisticsSummary = () => {
 	return useQuery({
