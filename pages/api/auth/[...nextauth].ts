@@ -21,9 +21,6 @@ export const authOptions = {
 			},
 
 			async authorize(credentials, req) {
-				console.log('Username', credentials?.username);
-				console.log('Password', credentials?.password);
-
 				if (!credentials) {
 					return null;
 				}
@@ -40,16 +37,15 @@ export const authOptions = {
 					return null;
 				}
 
+				// We dont hash passwords as for now
+
 				// const arePasswordsEqual = await compare(
 				// 	credentials.password,
 				// 	user.data.account.password
 				// );
 
-				// We dont hash passwords as for now
 				const arePasswordsEqual =
 					credentials.password === user.data.account.password;
-
-				console.log('arePasswordsEqual', arePasswordsEqual);
 
 				if (!arePasswordsEqual) {
 					return null;

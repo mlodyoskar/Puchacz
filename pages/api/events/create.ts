@@ -38,8 +38,6 @@ const handler: NextApiHandler = async (req, res) => {
 
 	const id = data?.createEvent?.id;
 	if (!id) {
-		console.log(errors);
-
 		res.status(500).json({ error: 'Wystąpił błąd przy tworzeniu eventu' });
 		return;
 	}
