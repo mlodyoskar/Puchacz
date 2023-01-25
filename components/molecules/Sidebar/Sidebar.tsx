@@ -14,11 +14,7 @@ import { signOut } from 'next-auth/react';
 
 const openSans = Open_Sans({ subsets: ['latin'] });
 
-const userNavigation = [
-	{ name: 'Your Profile', href: '#' },
-	{ name: 'Settings', href: '#' },
-	{ name: 'Wyloguj się', onClick: () => signOut() },
-];
+const userNavigation = [{ name: 'Wyloguj się', onClick: () => signOut() }];
 
 const sidebarItems = [
 	{
