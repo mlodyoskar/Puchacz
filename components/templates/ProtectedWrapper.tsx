@@ -1,8 +1,15 @@
-import { useSession, signIn, signOut } from 'next-auth/react';
-import React from 'react';
+import { useSession, signIn } from 'next-auth/react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { Input } from 'components/atoms/Input/Input';
 import { Button } from 'components/atoms/Button/Button';
+import { useZodForm } from 'utils/useZodForm';
+import { z } from 'zod';
+
+const LoginForm = z.object({
+	login: z.string().min(1),
+	password: z.string().min(1),
+});
 
 export const ProtectedWrapper = ({
 	children,
@@ -10,6 +17,26 @@ export const ProtectedWrapper = ({
 	children: React.ReactNode;
 }) => {
 	const { data: session, status } = useSession();
+	const { register, handleSubmit } = useZodForm({ schema: LoginForm });
+	const [errorLoginMessage, setErrorLoginMessage] = useState<
+		string | undefined
+	>(undefined);
+
+	interface onSubmit {
+		login: string;
+		password: string;
+	}
+	const onSubmit = async ({ login, password }: onSubmit) => {
+		const signInResponse = await signIn('credentials', {
+			username: login,
+			password,
+			redirect: false,
+		});
+
+		if (signInResponse && signInResponse.error) {
+			setErrorLoginMessage('Podano błędne dane logowania');
+		}
+	};
 
 	if (status === 'loading') {
 		return <div>Loading...</div>;
@@ -22,48 +49,47 @@ export const ProtectedWrapper = ({
 					<section className="relative flex h-64 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
 						<Image
 							alt="Group of people at party"
-							width={900}
-							height={900}
-							src="/../public/assets/login.jpg"
+							width={3240}
+							height={1920}
+							src="https://media.graphassets.com/66RIIUhTpWDfrJEO20zw"
 							className="absolute inset-0 h-full w-full rounded-sm object-cover opacity-80"
 						/>
-
-						<div className="hidden lg:relative lg:block lg:p-12">
-							<h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-								Puchacz Label 🦉
-							</h2>
-
-							<p className="mt-4 leading-relaxed text-white/90">
-								Aplikacja do zarządzania imprezami i budżetem
-							</p>
-						</div>
 					</section>
 
 					<main
 						aria-label="Main"
-						className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:py-12 lg:px-16 xl:col-span-6"
+						className="flex w-full items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:py-12 lg:px-16 xl:col-span-6"
 					>
-						<div className="max-w-xl lg:max-w-3xl">
-							<div className="relative block lg:hidden">
-								<h1 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
-									Puchacz Label 🦉
-								</h1>
+						<div className="w-full">
+							<form
+								onSubmit={handleSubmit(onSubmit)}
+								className="mt-8 grid grid-cols-6 gap-6"
+							>
+								<div className="col-span-12">
+									<h1 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
+										Puchacz Label 🦉
+									</h1>
 
-								<p className="leading-relaxed text-gray-500">
-									Aplikacja do zarządzania imprezami i budżetem
-								</p>
-							</div>
-
-							<form className="mt-8 grid grid-cols-6 gap-6">
-								<div className="col-span-12 sm:col-span-3">
-									<Input>Login</Input>
+									<p className="leading-relaxed text-gray-500">
+										Aplikacja do zarządzania imprezami i budżetem
+									</p>
+								</div>
+								{errorLoginMessage && (
+									<div className="col-span-12">
+										<p className="text-xs text-red-600">{errorLoginMessage}</p>
+									</div>
+								)}
+								<div className="col-span-12">
+									<Input {...register('login')}>Login</Input>
 								</div>
 
-								<div className="col-span-12 sm:col-span-6">
-									<Input type="password">Hasło</Input>
+								<div className="col-span-12">
+									<Input {...register('password')} type="password">
+										Hasło
+									</Input>
 								</div>
 
-								<div className="col-span-12 sm:flex sm:items-center sm:gap-4">
+								<div className="col-span-12 h-16 sm:flex sm:items-center sm:gap-4">
 									<Button fullWidth={true}>Zaloguj się</Button>
 								</div>
 							</form>
@@ -72,24 +98,6 @@ export const ProtectedWrapper = ({
 				</div>
 			</section>
 		);
-		// return (
-		// 	<div className="flex h-screen w-full flex-col items-center justify-center">
-		// 		<Typography component="h1">Kliknij aby się zalogować</Typography>
-
-		// 		<div className="mt-8 h-12">
-		// 			<Button
-		// 				onClick={() =>
-		// 					signIn('credentials', {
-		// 						username: 'oskarpuchalski17@gmail.com',
-		// 						password: 'Lakers21',
-		// 					})
-		// 				}
-		// 			>
-		// 				Zaloguj się
-		// 			</Button>
-		// 		</div>
-		// 	</div>
-		// );
 	}
 
 	return <>{children}</>;

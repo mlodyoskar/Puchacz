@@ -31,7 +31,6 @@ const useGetStatisticsParties = () => {
 const StatisticsPage = () => {
 	const { data: summary } = useGetStatisticsSummary();
 	const { data: parties } = useGetStatisticsParties();
-	const { data, status } = useSession();
 
 	return (
 		<motion.div
@@ -58,7 +57,6 @@ const StatisticsPage = () => {
 						</div>
 						<div className="mt-8">
 							<Typography component="h2">Ostatnie imprezy</Typography>
-							<h2>STATUS: {status}</h2>
 						</div>
 					</div>
 					<div className="shadow sm:hidden">

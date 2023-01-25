@@ -64,6 +64,8 @@ export const authOptions = {
 				const arePasswordsEqual =
 					credentials.password === user.data.account.password;
 
+				console.log('arePasswordsEqual', arePasswordsEqual);
+
 				if (!arePasswordsEqual) {
 					return null;
 				}
