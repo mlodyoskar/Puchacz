@@ -12,6 +12,7 @@ const nextConfig = {
     return config
   },
   images: {
+    domains: ['media.graphassets.com'],
     disableStaticImages: true
   },
   async redirects() {

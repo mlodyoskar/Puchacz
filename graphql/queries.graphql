@@ -41,3 +41,11 @@ query GetParticipantsSummary {
 		participants
 	}
 }
+
+query GetAccountByEmail($email: String!) {
+	account(where: { email: $email }) {
+		id
+		email
+		password
+	}
+}
