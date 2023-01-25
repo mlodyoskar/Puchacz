@@ -1,18 +1,12 @@
 import CameraIcon from 'components/icons/CameraIcon.svg';
 import StarIcon from 'components/icons/StarIcon.svg';
 import type { GetEventByIdQuery } from 'generated/graphql';
-
 type Event = Pick<
 	NonNullable<GetEventByIdQuery['event']>,
-	'name' | 'day' | 'createdAt' | 'stuffs'
+	'name' | 'day' | 'stuffs'
 >;
 
-export const EventDetailsSummary = ({
-	name,
-	day,
-	createdAt,
-	stuffs,
-}: Event) => {
+export const EventDetailsSummary = ({ name, day, stuffs }: Event) => {
 	return (
 		<div className="mx-auto mt-6 max-w-5xl px-4 sm:px-6 lg:px-8">
 			<dl className="grid grid-cols-2 gap-x-4 gap-y-8">
@@ -41,10 +35,6 @@ export const EventDetailsSummary = ({
 							{stuff.name}
 						</dd>
 					))}
-				</div>
-				<div className="sm:col-span-1">
-					<dt className="text-md font-medium text-gray-500">Stworzony</dt>
-					<dd className="text-md mt-1 text-gray-900">{createdAt}</dd>
 				</div>
 			</dl>
 		</div>

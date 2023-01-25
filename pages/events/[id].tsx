@@ -5,14 +5,12 @@ import { Typography } from 'components/atoms/Typography/Typography';
 import { useState } from 'react';
 import { EventDetailsSummary } from 'components/templates/events/eventDetails';
 import { EventBudgetDetails } from 'components/templates/events/budgetDetails';
-
 const RenderPage = ({ viewProps, data }: { viewProps: string; data: any }) => {
 	if (viewProps === 'event') {
 		return (
 			<EventDetailsSummary
 				name={data?.event?.name}
 				day={data?.event?.day}
-				createdAt={data?.event?.createdAt}
 				stuffs={data?.event?.stuffs}
 			/>
 		);
@@ -25,6 +23,7 @@ const RenderPage = ({ viewProps, data }: { viewProps: string; data: any }) => {
 		/>
 	);
 };
+
 const EventDetailsPage = () => {
 	const router = useRouter();
 	const id = router.query.id as string;
@@ -76,7 +75,7 @@ const EventDetailsPage = () => {
 									className={
 										view === 'event'
 											? 'border-b-2 border-blue-500 text-gray-900'
-											: 'whitespace-nowrap border-b-2 border-transparent py-4 px-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700'
+											: 'whitespace-nowrap border-b-2 border-transparent py-4 px-1 font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700'
 									}
 								>
 									Wydarzenie
@@ -85,7 +84,7 @@ const EventDetailsPage = () => {
 									onClick={() => setView('budget')}
 									className={
 										view === 'event'
-											? 'whitespace-nowrap border-b-2 border-transparent py-4 px-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700'
+											? 'whitespace-nowrap border-b-2 border-transparent py-4 px-1 font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700'
 											: 'border-b-2 border-blue-500 text-gray-900'
 									}
 								>
@@ -95,7 +94,6 @@ const EventDetailsPage = () => {
 						</div>
 					</div>
 				</div>
-
 				<RenderPage viewProps={view} data={data} />
 			</div>
 		</div>
