@@ -7,6 +7,7 @@ type Budget = Pick<
 	NonNullable<GetEventByIdQuery['event']>,
 	'participants' | 'ticketPrice' | 'budgets'
 >;
+type BudgetTable = Pick<NonNullable<GetEventByIdQuery['event']>, 'budgets'>;
 const RenderTable = ({
 	tableName,
 	budgets,
