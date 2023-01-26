@@ -1,6 +1,4 @@
-![owl](https://user-images.githubusercontent.com/45982530/214911657-29e51e1e-ffc8-4e67-b359-b2c43ee3a1ce.jpg)
-
-
+![owl](https://user-images.githubusercontent.com/45982530/214912583-c9e39356-0a14-405f-b1c1-ff8bf84f2b6f.jpg)
 
 # 🦉 Puchacz App
 Puchacz App is a event management tool that helps you plan, organize and track your events with ease. With its user-friendly interface, you can easily create, edit and delete events, and manage budgets for each one of them.
