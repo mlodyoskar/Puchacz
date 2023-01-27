@@ -21,3 +21,15 @@ query GetAllStuff {
 		...StuffData
 	}
 }
+
+query GetAllLogs {
+	logs {
+		message
+		account {
+			id
+		}
+		createdAt
+		action
+		source
+	}
+}

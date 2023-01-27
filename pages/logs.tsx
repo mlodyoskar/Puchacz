@@ -15,25 +15,25 @@ const LogsPage = () => {
 											scope="col"
 											className="py-3 pl-4 pr-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500 sm:pl-6"
 										>
-											Nazwa wydarzenia/budzetu
+											Wiadomość
 										</th>
 										<th
 											scope="col"
 											className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
 										>
-											Co dodał/edytował itd
+											Akcja
+										</th>
+										<th
+											scope="col"
+											className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
+										>
+											Autor
 										</th>
 										<th
 											scope="col"
 											className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
 										>
 											Kiedy
-										</th>
-										<th
-											scope="col"
-											className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
-										>
-											Kto
 										</th>
 									</tr>
 								</thead>
