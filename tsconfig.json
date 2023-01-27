@@ -20,6 +20,6 @@
 			"icons": ["components/icons"]
 		}
 	},
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "prettier.config.js"],
+	"include": ["types/next-env.d.ts", "**/*.ts", "**/*.tsx", "prettier.config.js"],
 	"exclude": ["node_modules"]
 }
