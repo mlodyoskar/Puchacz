@@ -1,5 +1,6 @@
 import { Typography } from 'components/atoms/Typography/Typography';
 import { useGetAllLogsQuery } from 'generated/graphql';
+
 import Image from 'next/image';
 const LogsPage = () => {
 	const { data, loading } = useGetAllLogsQuery();
@@ -51,6 +52,12 @@ const LogsPage = () => {
 											scope="col"
 											className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
 										>
+											Typ
+										</th>
+										<th
+											scope="col"
+											className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
+										>
 											Autor
 										</th>
 										<th
@@ -69,6 +76,9 @@ const LogsPage = () => {
 											</td>
 											<td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
 												{logs.action}
+											</td>
+											<td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+												{logs.source}
 											</td>
 											<td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
 												{logs.account?.email}
