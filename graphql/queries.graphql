@@ -27,6 +27,7 @@ query GetAllLogs {
 		message
 		account {
 			id
+			email
 		}
 		createdAt
 		action

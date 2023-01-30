@@ -1,6 +1,30 @@
 import { Typography } from 'components/atoms/Typography/Typography';
-
+import { useGetAllLogsQuery } from 'generated/graphql';
+import Image from 'next/image';
 const LogsPage = () => {
+	const { data, loading } = useGetAllLogsQuery();
+	if (loading) {
+		return (
+			<div>
+				<Typography component="h1">Logs page</Typography>
+				<div className="flex justify-center">
+					<Image
+						src={'/RingSpinner.svg'}
+						width={80}
+						height={80}
+						alt="Spinner"
+					/>
+				</div>
+			</div>
+		);
+	}
+	if (!data) {
+		return (
+			<div>
+				<Typography component="h1">Data not found</Typography>
+			</div>
+		);
+	}
 	return (
 		<div>
 			<Typography component="h1">Logs page</Typography>
@@ -38,20 +62,22 @@ const LogsPage = () => {
 									</tr>
 								</thead>
 								<tbody className="divide-y divide-gray-200 bg-white">
-									<tr>
-										<td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-											test test
-										</td>
-										<td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-											test
-										</td>
-										<td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-											test
-										</td>
-										<td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-											test
-										</td>
-									</tr>
+									{data?.logs?.map((logs) => (
+										<tr key={logs.message}>
+											<td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+												{logs.action} {logs.source} {logs.message}
+											</td>
+											<td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+												{logs.action}
+											</td>
+											<td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+												{logs.account?.id}
+											</td>
+											<td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+												{logs.createdAt}
+											</td>
+										</tr>
+									))}
 								</tbody>
 							</table>
 						</div>
