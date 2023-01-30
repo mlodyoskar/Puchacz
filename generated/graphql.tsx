@@ -25,6 +25,7 @@ export type Scalars = {
 
 export type Account = Node & {
   __typename?: 'Account';
+  avatar?: Maybe<Asset>;
   /** The time the document was created */
   createdAt: Scalars['DateTime'];
   /** User that created this document */
@@ -48,6 +49,12 @@ export type Account = Node & {
   updatedAt: Scalars['DateTime'];
   /** User that last updated this document */
   updatedBy?: Maybe<User>;
+};
+
+
+export type AccountAvatarArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  locales?: InputMaybe<Array<Locale>>;
 };
 
 
@@ -112,6 +119,7 @@ export type AccountConnection = {
 };
 
 export type AccountCreateInput = {
+  avatar?: InputMaybe<AssetCreateOneInlineInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   password: Scalars['String'];
@@ -151,6 +159,7 @@ export type AccountManyWhereInput = {
   OR?: InputMaybe<Array<AccountWhereInput>>;
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']>;
+  avatar?: InputMaybe<AssetWhereInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -280,6 +289,7 @@ export enum AccountOrderByInput {
 }
 
 export type AccountUpdateInput = {
+  avatar?: InputMaybe<AssetUpdateOneInlineInput>;
   email?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
 };
@@ -364,6 +374,7 @@ export type AccountWhereInput = {
   OR?: InputMaybe<Array<AccountWhereInput>>;
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']>;
+  avatar?: InputMaybe<AssetWhereInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -505,6 +516,7 @@ export type Aggregate = {
 /** Asset system model */
 export type Asset = Node & {
   __typename?: 'Asset';
+  avatarAccount: Array<Account>;
   /** The time the document was created */
   createdAt: Scalars['DateTime'];
   /** User that created this document */
@@ -545,6 +557,20 @@ export type Asset = Node & {
   url: Scalars['String'];
   /** The file width */
   width?: Maybe<Scalars['Float']>;
+};
+
+
+/** Asset system model */
+export type AssetAvatarAccountArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<AccountOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<AccountWhereInput>;
 };
 
 
@@ -660,6 +686,7 @@ export type AssetConnection = {
 };
 
 export type AssetCreateInput = {
+  avatarAccount?: InputMaybe<AccountCreateManyInlineInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   fileName: Scalars['String'];
   handle: Scalars['String'];
@@ -728,6 +755,9 @@ export type AssetManyWhereInput = {
   OR?: InputMaybe<Array<AssetWhereInput>>;
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']>;
+  avatarAccount_every?: InputMaybe<AccountWhereInput>;
+  avatarAccount_none?: InputMaybe<AccountWhereInput>;
+  avatarAccount_some?: InputMaybe<AccountWhereInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -838,6 +868,7 @@ export type AssetTransformationInput = {
 };
 
 export type AssetUpdateInput = {
+  avatarAccount?: InputMaybe<AccountUpdateManyInlineInput>;
   fileName?: InputMaybe<Scalars['String']>;
   handle?: InputMaybe<Scalars['String']>;
   height?: InputMaybe<Scalars['Float']>;
@@ -983,6 +1014,9 @@ export type AssetWhereInput = {
   OR?: InputMaybe<Array<AssetWhereInput>>;
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']>;
+  avatarAccount_every?: InputMaybe<AccountWhereInput>;
+  avatarAccount_none?: InputMaybe<AccountWhereInput>;
+  avatarAccount_some?: InputMaybe<AccountWhereInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -6408,6 +6442,13 @@ export type GetAccountByEmailQueryVariables = Exact<{
 
 export type GetAccountByEmailQuery = { __typename?: 'Query', account?: { __typename?: 'Account', id: string, email: string, password: string } | null };
 
+export type GetAccountImageByEmailQueryVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type GetAccountImageByEmailQuery = { __typename?: 'Query', account?: { __typename?: 'Account', avatar?: { __typename?: 'Asset', url: string } | null } | null };
+
 export const StuffDataFragmentDoc = gql`
     fragment StuffData on Stuff {
   id
@@ -6670,3 +6711,40 @@ export function useGetAccountByEmailLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type GetAccountByEmailQueryHookResult = ReturnType<typeof useGetAccountByEmailQuery>;
 export type GetAccountByEmailLazyQueryHookResult = ReturnType<typeof useGetAccountByEmailLazyQuery>;
 export type GetAccountByEmailQueryResult = Apollo.QueryResult<GetAccountByEmailQuery, GetAccountByEmailQueryVariables>;
+export const GetAccountImageByEmailDocument = gql`
+    query GetAccountImageByEmail($email: String!) {
+  account(where: {email: $email}) {
+    avatar {
+      url
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetAccountImageByEmailQuery__
+ *
+ * To run a query within a React component, call `useGetAccountImageByEmailQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAccountImageByEmailQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAccountImageByEmailQuery({
+ *   variables: {
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useGetAccountImageByEmailQuery(baseOptions: Apollo.QueryHookOptions<GetAccountImageByEmailQuery, GetAccountImageByEmailQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAccountImageByEmailQuery, GetAccountImageByEmailQueryVariables>(GetAccountImageByEmailDocument, options);
+      }
+export function useGetAccountImageByEmailLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAccountImageByEmailQuery, GetAccountImageByEmailQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAccountImageByEmailQuery, GetAccountImageByEmailQueryVariables>(GetAccountImageByEmailDocument, options);
+        }
+export type GetAccountImageByEmailQueryHookResult = ReturnType<typeof useGetAccountImageByEmailQuery>;
+export type GetAccountImageByEmailLazyQueryHookResult = ReturnType<typeof useGetAccountImageByEmailLazyQuery>;
+export type GetAccountImageByEmailQueryResult = Apollo.QueryResult<GetAccountImageByEmailQuery, GetAccountImageByEmailQueryVariables>;

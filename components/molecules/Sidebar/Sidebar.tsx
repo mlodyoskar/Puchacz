@@ -11,8 +11,14 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Open_Sans } from '@next/font/google';
 import { signOut } from 'next-auth/react';
+import { useGetAccountImageByEmailQuery } from 'generated/graphql';
+import { useAuthenitcatedSession } from 'utils/session';
+import Image from 'next/image';
 
 const openSans = Open_Sans({ subsets: ['latin'] });
+
+const AVATAR_PLACEHOLDER_URL =
+	'https://media.graphassets.com/Mdco4evYR3mtbDDsxHjc';
 
 const userNavigation = [{ name: 'Wyloguj się', onClick: () => signOut() }];
 
@@ -45,6 +51,10 @@ interface Props {
 export const Sidebar = ({ children }: Props) => {
 	const [sidebarOpen, setSidebarOpen] = useState(false);
 	const router = useRouter();
+	const { data: session } = useAuthenitcatedSession();
+	const { data: image } = useGetAccountImageByEmailQuery({
+		variables: { email: session?.user?.email || '' },
+	});
 
 	return (
 		<>
@@ -212,9 +222,13 @@ export const Sidebar = ({ children }: Props) => {
 									<div>
 										<Menu.Button className="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
 											<span className="sr-only">Open user menu</span>
-											<img
+											<Image
+												width={100}
+												height={100}
 												className="h-8 w-8 rounded-full"
-												src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+												src={
+													image?.account?.avatar?.url || AVATAR_PLACEHOLDER_URL
+												}
 												alt=""
 											/>
 										</Menu.Button>

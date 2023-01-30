@@ -49,3 +49,11 @@ query GetAccountByEmail($email: String!) {
 		password
 	}
 }
+
+query GetAccountImageByEmail($email: String!) {
+	account(where: { email: $email }) {
+		avatar {
+			url
+		}
+	}
+}
