@@ -1,25 +1,47 @@
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { useGetEventByIdQuery } from 'generated/graphql';
+import { Budget, useGetEventByIdQuery } from 'generated/graphql';
 import { Typography } from 'components/atoms/Typography/Typography';
 import { useState } from 'react';
 import { EventDetailsSummary } from 'components/templates/events/eventDetails';
 import { EventBudgetDetails } from 'components/templates/events/budgetDetails';
-const RenderPage = ({ viewProps, data }: { viewProps: string; data: any }) => {
-	if (viewProps === 'event') {
+import type { Stuff } from 'components/templates/events/createEvent';
+
+type EventDetailsViewEvent = {
+	view: 'event';
+	data: {
+		name: string;
+		day: string;
+		stuffs: Stuff;
+	};
+};
+
+type EventDetailsViewBudget = {
+	view: 'budget';
+	data: {
+		participants: number;
+		ticketPrice: number;
+		budgets: Budget[];
+	};
+};
+
+type EventDetailsProps = EventDetailsViewEvent | EventDetailsViewBudget;
+
+const EventDetails = ({ view, data }: EventDetailsProps) => {
+	if (view === 'event') {
 		return (
 			<EventDetailsSummary
-				name={data?.event?.name}
-				day={data?.event?.day}
-				stuffs={data?.event?.stuffs}
+				name={data.name}
+				day={data.day}
+				stuffs={data.stuffs}
 			/>
 		);
 	}
 	return (
 		<EventBudgetDetails
-			participants={data?.event?.participants}
-			ticketPrice={data?.event?.ticketPrice}
-			budgets={data?.event?.budgets}
+			participants={data.participants}
+			ticketPrice={data.ticketPrice}
+			budgets={data.budgets}
 		/>
 	);
 };
@@ -34,7 +56,7 @@ const EventDetailsPage = () => {
 	if (loading) {
 		return (
 			<div>
-				<Typography component="h1">Szczegóły wydarzenia</Typography>
+				<Typography component="h1">Wydarzenie</Typography>
 				<div className="flex justify-center">
 					<Image
 						src={'/RingSpinner.svg'}
@@ -94,7 +116,7 @@ const EventDetailsPage = () => {
 						</div>
 					</div>
 				</div>
-				<RenderPage viewProps={view} data={data} />
+				<EventDetails view={view} data={{ budgets: data.event }} />
 			</div>
 		</div>
 	);

@@ -29,6 +29,8 @@ export const CreateEvent = z.object({
 
 type CreateEvent = z.infer<typeof CreateEvent>;
 
+export type Stuff = CreateEvent['stuffDj'];
+
 export const CreateEventPage = () => {
 	const router = useRouter();
 	const { data: stuffData } = useGetAllStuffQuery();

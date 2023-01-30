@@ -31,10 +31,15 @@ const EventsPage = () => {
 	}
 	return (
 		<div>
-			<Typography component="h1">Imprezy</Typography>
-			<div className=" fixed bottom-0 w-full">
-				<div className="float-right mr-10 mb-2 flex h-full items-center justify-center gap-2 rounded-lg bg-blue-700 px-5 py-2.5  text-center text-sm font-medium text-white opacity-95 transition-colors hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 md:mr-72">
-					<Link href="events/create">Utwórz nową imprezę</Link>
+			<div className="mb-4 justify-between md:flex">
+				<Typography component="h1">Imprezy</Typography>
+				<div className="fixed bottom-0 right-0 left-0 mx-4 md:relative">
+					<Link
+						className="mb-2 flex h-full items-center justify-center rounded-lg bg-blue-700 px-5 py-2.5 text-center  text-sm font-medium text-white transition-colors hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300"
+						href="events/create"
+					>
+						Utwórz nową imprezę
+					</Link>
 				</div>
 			</div>
 			<div className="mb-10 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
