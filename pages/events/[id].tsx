@@ -83,7 +83,10 @@ const EventDetailsPage = () => {
 			<div>
 				<Image
 					className="h-32 w-full rounded-lg object-cover lg:h-48"
-					src={data.event?.image?.url || '/part.png'}
+					src={
+						data.event?.image?.url ||
+						'https://media.graphassets.com/zHTNXEy6ReodPk6UchZX'
+					}
 					height={600}
 					width={600}
 					alt=""

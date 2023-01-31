@@ -52,7 +52,10 @@ const EventsPage = () => {
 						<div className="truncate text-center">
 							<div>
 								<Image
-									src={data.image?.url || '/part.png'}
+									src={
+										data.image?.url ||
+										'https://media.graphassets.com/zHTNXEy6ReodPk6UchZX'
+									}
 									height={600}
 									width={600}
 									alt="Parties picture"
