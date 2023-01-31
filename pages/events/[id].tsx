@@ -94,7 +94,7 @@ const EventDetailsPage = () => {
 				<div className="mt-6 sm:mt-2 2xl:mt-5">
 					<div className="border-b border-gray-200">
 						<div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-							<nav className="-mb-px flex space-x-8">
+							<div className="-mb-px flex space-x-8">
 								<button
 									onClick={() => setView('event')}
 									className={
@@ -115,7 +115,7 @@ const EventDetailsPage = () => {
 								>
 									Budzet
 								</button>
-							</nav>
+							</div>
 						</div>
 					</div>
 				</div>
