@@ -38,7 +38,7 @@ const EventsPage = () => {
 						className="mb-2 flex h-full items-center justify-center rounded-lg bg-blue-700 px-5 py-2.5 text-center  text-sm font-medium text-white transition-colors hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300"
 						href="events/create"
 					>
-						Utwórz nową imprezę
+						Utwórz imprezę
 					</Link>
 				</div>
 			</div>
