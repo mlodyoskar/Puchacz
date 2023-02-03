@@ -34,35 +34,35 @@ const LogsPage = () => {
 					<div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
 						<div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
 							<table className="min-w-full divide-y divide-gray-300">
-								<thead className="bg-gray-50">
+								<thead className="bg-blue-600">
 									<tr>
 										<th
 											scope="col"
-											className="py-3 pl-4 pr-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500 sm:pl-6"
+											className="py-3 pl-4 pr-3 text-left text-xs font-medium uppercase tracking-wide text-white sm:pl-6"
 										>
 											Wiadomość
 										</th>
 										<th
 											scope="col"
-											className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
+											className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-white"
 										>
 											Akcja
 										</th>
 										<th
 											scope="col"
-											className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
+											className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-white"
 										>
 											Typ
 										</th>
 										<th
 											scope="col"
-											className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
+											className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-white"
 										>
 											Autor
 										</th>
 										<th
 											scope="col"
-											className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
+											className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-white"
 										>
 											Kiedy
 										</th>
